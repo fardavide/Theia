@@ -4,9 +4,13 @@
 
 
 
+
+
 **Theia** is a *lightweight* image laoder for Android.
 
 <u>Caching is currently not supported yet</u>
+
+
 
 
 
@@ -22,7 +26,11 @@
 
 
 
+
+
 ## Usage
+
+
 
 
 
@@ -43,6 +51,8 @@ E.g. `private val theia by lazy { newTheiaInstance }`
 
 
 
+
+
 ###### From `ImageView`
 
 ```kotlin
@@ -50,6 +60,8 @@ myImageView.theia {
     imageUrl = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
 }
 ```
+
+
 
 
 
@@ -66,11 +78,17 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
 
 
+
+
 ### Params
 
 * `image`:  The `AsyncImageSource` for the image to load into `target`
 
-  Extension:
+  Default is *null*.
+
+  This param in **"partially" required**, if no value is passed, `Theia` will try to use `palceholder`, if also `placeholder` is null, an `ImageSourceNotSetException` will be thrown
+
+  Extensions:
 
   * `imageBitmap`
   * `imageDrawable`
@@ -79,9 +97,8 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
   * `asyncImageFile`
   * `imageUrl`
 
-  Default is `null`.
 
-  This param in **"partially" required**, if no value is passed, `Theia` will try to use `palceholder`, if also `placeholder` is null, an `ImageSourceNotSetException` will be thrown
+
 
 
 
@@ -93,19 +110,42 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
 
 
+
+
 * `placeholder`: he image to load as placeholder for async requests.
+
+  Default is _null_
+
   It will be ignored for *successful* `Sync` requests, but it will be used anyway if:
 
   * there is an error loading `image` and no `error` is supplied
   * `error` is `Async`
 
-  Default is _null_
+  Extensions:
+
+  - `placeholderBitmap`
+  - `placeholderDrawable`
+  - `placeholderDrawableRes`
+  - `placeholderFile`
+
+
 
 
 
 * `error`: The image to load if some error occurred while loading `image`
 
   Default is _null_
+
+  Extensions:
+
+  - `errorBitmap`
+  - `errorDrawable`
+  - `errorDrawableRes`
+  - `errorFile`
+  - `asyncErroreFile`
+  - `errorUrl`
+
+
 
 
 
@@ -115,9 +155,13 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
 
 
+
+
 * `scalePlaceholder`: If _true_  `placeholder` will respect `scaleType`, else use `TheiaConfig.defaultScalePlaceholder` ( `TheiaParams.ScaleType.Center` )
 
   Default is _false_
+
+
 
 
 
@@ -144,6 +188,8 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
 
 
+
+
 * `shape`: The `TheiaParams.Shape` to apply to `image`
 
   Default is `TheiaConfig.defaultShape` ( `TheiaParams.Shape.Square` )
@@ -152,6 +198,8 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
   * `Round`
   * `Square`
+
+
 
 
 
@@ -165,6 +213,8 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
       + AnotherTransformation
   }
   ```
+
+
 
 
 
@@ -185,29 +235,42 @@ TheiaConfig {
 
 
 
+
+
 ##### Configuration params:
 
 * `defaultShape`: The default `TheiaParams.Shape` to use if none is specified explicitly. 
 
   Default is `TheiaParams.Shape.Square`
 
-  
+
+
+
+
 
 * `defaultScaleError`: If _true_ `error`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
 
   Default is *false*
 
-  
+
+
+
+
 
 * `defaultScalePlaceholder`: If _true_ `placeholder`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
 
   Default is *false*
 
-  
+
+
+
+
 
 * `httpClient`: The `HttpClient` for execute web calls
 
   Default is *HttpClient()*
+
+
 
 
 
@@ -217,9 +280,13 @@ TheiaConfig {
 
 
 
+
+
 * `logger`: A `TheiaLogger` for print messages. 
 
   Default is `DefaultTheiaLogger`
+
+
 
 
 
@@ -237,6 +304,8 @@ override fun error( ex: TheiaException ) {
     else Log.d( THEIA_NAME, ex.actualMessage )
 }
 ```
+
+
 
 
 
