@@ -1,6 +1,6 @@
 # Theia
 
-[![Download](https://api.bintray.com/packages/4face/ViewStateStore/studio.forface.viewstatestore/images/download.svg)](https://bintray.com/4face/ViewStateStore/studio.forface.viewstatestore/_latestVersion)  ![MinSDK](https://img.shields.io/badge/MinSDK-14-f44336.svg)  [![star this repo](http://githubbadges.com/star.svg?user=4face-studi0&repo=ViewStateStore&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/ViewStateStore)  [![fork this repo](http://githubbadges.com/fork.svg?user=4face-studi0&repo=ViewStateStore&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/ViewStateStore/fork)
+[![Download](https://api.bintray.com/packages/4face/Theia/studio.forface.theia/images/download.svg)](https://bintray.com/4face/Theia/studio.forface.theia/_latestVersion)  ![MinSDK](https://img.shields.io/badge/MinSDK-14-f44336.svg)  [![star this repo](http://githubbadges.com/star.svg?user=4face-studi0&repo=ViewStateStore&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/Theia)  [![fork this repo](http://githubbadges.com/fork.svg?user=4face-studi0&repo=Theia&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/Theia/fork)
 
 
 
@@ -69,11 +69,11 @@ newTheiaUnhandleInstance( resources ) {
   * `asyncImageFile`
   * `imageUrl`
 
-  
+
 
 * `target`: The `ImageView` where to load the `image`
 
-  
+
 
 * `placeholder`: he image to load as placeholder for async requests.
   It will be ignored for *successful* `Sync` requests, but it will be used anyway if:
@@ -82,19 +82,19 @@ newTheiaUnhandleInstance( resources ) {
 
   * `error` is `Async`
 
-    
+
 
 * `error`: The image to load if some error occurred while loading `image`
 
-  
+
 
 * `scaleError`: If _true_  `error` will respect `scaleType`, else use `TheiaConfig.defaultScaleError` ( `TheiaParams.ScaleType.Center` )
 
-  
+
 
 * `scalePlaceholder`: If _true_  `placeholder` will respect `scaleType`, else use `TheiaConfig.defaultScalePlaceholder` ( `TheiaParams.ScaleType.Center` )
 
-  
+
 
 * `scaleType`: The `TheiaParams.ScaleType` to apply to `image`
 
@@ -117,7 +117,7 @@ newTheiaUnhandleInstance( resources ) {
 
     Proportions won't be preserved and the image will be distorted
 
-    
+
 
 * `shape`: The `TheiaParams.Shape` to apply to `image`
 
@@ -128,11 +128,11 @@ newTheiaUnhandleInstance( resources ) {
   * `Round`
   * `Square`
 
-  
+
 
 * `extraTransformations`: Add a new [TheiaTransformation] to [extraTransformations] within plus operator.
 
-  E.g. 
+  E.g.
 
   ```
   theia {
@@ -144,4 +144,3 @@ newTheiaUnhandleInstance( resources ) {
 
 
 ### Configuration
-
