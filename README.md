@@ -69,9 +69,17 @@ newTheiaUnhandleInstance( resources ) {
   * `asyncImageFile`
   * `imageUrl`
 
+  Default is `null`.
+
+  This param in **"partially" required**, if no value is passed, `Theia` will try to use `palceholder`, if also `placeholder` is null, an `ImageSourceNotSetException` will be thrown
+
 
 
 * `target`: The `ImageView` where to load the `image`
+
+  This param is **required**, if no value is passed, a `TargetNotSetException` will be thrown
+
+  On `PerTargetedTheia` this value is already set, since the instance can only be retrieved from an `ImageView` and can't be changed
 
 
 
@@ -79,20 +87,27 @@ newTheiaUnhandleInstance( resources ) {
   It will be ignored for *successful* `Sync` requests, but it will be used anyway if:
 
   * there is an error loading `image` and no `error` is supplied
-
   * `error` is `Async`
+
+  Default is _null_
 
 
 
 * `error`: The image to load if some error occurred while loading `image`
 
+  Default is _null_
+
 
 
 * `scaleError`: If _true_  `error` will respect `scaleType`, else use `TheiaConfig.defaultScaleError` ( `TheiaParams.ScaleType.Center` )
 
+  Default is _false_
+
 
 
 * `scalePlaceholder`: If _true_  `placeholder` will respect `scaleType`, else use `TheiaConfig.defaultScalePlaceholder` ( `TheiaParams.ScaleType.Center` )
+
+  Default is _false_
 
 
 
@@ -143,4 +158,61 @@ newTheiaUnhandleInstance( resources ) {
 
 
 
-### Configuration
+### Loggin & Configuration
+
+`Theia` can be configured via `TheiaConfig`, which also can be invoked with a lambda with itself as receiver:
+
+Both `TheiaConfig.defaultShape = Round` and `TheiaConfig { defaultShape = Round }` are valid. The invocation syntax can be use for set multiple values
+
+E.g.
+
+```kotlin
+TheiaConfig {
+    defaultShape = Round
+    defaultScaleError = true
+}
+```
+
+
+
+##### Configuration params:
+
+* `defaultShape`: The default `TheiaParams.Shape` to use if none is specified explicitly. 
+
+  Default is `TheiaParams.Shape.Square`
+
+  
+
+* `defaultScaleError`: If _true_ `error`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
+
+  Default is *false*
+
+  
+
+* `defaultScalePlaceholder`: If _true_ `placeholder`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
+
+  Default is *false*
+
+  
+
+* `httpClient`: The `HttpClient` for execute web calls
+
+  Default is *HttpClient()*
+
+
+
+* `logginEnabled`: Whether the logging should be enabled. 
+
+  Default is `BuildConfig.DEBUG`
+
+
+
+* `logger`: A `TheiaLogger` for print messages. 
+
+  Default is `DefaultTheiaLogger`
+
+
+
+##### Logging
+
+Define a custom logger by creating a subclass of `TheiaLogger` and set in `TheiaConfig.logger`
