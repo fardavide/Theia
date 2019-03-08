@@ -41,7 +41,7 @@ newTheiaInstance {
 
 ```kotlin
 myImageView.theia {
-	imageUrl = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
+    imageUrl = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
 }
 ```
 
@@ -136,7 +136,7 @@ newTheiaUnhandleInstance( resources ) {
 
   ```
   theia {
-  	+ SomeCustomTransformation
+      + SomeCustomTransformation
       + AnotherTransformation
   }
   ```
