@@ -93,9 +93,11 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
 }
 
 /** Implementation of [AbsTheiaBuilder] that receives [AbsTheiaBuilder.target] as constructor params */
+@TheiaDsl
 class PreTargetedTheiaBuilder( resources: Resources, override var target: ImageView ): AbsTheiaBuilder( resources )
 
 /** Default implementation of [AbsTheiaBuilder] that exposes [AbsTheiaBuilder.target] */
+@TheiaDsl
 class TheiaBuilder( resources: Resources ): AbsTheiaBuilder( resources ) {
     public override lateinit var target: ImageView
 }
