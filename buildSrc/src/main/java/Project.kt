@@ -20,7 +20,7 @@ object Project {
     val bintrayGroup =      "studio.forface"
     val groupId =           "$bintrayGroup.theia"
     val name =              "Theia"
-    val description =       "Image loader"
+    val description =       "Lightweight Android Image loader"
     val siteUrl =           "http://4face.studio"
     val gitUrl =            "https://github.com/4face-studi0/Theia"
     val developerId =       "4face-studi0"

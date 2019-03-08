@@ -23,3 +23,5 @@ dependencies {
     implementation( Libs.Android.recycler_view )
     implementation( Libs.Android.support_annotations )
 }
+
+publish("theia" )
