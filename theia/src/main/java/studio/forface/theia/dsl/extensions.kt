@@ -57,7 +57,7 @@ val FragmentActivity.newTheiaInstance: Theia
 val Fragment.newTheiaInstance: Theia
     get() {
         val instance = Theia( resources )
-        doOnDestroy( removeObserver = true ) { instance.purgeRequests() }
+        doOnDestroy( removeObserver = false ) { instance.purgeRequests() }
         return instance
     }
 
@@ -70,7 +70,7 @@ val Fragment.newTheiaInstance: Theia
 val View.newTheiaInstance: Theia
     get() {
         val instance = Theia( context.resources )
-        doOnDetach( removeListener = true ) { instance.purgeRequests() }
+        doOnDetach( removeListener = false ) { instance.purgeRequests() }
         return instance
     }
 
@@ -92,7 +92,7 @@ val RecyclerView.ViewHolder.newTheiaInstance get() = itemView.newTheiaInstance
  */
 val ImageView.theia : PreTargetedTheia get() {
     val instance = PreTargetedTheia( context.resources,this )
-    doOnDetach( removeListener = true ) { instance.purgeRequests() }
+    doOnDetach( removeListener = false ) { instance.purgeRequests() }
     return instance
 }
 

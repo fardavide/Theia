@@ -37,6 +37,12 @@ newTheiaInstance {
 }
 ```
 
+For avoid to create many instances for a single component, keep a single reference to `Theia`
+
+E.g. `private val theia by lazy { newTheiaInstance }`
+
+
+
 ###### From `ImageView`
 
 ```kotlin
@@ -45,7 +51,9 @@ myImageView.theia {
 }
 ```
 
-##### From *Any*
+
+
+###### From *Any*
 
 ```kotlin
 newTheiaUnhandleInstance( resources ) {
@@ -53,6 +61,8 @@ newTheiaUnhandleInstance( resources ) {
     imageUrl = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
 }
 ```
+
+In this case, requests need to be purged manually with `theia.purgeRequests()`
 
 
 
@@ -213,6 +223,27 @@ TheiaConfig {
 
 
 
-##### Logging
+#### Logging
 
 Define a custom logger by creating a subclass of `TheiaLogger` and set in `TheiaConfig.logger`
+
+When defining your Logger, remember to use `logEnabled` for handle different outputs, since we want to give a minimal feedback for critical errors, even if log is disabled.
+
+I.e.
+
+```kotlin
+override fun error( ex: TheiaException ) {
+    if ( logEnabled ) ex.printStackTrace()
+    else Log.d( THEIA_NAME, ex.actualMessage )
+}
+```
+
+
+
+### Extra
+
+There are also some custom framework components that provide a single instance of `Theia`:
+
+* `TheiaActivity`
+* `TheiaFragment`
+* `TheiaViewHolder` ( inherit from `RecyclerView.ViewHolder` )
