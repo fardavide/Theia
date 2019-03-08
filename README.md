@@ -2,17 +2,9 @@
 
 [![Download](https://api.bintray.com/packages/4face/Theia/studio.forface.theia/images/download.svg)](https://bintray.com/4face/Theia/studio.forface.theia/_latestVersion)  ![MinSDK](https://img.shields.io/badge/MinSDK-14-f44336.svg)  [![star this repo](http://githubbadges.com/star.svg?user=4face-studi0&repo=Theia&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/Theia)  [![fork this repo](http://githubbadges.com/fork.svg?user=4face-studi0&repo=Theia&style=flat&color=fff&background=4caf50)](https://github.com/4face-studi0/Theia/fork)
 
-
-
-
-
-**Theia** is a *lightweight* image laoder for Android.
+**Theia** is a *lightweight* image loader for Android.
 
 <u>Caching is currently not supported yet</u>
-
-
-
-
 
 ## Installation
 
@@ -24,15 +16,7 @@
 
 `implementation( "studio.forface.theia:theia:last_version" )`
 
-
-
-
-
 ## Usage
-
-
-
-
 
 ### Base
 
@@ -49,10 +33,6 @@ For avoid to create many instances for a single component, keep a single referen
 
 E.g. `private val theia by lazy { newTheiaInstance }`
 
-
-
-
-
 ###### From `ImageView`
 
 ```kotlin
@@ -60,10 +40,6 @@ myImageView.theia {
     imageUrl = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
 }
 ```
-
-
-
-
 
 ###### From *Any*
 
@@ -75,10 +51,6 @@ newTheiaUnhandleInstance( resources ) {
 ```
 
 In this case, requests need to be purged manually with `theia.purgeRequests()`
-
-
-
-
 
 ### Params
 
@@ -98,23 +70,15 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
   * `imageUrl`
 
 
-
-
-
-
 * `target`: The `ImageView` where to load the `image`
 
   This param is **required**, if no value is passed, a `TargetNotSetException` will be thrown
 
   On `PerTargetedTheia` this value is already set, since the instance can only be retrieved from an `ImageView` and can't be changed
 
-
-
-
-
 * `placeholder`: he image to load as placeholder for async requests.
 
-  Default is _null_
+  Default is `TheiaConfig.defaultPlaceholder` ( `null` )
 
   It will be ignored for *successful* `Sync` requests, but it will be used anyway if:
 
@@ -128,13 +92,9 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
   - `placeholderDrawableRes`
   - `placeholderFile`
 
-
-
-
-
 * `error`: The image to load if some error occurred while loading `image`
 
-  Default is _null_
+  Default is `TheiaConfig.defaultError` ( `null` )
 
   Extensions:
 
@@ -145,25 +105,13 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
   - `asyncErroreFile`
   - `errorUrl`
 
-
-
-
-
 * `scaleError`: If _true_  `error` will respect `scaleType`, else use `TheiaConfig.defaultScaleError` ( `TheiaParams.ScaleType.Center` )
 
-  Default is _false_
-
-
-
-
+  Default is `TheiaConfig.defaultScaleError` ( `false` )
 
 * `scalePlaceholder`: If _true_  `placeholder` will respect `scaleType`, else use `TheiaConfig.defaultScalePlaceholder` ( `TheiaParams.ScaleType.Center` )
 
-  Default is _false_
-
-
-
-
+  Default is `TheiaConfig.defaultScalePlaceholder` ( `false` )
 
 * `scaleType`: The `TheiaParams.ScaleType` to apply to `image`
 
@@ -186,10 +134,6 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
     Proportions won't be preserved and the image will be distorted
 
-
-
-
-
 * `shape`: The `TheiaParams.Shape` to apply to `image`
 
   Default is `TheiaConfig.defaultShape` ( `TheiaParams.Shape.Square` )
@@ -198,10 +142,6 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
 
   * `Round`
   * `Square`
-
-
-
-
 
 * `extraTransformations`: Add a new [TheiaTransformation] to [extraTransformations] within plus operator.
 
@@ -213,10 +153,6 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
       + AnotherTransformation
   }
   ```
-
-
-
-
 
 ### Loggin & Configuration
 
@@ -233,19 +169,15 @@ TheiaConfig {
 }
 ```
 
-
-
-
-
 ##### Configuration params:
 
-* `defaultShape`: The default `TheiaParams.Shape` to use if none is specified explicitly. 
+* `defaultError`: The default image to be load as error if no other value is set. 
 
-  Default is `TheiaParams.Shape.Square`
+  Default is _null_
 
+* `defaultPlaceholder`: The default image to be used as placeholder if no other value is set. 
 
-
-
+  Default is _null_
 
 
 * `defaultScaleError`: If _true_ `error`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
@@ -253,42 +185,26 @@ TheiaConfig {
   Default is *false*
 
 
-
-
-
-
 * `defaultScalePlaceholder`: If _true_ `placeholder`s will respect the `TheiaParams.scaleType`, else use. `defaultScaleType `
 
   Default is *false*
 
+* `defaultShape`: The default `TheiaParams.Shape` to use if none is specified explicitly. 
 
-
-
+  Default is `TheiaParams.Shape.Square`
 
 
 * `httpClient`: The `HttpClient` for execute web calls
 
   Default is *HttpClient()*
 
-
-
-
-
 * `logginEnabled`: Whether the logging should be enabled. 
 
   Default is `BuildConfig.DEBUG`
 
-
-
-
-
 * `logger`: A `TheiaLogger` for print messages. 
 
   Default is `DefaultTheiaLogger`
-
-
-
-
 
 #### Logging
 
@@ -304,10 +220,6 @@ override fun error( ex: TheiaException ) {
     else Log.d( THEIA_NAME, ex.actualMessage )
 }
 ```
-
-
-
-
 
 ### Extra
 

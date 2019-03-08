@@ -1,8 +1,10 @@
 package studio.forface.theia
 
+import android.content.ContextWrapper
 import io.ktor.client.HttpClient
 import studio.forface.theia.TheiaParams.ScaleType.Center
 import studio.forface.theia.TheiaParams.Shape.Square
+import studio.forface.theia.dsl.dsl
 import studio.forface.theia.log.DefaultTheiaLogger
 import studio.forface.theia.log.TheiaLogger
 
@@ -13,8 +15,11 @@ import studio.forface.theia.log.TheiaLogger
  */
 object TheiaConfig {
 
-    /** The default [TheiaParams.Shape] to use if none is specified explicitly. Default is [Square] */
-    var defaultShape = TheiaParams.Shape.Square
+    /** The default [AsyncImageSource] to be used as `error` if no other value is set */
+    var defaultError: ImageSource? = null
+
+    /** The default [SyncImageSource] to be used as `placeholder` if no other value is set */
+    var defaultPlaceholder: SyncImageSource? = null
 
     /** If `true` `error`s will respect the [TheiaParams.scaleType], else use [defaultScaleType] */
     var defaultScaleError = false
@@ -25,6 +30,9 @@ object TheiaConfig {
     /** The default [TheiaParams.ScaleType] to use if none is specified explicitly. Default is [Center] */
     var defaultScaleType = TheiaParams.ScaleType.Center
 
+    /** The default [TheiaParams.Shape] to use if none is specified explicitly. Default is [Square] */
+    var defaultShape = TheiaParams.Shape.Square
+
     /** The [HttpClient] for execute web calls */
     val httpClient = HttpClient()
 
@@ -33,6 +41,11 @@ object TheiaConfig {
 
     /** A [TheiaLogger] from print messages. Default is [DefaultTheiaLogger] */
     var logger: TheiaLogger = DefaultTheiaLogger
+
+
+    /* Extensions */
+    var ContextWrapper.defaultPlaceholderDrawableRes: Int  by dsl { defaultPlaceholder = it.toImageSource( resources ) }
+    var ContextWrapper.defaultErrorDrawableRes:       Int  by dsl { defaultError = it.toImageSource( resources ) }
 }
 
 /**

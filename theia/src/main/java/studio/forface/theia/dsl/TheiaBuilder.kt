@@ -5,6 +5,8 @@ package studio.forface.theia.dsl
 import android.content.res.Resources
 import android.widget.ImageView
 import studio.forface.theia.*
+import studio.forface.theia.TheiaConfig.defaultError
+import studio.forface.theia.TheiaConfig.defaultPlaceholder
 import studio.forface.theia.TheiaConfig.defaultScaleError
 import studio.forface.theia.TheiaConfig.defaultScalePlaceholder
 import studio.forface.theia.TheiaConfig.defaultScaleType
@@ -30,22 +32,39 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      * It will be ignored for *successful* [Sync] requests, but it will be used anyway if:
      * * there is an error loading [image] and no [error] is supplied
      * * [error] is [Async]
+     *
+     * Default is [TheiaConfig.defaultPlaceholder]
      */
-    var placeholder: SyncImageSource? = null
+    var placeholder: SyncImageSource? = defaultPlaceholder
 
-    /** The image to load if some error occurred while loading [image] */
-    var error: ImageSource? = null
+    /**
+     * The image to load if some error occurred while loading [image]
+     * Default is [TheiaConfig.defaultError]
+     */
+    var error: ImageSource? = defaultError
 
-    /** If `true` [error] will respect [scaleType], else use [TheiaParams.ScaleType.Center] */
+    /**
+     * If `true` [error] will respect [scaleType], else use [TheiaParams.ScaleType.Center]
+     * Default is [TheiaConfig.defaultScaleError]
+     */
     var scaleError = defaultScaleError
 
-    /** If `true` [placeholder] will respect [scaleType], else use [TheiaParams.ScaleType.Center] */
+    /**
+     * If `true` [placeholder] will respect [scaleType], else use [TheiaParams.ScaleType.Center]
+     * Default is [TheiaConfig.defaultScalePlaceholder]
+     */
     var scalePlaceholder = defaultScalePlaceholder
 
-    /** The [TheiaParams.ScaleType] to apply to [image] */
+    /**
+     * The [TheiaParams.ScaleType] to apply to [image]
+     * Default is [TheiaConfig.defaultScaleType]
+     */
     var scaleType = defaultScaleType
 
-    /** The [TheiaParams.Shape] to apply to [image] */
+    /**
+     * The [TheiaParams.Shape] to apply to [image]
+     * Default is [TheiaConfig.defaultShape]
+     */
     var shape: TheiaParams.Shape = defaultShape
 
     /**
@@ -76,7 +95,11 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      * @throws TargetNotSetException if [target] is not initialized
      */
     fun build(): TheiaParams {
-        if ( ! ::target.isInitialized ) throw TargetNotSetException()
+        try {
+            target
+        } catch ( e: UninitializedPropertyAccessException ) {
+            throw TargetNotSetException()
+        }
 
         return TheiaParams(
             image =                 actualImage,

@@ -18,7 +18,7 @@ internal class DslComponent<T, V> ( private val setter: T.(V) -> Unit ) : ReadWr
      * @param property the metadata for the property.
      * @return the property value.
      */
-    override fun getValue( thisRef: T, property: KProperty<*>): V = throwDslGetException()
+    override fun getValue( thisRef: T, property: KProperty<*> ): V = throwDslGetException()
 
     /**
      * Sets the value of the property for the given object.
@@ -26,7 +26,7 @@ internal class DslComponent<T, V> ( private val setter: T.(V) -> Unit ) : ReadWr
      * @param property the metadata for the property.
      * @param value the value to set.
      */
-    override fun setValue(thisRef: T, property: KProperty<*>, value: V ) {
+    override fun setValue( thisRef: T, property: KProperty<*>, value: V ) {
         thisRef.setter( value )
     }
 }

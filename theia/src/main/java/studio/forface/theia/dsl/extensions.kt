@@ -9,12 +9,15 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import studio.forface.theia.*
+import studio.forface.theia.TheiaConfig.defaultError
+import studio.forface.theia.TheiaConfig.defaultPlaceholder
 import studio.forface.theia.utils.doOnDestroy
 import studio.forface.theia.utils.doOnDetach
 import java.io.File
@@ -133,3 +136,21 @@ var AbsTheiaBuilder.errorFile:                 File        by dsl { error = it.t
 var AbsTheiaBuilder.asyncErrorFile:            File        by dsl { error = it.toAsyncImageSource() }
 var AbsTheiaBuilder.errorUrl:                  String      by dsl { error = it.toImageSource() }
 //var AbsTheiaBuilder.errorURL:                  URL         by dsl { error = it.toImageSource() } // Commented due to NoDefClassFoundException
+
+
+/* Extensions for TheiaConfig */
+
+var TheiaConfig.defaultPlaceholderBitmap:           Bitmap      by dsl { defaultPlaceholder = it.toImageSource() }
+var TheiaConfig.defaultPlaceholderDrawable:         Drawable    by dsl { defaultPlaceholder = it.toImageSource() }
+// Unappliable here! See TheiaConfig extensions
+// var TheiaConfig.defaultPlaceholderDrawableRes:      Int         by dsl { defaultPlaceholder = it.toImageSource( resources ) }
+var TheiaConfig.defaultPlaceholderFile:             File        by dsl { defaultPlaceholder = it.toImageSource() }
+
+var TheiaConfig.defaultErrorBitmap:                 Bitmap      by dsl { defaultError = it.toImageSource() }
+var TheiaConfig.defaultErrorDrawable:               Drawable    by dsl { defaultError = it.toImageSource() }
+// Unappliable here! See TheiaConfig extensions
+// var TheiaConfig.defaultErrorDrawableRes:            Int         by dsl { defaultError = it.toImageSource( resources ) }
+var TheiaConfig.defaultErrorFile:                   File        by dsl { defaultError = it.toImageSource() }
+var TheiaConfig.defaultAsyncErrorFile:              File        by dsl { defaultError = it.toAsyncImageSource() }
+var TheiaConfig.defaultErrorUrl:                    String      by dsl { defaultError = it.toImageSource() }
+//var TheiaConfig.defaultErrorURL:                    URL         by dsl { defaultError = it.toImageSource() } // Commented due to NoDefClassFoundException
