@@ -4,7 +4,7 @@
 
 **Theia** is a *lightweight* image loader for Android.
 
-<u>Caching is currently not supported yet</u>
+<u>With Cache System!</u>
 
 ## Installation
 
@@ -143,6 +143,10 @@ In this case, requests need to be purged manually with `theia.purgeRequests()`
   * `Round`
   * `Square`
 
+* `useCache`: If *true* cache will be used for this request. 
+
+  Default is `TheiaConfig.defaultUseCache` ( `true` )
+
 * `extraTransformations`: Add a new [TheiaTransformation] to [extraTransformations] within plus operator.
 
   E.g.
@@ -171,6 +175,14 @@ TheiaConfig {
 
 ##### Configuration params:
 
+* `cacheDuration`: A `Duration` representing how long the cached images should be used before use fresh data. 
+
+  Default is 1 month ( `1.months` )
+
+* `defaultCacheDirectory`: The default `File` directory where to store cache.
+  Note: changing default directory may require `permission.READ_EXTERNAL_STORAGE` and `permission.WRITE_EXTERNAL_STORAGE`
+  Default is `initDefaultCacheDir` ( `context.cacheDir` )
+
 * `defaultError`: The default image to be load as error if no other value is set. 
 
   Default is _null_
@@ -192,6 +204,10 @@ TheiaConfig {
 * `defaultShape`: The default `TheiaParams.Shape` to use if none is specified explicitly. 
 
   Default is `TheiaParams.Shape.Square`
+
+* `defaultUseCache`: If *true* use cache. 
+
+  Default is *true*
 
 
 * `httpClient`: The `HttpClient` for execute web calls
