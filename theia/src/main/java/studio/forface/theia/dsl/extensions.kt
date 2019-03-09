@@ -9,15 +9,12 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import studio.forface.theia.*
-import studio.forface.theia.TheiaConfig.defaultError
-import studio.forface.theia.TheiaConfig.defaultPlaceholder
 import studio.forface.theia.utils.doOnDestroy
 import studio.forface.theia.utils.doOnDetach
 import java.io.File
@@ -43,6 +40,7 @@ inline operator fun PreTargetedTheia.invoke( builder: PreTargetedTheiaBuilder.()
  */
 val FragmentActivity.newTheiaInstance: Theia
     get() {
+        initDefaultCacheDir(this )
         val instance = Theia( resources )
         (this as LifecycleOwner).doOnDestroy( removeObserver = true ) { instance.purgeRequests() }
         return instance
@@ -59,6 +57,7 @@ val FragmentActivity.newTheiaInstance: Theia
  */
 val Fragment.newTheiaInstance: Theia
     get() {
+        initDefaultCacheDir( requireContext() )
         val instance = Theia( resources )
         doOnDestroy( removeObserver = false ) { instance.purgeRequests() }
         return instance
@@ -72,6 +71,7 @@ val Fragment.newTheiaInstance: Theia
  */
 val View.newTheiaInstance: Theia
     get() {
+        initDefaultCacheDir( context )
         val instance = Theia( context.resources )
         doOnDetach( removeListener = false ) { instance.purgeRequests() }
         return instance
@@ -94,6 +94,7 @@ val RecyclerView.ViewHolder.newTheiaInstance get() = itemView.newTheiaInstance
  * [PreTargetedTheia.target] to the [TheiaBuilder] so it doesn't need to be declared explicitly
  */
 val ImageView.theia : PreTargetedTheia get() {
+    initDefaultCacheDir( context )
     val instance = PreTargetedTheia( context.resources,this )
     doOnDetach( removeListener = false ) { instance.purgeRequests() }
     return instance

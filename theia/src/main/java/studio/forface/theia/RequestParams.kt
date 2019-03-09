@@ -11,7 +11,8 @@ internal data class RequestParams(
     internal val dimensions: Dimensions,
     internal val scaleType: TheiaParams.ScaleType,
     internal val shape: TheiaParams.Shape,
-    internal val extraTransformations: List<TheiaTransformation>
+    internal val extraTransformations: List<TheiaTransformation>,
+    internal val useCache: Boolean
 ) {
     companion object {
 
@@ -21,7 +22,8 @@ internal data class RequestParams(
                 dimensions =            target.width to target.height,
                 scaleType =             scaleType,
                 shape =                 shape,
-                extraTransformations =  extraTransformations
+                extraTransformations =  extraTransformations,
+                useCache =              useCache
             )
         }
     }

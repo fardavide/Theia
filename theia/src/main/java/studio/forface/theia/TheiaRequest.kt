@@ -8,9 +8,17 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
+import studio.forface.theia.TheiaConfig.cacheDuration
 import studio.forface.theia.TheiaParams.ScaleType
+import studio.forface.theia.cache.get
+import studio.forface.theia.cache.set
+import studio.forface.theia.log.TheiaLogger
 import studio.forface.theia.utils.*
+import java.io.ByteArrayOutputStream
+import java.io.File
 import kotlin.coroutines.CoroutineContext
+import studio.forface.theia.cache.minus
+import java.lang.System.currentTimeMillis
 
 /**
  * A request for retrieve and apply the image.
@@ -19,13 +27,17 @@ import kotlin.coroutines.CoroutineContext
  *
  * @author Davide Giuseppe Farella.
  */
-internal abstract class TheiaRequest<in ImageSource> : CoroutineScope {
+internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
+    CoroutineScope, TheiaLogger by TheiaConfig.logger {
 
     /** A [Job] for [CoroutineScope] */
     private val job = Job()
 
     /** @see CoroutineScope.coroutineContext */
     override val coroutineContext = Main + job
+
+    /** The directory for caches */
+    private val cacheDirectory get() = TheiaConfig.defaultCacheDirectory
 
     /** The [CoroutineContext] for [getBitmap] */
     abstract val callContext: CoroutineContext
@@ -66,11 +78,37 @@ internal abstract class TheiaRequest<in ImageSource> : CoroutineScope {
     /** @return a [Bitmap] get from the given [ImageSource] */
     abstract suspend fun getBitmap( source: ImageSource ): Bitmap
 
-    /** @return a [Bitmap] stored in cache from the given [ImageSource] */
-    private fun getCachedBitmap( source: ImageSource ): Bitmap? = null //TODO Cache not implemented
+    /**
+     * @return a [Bitmap] stored in cache from the given [ImageSource]
+     * @return null if [params] has [RequestParams.useCache], [AbsImageSource.isLocalSource], [canUseCache] is false or
+     * if cache is not available.
+     */
+    private fun getCachedBitmap( source: ImageSource ): Bitmap? {
+        if ( ! params.useCache || source.isLocalSource || ! canUseCache() ) return null
+        return cacheDirectory[source.cacheName, currentTimeMillis() - cacheDuration]?.readBytes()?.toBitmap()
+    }
 
-    /** Store the given [Bitmap] in cache */
-    private fun storeInCache( bitmap: Bitmap, source: ImageSource ) {} //TODO Cache not implemented
+    /**
+     * Store the given [Bitmap] in cache, if:
+     * * [params] has [RequestParams.useCache]
+     * * [AbsImageSource.isRemoteSource]
+     * * [canUseCache]
+     * * cache doesn't exist for this [ImageSource]
+     */
+    private fun storeInCache( bitmap: Bitmap, source: ImageSource ) {
+        if ( ! params.useCache || source.isLocalSource || ! canUseCache() ) return
+        if ( cacheDirectory[source.cacheName] != null ) return
+        val stream = ByteArrayOutputStream()
+        bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream )
+        cacheDirectory[source.cacheName] = stream.toByteArray()
+    }
+
+    /**
+     * @return `true` if [TheiaConfig.defaultCacheDirectory] [File.canWrite], else false and log
+     * [MissingCacheStoragePermissionsException]
+     */
+    private fun canUseCache() = cacheDirectory.canWrite()
+        .also { allowed -> if ( ! allowed ) error( MissingCacheStoragePermissionsException() ) }
 
     /** Apply the needed transformations to the given [Bitmap] */
     private fun prepareBitmap(

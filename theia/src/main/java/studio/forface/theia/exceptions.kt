@@ -12,15 +12,22 @@ open class TheiaException(
     override val cause: Throwable? = null
 ) : Exception()
 
+/** @return NOT null [String] [TheiaException.getLocalizedMessage] or [TheiaException.message] if first one is null */
+val TheiaException.actualMessage: String get() = localizedMessage ?: message
+
+
 /** [TheiaException] describing that no [TheiaBuilder.image] or [TheiaBuilder.placeholder] has been set */
 class ImageSourceNotSetException : TheiaException( "Both 'image' and 'placeholder' are null" )
+
+/** [TheiaException] describing that no permissions have been provided for use cache */
+class MissingCacheStoragePermissionsException : TheiaException(
+    "Impossible to use cache due to missing storage permissions. Please provide 'READ_EXTERNAL_STORAGE' and " +
+            "'WRITE_EXTERNAL_STORAGE' permissions"
+)
 
 /** [TheiaException] describing that no [TheiaBuilder.target] has been set */
 class TargetNotSetException : TheiaException( "'target' is required! No 'target' set" )
 
 
-/** @return NOT null [String] [TheiaException.getLocalizedMessage] or [TheiaException.message] if first one is null */
-val TheiaException.actualMessage: String get() = localizedMessage ?: message
-
 /** @return a [TheiaException] generated from the given [Throwable] */
-internal fun Throwable.toTheiaException()= TheiaException( message ?: "", cause )
+internal fun Throwable.toTheiaException() = TheiaException( message ?: "", cause )

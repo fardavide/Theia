@@ -1,5 +1,6 @@
 package studio.forface.theia
 
+import android.content.Context
 import android.content.res.Resources
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
@@ -163,3 +164,10 @@ class UnhandledTheia internal constructor( resources: Resources ) : Theia( resou
 
 /** A typealias for [TheiaRequest] without generic */
 private typealias Request = TheiaRequest<*>
+
+
+/** Initialize [TheiaConfig.defaultCacheDirectory] if not set yet */
+internal fun initDefaultCacheDir( context: Context ) {
+    if ( TheiaConfig.defaultCacheDirectory == noDirectory )
+        TheiaConfig.defaultCacheDirectory = context.cacheDir
+}

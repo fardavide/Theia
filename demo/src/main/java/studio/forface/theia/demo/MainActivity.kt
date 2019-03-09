@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView( R.layout.activity_main )
 
         TheiaConfig {
+            cacheDuration = 5.mins
             defaultPlaceholderDrawableRes = R.drawable.ic_favorite
         }
 

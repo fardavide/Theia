@@ -11,6 +11,7 @@ import studio.forface.theia.TheiaConfig.defaultScaleError
 import studio.forface.theia.TheiaConfig.defaultScalePlaceholder
 import studio.forface.theia.TheiaConfig.defaultScaleType
 import studio.forface.theia.TheiaConfig.defaultShape
+import studio.forface.theia.TheiaConfig.defaultUseCache
 import studio.forface.theia.transformation.TheiaTransformation
 
 /**
@@ -67,6 +68,9 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      */
     var shape: TheiaParams.Shape = defaultShape
 
+    /** If `true` cache will be used for this request. Default is [TheiaConfig.defaultUseCache] */
+    var useCache = defaultUseCache
+
     /**
      * Add a new [TheiaTransformation] to [extraTransformations] within plus operator.
      * E.g. >
@@ -110,7 +114,8 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
             scalePlaceholder =      scalePlaceholder,
             scaleType =             scaleType,
             shape =                 shape,
-            extraTransformations =  extraTransformations
+            extraTransformations =  extraTransformations,
+            useCache =              useCache
         )
     }
 }

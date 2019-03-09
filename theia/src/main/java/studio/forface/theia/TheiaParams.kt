@@ -19,7 +19,8 @@ data class TheiaParams(
     internal val scalePlaceholder: Boolean,
     internal val scaleType: ScaleType,
     internal val shape: Shape,
-    internal val extraTransformations: List<TheiaTransformation>
+    internal val extraTransformations: List<TheiaTransformation>,
+    internal val useCache: Boolean
 ) {
 
     /** An enum representing how to scale the image */

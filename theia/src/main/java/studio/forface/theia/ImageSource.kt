@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package studio.forface.theia
 
 import android.content.res.Resources
@@ -17,7 +19,10 @@ import java.net.URL
  * @author Davide Giuseppe Farella
  */
 sealed class AbsImageSource<out Type> {
-    abstract val source: Type
+    internal abstract val source: Type
+    internal val cacheName get() = "$source.cache".replace('/', '.' )
+    internal open val isRemoteSource = false
+    internal val isLocalSource get() = ! isRemoteSource
 }
 
 /** A sealed class for [ImageSource] that will be loaded synchronously */
@@ -32,10 +37,12 @@ sealed class AbsSyncImageSource<out Type> : AbsImageSource<Type>() {
     /** A [SyncImageSource] of type [Int] [DrawableRes] */
     class DrawableResImageSource(
         @DrawableRes override val source: Int,
-        val resources: Resources
+        private val resources: Resources
     ) : AbsSyncImageSource<Int>() {
+
         /** @return a [Drawable] from [source] */
-        fun resolveDrawable() = resources.getDrawable( source )
+        @Suppress("DEPRECATION")
+        fun resolveDrawable(): Drawable = resources.getDrawable( source )
     }
 
     /** A [SyncImageSource] of type [File] */
@@ -49,10 +56,14 @@ sealed class AbsAsyncImageSource<out Type> : AbsImageSource<Type>() {
     class AsyncFileImageSource( override val source: File ) : AbsAsyncImageSource<File>()
 
     /** An [AsyncImageSource] of type [String] */
-    class StringImageSource( override val source: String ) : AbsAsyncImageSource<String>()
+    class StringImageSource( override val source: String ) : AbsAsyncImageSource<String>() {
+        override val isRemoteSource = true
+    }
 
     /** An [AsyncImageSource] of type [URL] */
-    class UrlImageSource( override val source: URL ) : AbsAsyncImageSource<URL>()
+    class UrlImageSource( override val source: URL ) : AbsAsyncImageSource<URL>() {
+        override val isRemoteSource = true
+    }
 }
 
 
