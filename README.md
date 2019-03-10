@@ -27,22 +27,27 @@
 A **Theia** instance can be retrieved in many ways:
 
 * from `FragmentActivity`, `Fragment`, `View` or `RecyclerView.ViewHolder`
-via `newTheiaInstance` ( provides instance of `Theia` ).
-In this case a new instance will be created ad every invocation, so it's better to keep a strong reference to it ( e.g. `private val theia by lazy ( newTheiaInstance )` )
-The requests will be bonded to the lifecycle of the receiver component
+
+  via `newTheiaInstance` ( provides instance of `Theia` ).
+  In this case a new instance will be created ad every invocation, so it's better to keep a strong reference to it ( e.g. `private val theia by lazy ( newTheiaInstance )` )
+  The requests will be bonded to the lifecycle of the receiver component
 
 * from `ImageView`
-via `theia` ( provides instance of `PreTargetedTheia` )
-Also here a new instance will be created every time, but we don't need a strong reference, since usually only a single request is needed for an `ImageView`
-The request will be bonded to the lifecycle of the `ImageView`
+
+  via `theia` ( provides instance of `PreTargetedTheia` )
+  Also here a new instance will be created every time, but we don't need a strong reference, since usually only a single request is needed for an `ImageView`
+  The request will be bonded to the lifecycle of the `ImageView`
 
 * everywhere
-via `newTheiaUnhandledInstance` ( provides instance of `UnhandledTheia` and need a `Context` )
-Also here a new instance will be created ad every invocation, so it's better to keep a strong reference to it ( e.g. `private val theia by lazy ( newTheiaUnhandledInstance )` )
-The request won't be bonded to any lifecycle, so they need to be purged manually via `theia.purgeRequests()`
+
+  via `newTheiaUnhandledInstance` ( provides instance of `UnhandledTheia` and need a `Context` )
+  Also here a new instance will be created ad every invocation, so it's better to keep a strong reference to it ( e.g. `private val theia by lazy ( newTheiaUnhandledInstance )` )
+  The request won't be bonded to any lifecycle, so they need to be purged manually via `theia.purgeRequests()`
 
 * using a custom component
-There are some custom framework components that provide a single instance of `Theia` ( `theia` ):
+
+  There are some custom framework components that provide a single instance of `Theia` ( `theia` ):
+
    * `TheiaActivity`
    * `TheiaFragment`
    * `TheiaViewHolder` ( inherit from `RecyclerView.ViewHolder` )
