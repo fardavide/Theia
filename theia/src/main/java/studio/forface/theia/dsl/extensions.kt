@@ -42,7 +42,7 @@ val FragmentActivity.newTheiaInstance: Theia
     get() {
         initDefaultCacheDir(this )
         val instance = Theia( resources )
-        (this as LifecycleOwner).doOnDestroy( removeObserver = true ) { instance.purgeRequests() }
+        doOnDestroy( removeObserver = true ) { instance.purgeRequests() }
         return instance
     }
 

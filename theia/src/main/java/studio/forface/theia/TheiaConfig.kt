@@ -2,13 +2,14 @@
 
 package studio.forface.theia
 
-import android.content.ContextWrapper
 import android.Manifest.permission
-import android.os.Environment
+import android.content.ContextWrapper
 import io.ktor.client.HttpClient
 import studio.forface.theia.TheiaParams.ScaleType.Center
 import studio.forface.theia.TheiaParams.Shape.Square
 import studio.forface.theia.cache.Duration
+import studio.forface.theia.cache._cleanCache
+import studio.forface.theia.cache.months
 import studio.forface.theia.dsl.dsl
 import studio.forface.theia.log.DefaultTheiaLogger
 import studio.forface.theia.log.TheiaLogger
@@ -33,9 +34,13 @@ object TheiaConfig {
      * [permission.WRITE_EXTERNAL_STORAGE]
      *
      * Default is [initDefaultCacheDir]
+     *
+     * When this value is changed, cache will be removed from the old directory.
+     * If new directory not [File.exists], it will be created.
      */
     var defaultCacheDirectory: File = noDirectory
         set( value ) {
+            _cleanCache()
             field = value
             if ( ! field.exists() ) field.mkdir()
         }
@@ -74,21 +79,6 @@ object TheiaConfig {
     /* Extensions */
     var ContextWrapper.defaultPlaceholderDrawableRes:   Int  by dsl { defaultPlaceholder = it.toImageSource( resources ) }
     var ContextWrapper.defaultErrorDrawableRes:         Int  by dsl { defaultError = it.toImageSource( resources ) }
-
-    /** @return a [Duration] of the given value in minutes */
-    val Int.mins get() = Duration(this.toLong() * 1000 /* ms */ * 60 /* seconds */ )
-
-    /** @return a [Duration] of the given value in hours */
-    val Int.hours get() = 60.mins * this
-
-    /** @return a [Duration] of the given value in days */
-    val Int.days get() = 24.hours * this
-
-    /** @return a [Duration] of the given value in weeks */
-    val Int.weeks get() = 7.days * this
-
-    /** @return a [Duration] of the given value in months */
-    val Int.months get() = 30.days * this
 }
 
 /**

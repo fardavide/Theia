@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
+import studio.forface.theia.cache.CACHE_EXT
 import java.io.File
 import java.net.URL
 
@@ -20,7 +21,7 @@ import java.net.URL
  */
 sealed class AbsImageSource<out Type> {
     internal abstract val source: Type
-    internal val cacheName get() = "$source.cache".replace('/', '.' )
+    internal val cacheName get() = "$source$CACHE_EXT".replace( File.separatorChar, '.' )
     internal open val isRemoteSource = false
     internal val isLocalSource get() = ! isRemoteSource
 }

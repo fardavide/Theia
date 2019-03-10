@@ -47,7 +47,7 @@ object Versions {
     val android_lifecycle =             "2.0.0"
     val android_recycler_view =         "1.0.0"
     val android_robolectric =           "4.2"
-    val android_support =               "1.0.2"
+    val android_support =               "1.1.0-alpha02"
     val android_test_runner =           "1.1.1"
 
     val publishing_bintray_plugin =     "1.8.4"

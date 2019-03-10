@@ -3,9 +3,12 @@ package studio.forface.theia.demo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.forface.theia.Theia
 import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
 import studio.forface.theia.TheiaParams.Shape.Round
+import studio.forface.theia.cache.days
+import studio.forface.theia.cache.mins
 import studio.forface.theia.dsl.*
 import studio.forface.theia.invoke
 

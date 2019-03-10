@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package studio.forface.theia
 
 import android.content.Context
@@ -5,9 +7,14 @@ import android.content.res.Resources
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
 import studio.forface.theia.AbsSyncImageSource.DrawableResImageSource
+import studio.forface.theia.cache.CACHE_EXT
+import studio.forface.theia.cache.Duration
+import studio.forface.theia.cache._cleanCache
+import studio.forface.theia.cache.mins
 import studio.forface.theia.dsl.PreTargetedTheiaBuilder
 import studio.forface.theia.dsl.TheiaBuilder
 import studio.forface.theia.log.TheiaLogger
+import java.io.File
 
 /**
  * An interface for load images into an [ImageView]
@@ -42,6 +49,14 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** A list of active [AsyncRequest] */
     private val requests = mutableListOf<TheiaRequest<*>>()
+
+    /**
+     * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan]
+     *
+     * @param olderThan A duration for query files to delete.
+     * Default is 0 minutes ( `0.mins` ), soo all the caches will be removed
+     */
+    fun cleanCache( olderThan: Duration = 0.mins ) = _cleanCache( olderThan )
 
     /** Apply [TheiaParams] */
     @PublishedApi
