@@ -105,14 +105,10 @@ val ImageView.theia : PreTargetedTheia get() {
  * NOTE: this instance won't be tied to any Lifecycle, so you will need to manually stop the requests by
  * [Theia.purgeRequests]
  */
-fun newTheiaUnhandledInstance( context: Context ) = UnhandledTheia( context.resources )
-
-/**
- * @return a new instance of [UnhandledTheia]
- * NOTE: this instance won't be tied to any Lifecycle, so you will need to manually stop the requests by
- * [Theia.purgeRequests]
- */
-fun newTheiaUnhandledInstance( resources: Resources ) = UnhandledTheia( resources )
+fun newTheiaUnhandledInstance( context: Context ): UnhandledTheia {
+    initDefaultCacheDir( context )
+    return UnhandledTheia( context.resources )
+}
 
 
 /* Extensions for TheiaBuilder's */
