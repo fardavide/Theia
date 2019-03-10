@@ -51,7 +51,8 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     private val requests = mutableListOf<TheiaRequest<*>>()
 
     /**
-     * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan]
+     * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan] from
+     * [TheiaConfig.defaultCacheDirectory]
      *
      * @param olderThan A duration for query files to delete.
      * Default is 0 minutes ( `0.mins` ), soo all the caches will be removed

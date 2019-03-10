@@ -2,12 +2,14 @@
 
 package studio.forface.theia.cache
 
+import studio.forface.theia.TheiaConfig
 import java.io.File
 import java.lang.System.currentTimeMillis
 import studio.forface.theia.TheiaConfig.defaultCacheDirectory as cacheDir
 
 /**
- * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan]
+ * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan] from
+ * [TheiaConfig.defaultCacheDirectory]
  *
  * @param olderThan A duration for query files to delete.
  * Default is 0 minutes ( `0.mins` ), soo all the caches will be removed

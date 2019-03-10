@@ -239,6 +239,15 @@ override fun error( ex: TheiaException ) {
 
 ### Extra
 
+#### Cache
+
+For clean cache manually, use: `theia.cleanCache( 5.days )`
+
+It willl delete all the `File`s with extension `CACHE_EXT` with `File.lastModified` older than `olderThan` from `TheiaConfig.defaultCacheDirectory`
+`olderThan`  is `Duration` for query files to delete. Default is `0.mins` so all the caches will be deleted.
+
+#### Android components
+
 There are also some custom framework components that provide a single instance of `Theia`:
 
 * `TheiaActivity`
