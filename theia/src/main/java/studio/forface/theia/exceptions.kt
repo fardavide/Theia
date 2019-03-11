@@ -7,10 +7,17 @@ import studio.forface.theia.dsl.TheiaBuilder
  *
  * @author Davide Giuseppe Farella
  */
-open class TheiaException(
-    override val message: String = "Generic $THEIA_NAME exception",
-    override val cause: Throwable? = null
-) : Exception()
+open class TheiaException : Exception {
+
+    /** @constructor for class that inherit [TheiaException] */
+    constructor( message: String = "Generic $THEIA_NAME exception" ): super( message )
+
+    /** @constructor for wrap "unknown" [Throwable]s */
+    constructor( cause: Throwable ) : super( cause )
+
+    /** @return non-null [String] [Throwable.message] or empty [String] */
+    override val message: String get() = super.message ?: ""
+}
 
 /** @return NOT null [String] [TheiaException.getLocalizedMessage] or [TheiaException.message] if first one is null */
 val TheiaException.actualMessage: String get() = localizedMessage ?: message
@@ -41,4 +48,4 @@ class UndefinedDimensionsException : TheiaException( "If no 'target' is declared
 
 
 /** @return a [TheiaException] generated from the given [Throwable] */
-internal fun Throwable.toTheiaException() = TheiaException( message ?: "", cause ) // TODO: stacktrace
+internal fun Throwable.toTheiaException() = TheiaException( cause = this )
