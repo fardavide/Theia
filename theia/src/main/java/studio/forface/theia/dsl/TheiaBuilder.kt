@@ -3,6 +3,7 @@
 package studio.forface.theia.dsl
 
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.widget.ImageView
 import studio.forface.theia.*
 import studio.forface.theia.TheiaConfig.defaultError
@@ -25,8 +26,8 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
     /** The [AsyncImageSource] for the image to load into [target] */
     var image: ImageSource? = null
 
-    /** The [ImageView] where to load the [image] */
-    protected open lateinit var target: ImageView
+    /** The [ImageView] where to load the [image]. Default is `null` */
+    protected open var target: ImageView? = null
 
     /**
      * The image to load as placeholder for async requests.
@@ -43,6 +44,12 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      * Default is [TheiaConfig.defaultError]
      */
     var error: ImageSource? = defaultError
+
+    /**
+     * Override dimensions of images to load, this param is required if [target] is not set
+     * Default is `null`
+     */
+    var dimensions: Dimensions? = null
 
     /**
      * If `true` [error] will respect [scaleType], else use [TheiaParams.ScaleType.Center]
@@ -71,6 +78,16 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
     /** If `true` cache will be used for this request. Default is [TheiaConfig.defaultUseCache] */
     var useCache = defaultUseCache
 
+    /** Set a [CompletionCallback] that will be called when [image] is ready */
+    fun onCompletion( callback: CompletionCallback ) {
+        this.completionCallback = callback
+    }
+
+    /** Set an [ErrorCallback] that will be called when something went wrong loading [image] */
+    fun onError( callback: ErrorCallback ) {
+        this.errorCallback = callback
+    }
+
     /**
      * Add a new [TheiaTransformation] to [extraTransformations] within plus operator.
      * E.g. >
@@ -90,19 +107,34 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      */
     private val actualImage get() = image ?: placeholder ?: throw ImageSourceNotSetException()
 
+    /**
+     * A [CompletionCallback] that will be called when [image] is ready
+     * Default is `null`
+     * Set it via [onCompletion] function
+     */
+    private var completionCallback: CompletionCallback? = null
+
+    /**
+     * An [ErrorCallback] that will be called when something went wrong loading [image]
+     * Default is `null`
+     * Set it via [onError] function
+     */
+    private var errorCallback: ErrorCallback? = null
+
     /** A [Set] of [TheiaTransformation] to apply to the images ( [image], [placeholder], [error] ) */
     private val extraTransformations = mutableListOf<TheiaTransformation>()
 
     /**
      * @return [TheiaParams]
      *
-     * @throws TargetNotSetException if [target] is not initialized
+     * @throws PointlessRequestException if both [target] and [completionCallback] are null
+     * @throws UndefinedDimensionsException if both [target] and [dimensions] are null
      */
     fun build(): TheiaParams {
-        try {
-            target
-        } catch ( e: UninitializedPropertyAccessException ) {
-            throw TargetNotSetException()
+
+        if ( target == null ) {
+            if ( completionCallback == null ) throw PointlessRequestException()
+            if ( dimensions == null ) throw UndefinedDimensionsException()
         }
 
         return TheiaParams(
@@ -115,17 +147,26 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
             scaleType =             scaleType,
             shape =                 shape,
             extraTransformations =  extraTransformations,
-            useCache =              useCache
+            useCache =              useCache,
+            dimensions =            dimensions,
+            completionCallback =    completionCallback,
+            errorCallback =         errorCallback
         )
     }
 }
 
 /** Implementation of [AbsTheiaBuilder] that receives [AbsTheiaBuilder.target] as constructor params */
 @TheiaDsl
-class PreTargetedTheiaBuilder( resources: Resources, override var target: ImageView ): AbsTheiaBuilder( resources )
+class PreTargetedTheiaBuilder( resources: Resources, override var target: ImageView? ): AbsTheiaBuilder( resources )
 
 /** Default implementation of [AbsTheiaBuilder] that exposes [AbsTheiaBuilder.target] */
 @TheiaDsl
 class TheiaBuilder( resources: Resources ): AbsTheiaBuilder( resources ) {
-    public override lateinit var target: ImageView
+    public override var target: ImageView? = null
 }
+
+/** A typealias for a lambda that receives a [Bitmap] */
+typealias CompletionCallback = (Bitmap) -> Unit
+
+/** A typealias for a lambda that receives a [TheiaException] */
+typealias ErrorCallback = (TheiaException) -> Unit

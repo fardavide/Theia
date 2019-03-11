@@ -1,6 +1,7 @@
 package studio.forface.theia.utils
 
 import android.view.View
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle

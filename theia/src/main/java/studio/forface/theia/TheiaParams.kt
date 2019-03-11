@@ -1,6 +1,8 @@
 package studio.forface.theia
 
 import android.widget.ImageView
+import studio.forface.theia.dsl.CompletionCallback
+import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.transformation.CircleTransformation
 import studio.forface.theia.transformation.NoTransformation
 import studio.forface.theia.transformation.TheiaTransformation
@@ -12,7 +14,7 @@ import studio.forface.theia.transformation.TheiaTransformation
  */
 data class TheiaParams(
     internal val image: ImageSource,
-    internal val target: ImageView,
+    internal val target: ImageView?,
     internal val placeholder: SyncImageSource?,
     internal val error: ImageSource?,
     internal val scaleError: Boolean,
@@ -20,7 +22,10 @@ data class TheiaParams(
     internal val scaleType: ScaleType,
     internal val shape: Shape,
     internal val extraTransformations: List<TheiaTransformation>,
-    internal val useCache: Boolean
+    internal val useCache: Boolean,
+    internal val dimensions: Dimensions?,
+    internal val completionCallback: CompletionCallback?,
+    internal val errorCallback: ErrorCallback?
 ) {
 
     /** An enum representing how to scale the image */

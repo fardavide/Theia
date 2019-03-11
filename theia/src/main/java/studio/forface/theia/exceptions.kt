@@ -25,9 +25,20 @@ class MissingCacheStoragePermissionsException : TheiaException(
             "'WRITE_EXTERNAL_STORAGE' permissions"
 )
 
+/**
+ * [TheiaException] describing that the Request is useless since none of [TheiaBuilder.target] and
+ * [TheiaBuilder.completionCallback] is supplied
+ */
+class PointlessRequestException :
+        TheiaException( "The request is useless since both 'target' and 'completionCallback' are null" )
+
 /** [TheiaException] describing that no [TheiaBuilder.target] has been set */
+@Deprecated( "This exception is not used anymore, since target is optional if a CompletionCallback is supplied" ) // TODO remove in 0.3
 class TargetNotSetException : TheiaException( "'target' is required! No 'target' set" )
+
+/** [TheiaException] describing that both [TheiaBuilder.target] and [TheiaBuilder.dimensions] are null */
+class UndefinedDimensionsException : TheiaException( "If no 'target' is declared, 'dimensions' should be defined" )
 
 
 /** @return a [TheiaException] generated from the given [Throwable] */
-internal fun Throwable.toTheiaException() = TheiaException( message ?: "", cause )
+internal fun Throwable.toTheiaException() = TheiaException( message ?: "", cause ) // TODO: stacktrace

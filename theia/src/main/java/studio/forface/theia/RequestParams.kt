@@ -1,5 +1,6 @@
 package studio.forface.theia
 
+import android.widget.ImageView
 import studio.forface.theia.transformation.TheiaTransformation
 
 /**
@@ -19,7 +20,7 @@ internal data class RequestParams(
         /** @return [RequestParams] created from [TheiaParams] */
         infix fun of( theiaParams: TheiaParams ) = with( theiaParams ) {
             RequestParams(
-                dimensions =            target.width to target.height,
+                dimensions =            dimensions ?: target?.dimensions ?: throw AssertionError(),
                 scaleType =             scaleType,
                 shape =                 shape,
                 extraTransformations =  extraTransformations,
@@ -30,6 +31,9 @@ internal data class RequestParams(
 }
 
 /** A typealias for a [Pair] of [Int]s */
-internal typealias Dimensions = Pair<Int, Int>
+typealias Dimensions = Pair<Int, Int>
 internal val Dimensions.width get() = first
 internal val Dimensions.height get() = second
+
+/** @return a [Dimensions] from [ImageView] */
+internal val ImageView.dimensions get() = width to height

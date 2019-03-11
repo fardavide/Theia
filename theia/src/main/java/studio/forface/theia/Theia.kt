@@ -11,6 +11,8 @@ import studio.forface.theia.cache.CACHE_EXT
 import studio.forface.theia.cache.Duration
 import studio.forface.theia.cache._cleanCache
 import studio.forface.theia.cache.mins
+import studio.forface.theia.dsl.CompletionCallback
+import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.dsl.PreTargetedTheiaBuilder
 import studio.forface.theia.dsl.TheiaBuilder
 import studio.forface.theia.log.TheiaLogger
@@ -63,13 +65,17 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     @PublishedApi
     internal fun applyParams( params: TheiaParams ): Unit = with( params ) {
 
-        target.doOnPreDraw {
+        val load = {
 
             // Set placeholder if image is Async
             if ( image is Async ) load( placeholder, scalePlaceholder )
 
             // Set image and handle error
-            load( image ) {
+            // On completion call params.completionCallback
+            load( image, onCompletion = params.completionCallback ) {
+
+                // Call errorCallback if not null.
+                params.errorCallback?.invoke( it )
 
                 // Set placeholder if error is NOT Sync ( Async or null )
                 if ( error !is Sync ) load( placeholder, scalePlaceholder )
@@ -78,6 +84,13 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
                 load( error, scaleError ) { load( placeholder, scalePlaceholder ) }
             }
         }
+
+        // If we have Dimensions, load now, else on target's pre-draw
+        when {
+            params.dimensions != null -> load()
+            params.target != null -> params.target.doOnPreDraw { load() }
+            else -> throw AssertionError()
+        }
     }
 
     /** Apply [ImageSource] with its [TheiaParams] */
@@ -85,7 +98,8 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         source: ImageSource?,
         params: TheiaParams,
         applyScale: Boolean = true,
-        onError: (TheiaException) -> Unit
+        onCompletion: CompletionCallback,
+        onError: ErrorCallback
     ) {
         val requestParams = RequestParams of params
 
@@ -111,12 +125,13 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             overrideScaleType = if ( ! applyScale ) TheiaConfig.defaultScaleType else null,
             onComplete = {
                 dropRequest( request )
-                params.target.setImageBitmap( it )
+                onCompletion( it ) // Deliver to CompletionCallback
+                params.target?.setImageBitmap( it ) // Set into target
             },
             onError = {
                 dropRequest( request )
+                onError( it ) // Deliver ErrorCallback
                 error( it ) // Log error
-                onError( it ) // Deliver to lambda
             }
         )
     }
@@ -154,9 +169,10 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     private fun TheiaParams.load(
         source: ImageSource?,
         applyScale: Boolean = true,
-        onError: (TheiaException) -> Unit = {}
+        onCompletion: CompletionCallback? = {},
+        onError: ErrorCallback = {}
     ) {
-        applySource( source,this, applyScale, onError )
+        applySource( source,this, applyScale, onCompletion ?: {}, onError )
     }
 }
 
