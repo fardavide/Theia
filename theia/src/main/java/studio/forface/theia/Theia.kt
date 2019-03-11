@@ -131,7 +131,8 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             onError = {
                 dropRequest( request )
                 onError( it ) // Deliver ErrorCallback
-                error( it ) // Log error
+                if ( it.isFatal ) error( it )
+                else info( it )
             }
         )
     }
