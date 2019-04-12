@@ -66,6 +66,7 @@ object Libs {
 
     val ktor =                                  "io.ktor:ktor-client-core:${Versions.ktor}"
     val ktor_apache =                           "io.ktor:ktor-client-apache:${Versions.ktor}"
+    val ktor_android =                          "io.ktor:ktor-client-android:${Versions.ktor}"
     val mockk =                                 "io.mockk:mockk:${Versions.mockk}"
     val mockk_android =                         "io.mockk:mockk-android:${Versions.mockk}"
 

@@ -14,7 +14,7 @@ dependencies {
     implementation( Libs.kotlin_reflect )
 
     implementation( Libs.ktor )
-    implementation( Libs.ktor_apache )
+    implementation( Libs.ktor_android )
 
     implementation( Libs.Android.appcompat )
     implementation( Libs.Android.ktx )
