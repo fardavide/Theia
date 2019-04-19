@@ -1,46 +1,44 @@
 package studio.forface.theia
 
 import android.graphics.Bitmap
+import androidx.annotation.UiThread
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
 import studio.forface.theia.TheiaConfig.cacheDuration
 import studio.forface.theia.TheiaParams.ScaleType
 import studio.forface.theia.cache.get
+import studio.forface.theia.cache.minus
 import studio.forface.theia.cache.set
-import studio.forface.theia.log.TheiaLogger
 import studio.forface.theia.utils.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import kotlin.coroutines.CoroutineContext
-import studio.forface.theia.cache.minus
 import java.lang.System.currentTimeMillis
 
 /**
  * A request for retrieve and apply the image.
- *
  * Implements [CoroutineScope] for async calls.
  *
  * @author Davide Giuseppe Farella.
  */
 internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
-    CoroutineScope, TheiaLogger by TheiaConfig.logger {
+    CoroutineScope {
 
     /** A [Job] for [CoroutineScope] */
     private val job = Job()
 
     /** @see CoroutineScope.coroutineContext */
-    override val coroutineContext = Main + job
+    override val coroutineContext = IO + job
 
     /** The directory for caches */
     private val cacheDirectory get() = TheiaConfig.defaultCacheDirectory
-
-    /** The [CoroutineContext] for [getBitmap] */
-    abstract val callContext: CoroutineContext
 
     /** The [RequestParams] */
     abstract val params: RequestParams
@@ -54,26 +52,24 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
     operator fun invoke(
         source: ImageSource,
         overrideScaleType: ScaleType? = null,
-        onComplete: (Bitmap) -> Unit = {},
-        onError: (TheiaException) -> Unit = {}
+        @UiThread onComplete: (Bitmap) -> Unit = {},
+        @UiThread onError: (TheiaException) -> Unit = {}
     ) {
         launch {
             runCatching { handleSource( source ) }
                 .mapCatching { prepareBitmap( it, overrideScaleType ) }
-                .onSuccess { onComplete( it ) }
-                .onFailure { onError( it.toTheiaException() ) }
+                .onSuccess { withContext( Main ) { onComplete( it ) } }
+                .onFailure { withContext( Main ) { onError( it.toTheiaException() ) } }
         }
     }
 
     /**
+     * Try to get [Bitmap] from cache, if null get from [ImageSource] and then store it in cache
      * @return [Bitmap]
-     * Try to get [Bitmap] from cache, if null get from [ImageSource] on [callContext] and then store it in cache
      */
-    private suspend fun handleSource( source: ImageSource ) = coroutineScope {
-        return@coroutineScope getCachedBitmap( source ) ?:
-                withContext( callContext ) { getBitmap( source ) }
-                    .also { storeInCache( it, source ) }
-    }
+    private suspend fun handleSource( source: ImageSource ) = getCachedBitmap( source )
+            ?: getBitmap( source ).also { storeInCache( it, source ) }
+
 
     /** @return a [Bitmap] get from the given [ImageSource] */
     abstract suspend fun getBitmap( source: ImageSource ): Bitmap
@@ -130,9 +126,6 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
 /** A [TheiaRequest] that will be executed synchronously */
 internal class SyncRequest( override val params: RequestParams ): TheiaRequest<SyncImageSource>() {
 
-    /** The [CoroutineContext] for [getBitmap] */
-    override val callContext = Main
-
     /** @return a [Bitmap] get from the given [ImageSource] */
     override suspend fun getBitmap( source: SyncImageSource ): Bitmap {
         return when ( source ) {
@@ -149,9 +142,6 @@ internal class AsyncRequest(
     private val client: HttpClient,
     override val params: RequestParams
 ): TheiaRequest<AsyncImageSource>() {
-
-    /** The [CoroutineContext] for [getBitmap] */
-    override val callContext = IO
 
     /** @return a [Bitmap] get from the given [ImageSource] */
     override suspend fun getBitmap( source: AsyncImageSource ): Bitmap {
