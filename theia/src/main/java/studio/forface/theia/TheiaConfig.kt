@@ -58,10 +58,10 @@ object TheiaConfig {
     var defaultScalePlaceholder = false
 
     /** The default [TheiaParams.ScaleType] to use if none is specified explicitly. Default is [Center] */
-    var defaultScaleType = TheiaParams.ScaleType.Center
+    var defaultScaleType = Center
 
     /** The default [TheiaParams.Shape] to use if none is specified explicitly. Default is [Square] */
-    var defaultShape = TheiaParams.Shape.Square
+    var defaultShape = Square
 
     /** If `true` use cache. Default is `true` */
     var defaultUseCache = true

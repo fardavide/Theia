@@ -55,7 +55,7 @@ abstract class TheiaFragment: Fragment(), TheiaComponent {
  * NOTE: Use this is NOT required for benefit of [Theia], if you prefer, you cant simply implement
  * `val theia by lazy { newTheiaInstance() }` by in your [RecyclerView.ViewHolder]
  */
-abstract class TheiaViewHolder( itemView: View): RecyclerView.ViewHolder( itemView ), TheiaComponent {
+abstract class TheiaViewHolder( itemView: View ): RecyclerView.ViewHolder( itemView ), TheiaComponent {
 
     /** A strong reference to a single instance of [Theia] for this component */
     override val theia by lazy { newTheiaInstance }
