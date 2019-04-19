@@ -1,15 +1,10 @@
 package studio.forface.theia
 
 import android.graphics.Bitmap
-import androidx.annotation.UiThread
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
 import studio.forface.theia.TheiaConfig.cacheDuration
@@ -17,6 +12,7 @@ import studio.forface.theia.TheiaParams.ScaleType
 import studio.forface.theia.cache.get
 import studio.forface.theia.cache.minus
 import studio.forface.theia.cache.set
+import studio.forface.theia.log.TheiaLogger
 import studio.forface.theia.utils.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -24,18 +20,11 @@ import java.lang.System.currentTimeMillis
 
 /**
  * A request for retrieve and apply the image.
- * Implements [CoroutineScope] for async calls.
  *
  * @author Davide Giuseppe Farella.
  */
 internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
-    CoroutineScope {
-
-    /** A [Job] for [CoroutineScope] */
-    private val job = Job()
-
-    /** @see CoroutineScope.coroutineContext */
-    override val coroutineContext = IO + job
+    TheiaLogger by TheiaConfig.logger {
 
     /** The directory for caches */
     private val cacheDirectory get() = TheiaConfig.defaultCacheDirectory
@@ -49,18 +38,16 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
      * @param onComplete a lambda that receives the processed [Bitmap]
      * @param onError a lambda that receives the generated [TheiaException]
      */
-    operator fun invoke(
+    suspend operator fun invoke(
         source: ImageSource,
         overrideScaleType: ScaleType? = null,
-        @UiThread onComplete: (Bitmap) -> Unit = {},
-        @UiThread onError: (TheiaException) -> Unit = {}
+        onComplete: suspend (Bitmap) -> Unit = {},
+        onError: suspend (TheiaException) -> Unit = {}
     ) {
-        launch {
-            runCatching { handleSource( source ) }
-                .mapCatching { prepareBitmap( it, overrideScaleType ) }
-                .onSuccess { withContext( Main ) { onComplete( it ) } }
-                .onFailure { withContext( Main ) { onError( it.toTheiaException() ) } }
-        }
+        runCatching { handleSource( source ) }
+            .mapCatching { prepareBitmap( it, overrideScaleType ) }
+            .onSuccess { withContext( Main ) { onComplete( it ) } }
+            .onFailure { withContext( Main ) { onError( it.toTheiaException() ) } }
     }
 
     /**
@@ -69,6 +56,7 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
      */
     private suspend fun handleSource( source: ImageSource ) = getCachedBitmap( source )
             ?: getBitmap( source ).also { storeInCache( it, source ) }
+
 
 
     /** @return a [Bitmap] get from the given [ImageSource] */
@@ -82,6 +70,7 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
     private fun getCachedBitmap( source: ImageSource ): Bitmap? {
         if ( ! params.useCache || source.isLocalSource || ! canUseCache() ) return null
         return cacheDirectory[source.cacheName, currentTimeMillis() - cacheDuration]?.readBytes()?.toBitmap()
+            ?.also { info( "Loading ${source.source} from cache on ${Thread.currentThread().name}" ) }
     }
 
     /**
@@ -116,23 +105,26 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
             .applyTransformation( shape.transformation )
             .applyTransformations( extraTransformations )
     }
-
-    /** Stop the current Request */
-    fun stop() {
-        job.cancel()
-    }
 }
 
 /** A [TheiaRequest] that will be executed synchronously */
 internal class SyncRequest( override val params: RequestParams ): TheiaRequest<SyncImageSource>() {
 
+    internal companion object {
+        /** A single [ExecutorCoroutineDispatcher] for all the [SyncRequest]s */
+        @UseExperimental(ObsoleteCoroutinesApi::class)
+        val singleThreadContext = newSingleThreadContext( "SyncRequest Dispatcher" )
+    }
+
     /** @return a [Bitmap] get from the given [ImageSource] */
-    override suspend fun getBitmap( source: SyncImageSource ): Bitmap {
-        return when ( source ) {
-            is BitmapImageSource -> source.source
-            is DrawableImageSource -> source.source.toHighResBitmap()
-            is DrawableResImageSource -> source.resolveDrawable().toHighResBitmap()
-            is FileImageSource -> source.source.readBytes().toBitmap()
+    override suspend fun getBitmap( source: SyncImageSource ): Bitmap = coroutineScope {
+        withContext( singleThreadContext ) {
+            when ( source ) {
+                is BitmapImageSource -> source.source
+                is DrawableImageSource -> source.source.toHighResBitmap()
+                is DrawableResImageSource -> source.resolveDrawable().toHighResBitmap()
+                is FileImageSource -> source.source.readBytes().toBitmap()
+            }
         }
     }
 }

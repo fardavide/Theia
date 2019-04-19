@@ -11,6 +11,7 @@ dependencies {
     applyAndroidTests()
 
     implementation( Libs.kotlin )
+    implementation( Libs.coroutines_android )
 
     implementation( Libs.Android.appcompat )
     implementation( Libs.Android.constraint_layout )

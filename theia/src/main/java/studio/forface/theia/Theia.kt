@@ -6,6 +6,10 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import studio.forface.theia.AbsSyncImageSource.DrawableResImageSource
 import studio.forface.theia.cache.CACHE_EXT
 import studio.forface.theia.cache.Duration
@@ -20,10 +24,11 @@ import java.io.File
 
 /**
  * An interface for load images into an [ImageView]
+ * Implements [CoroutineScope] for async calls.
  *
  * @author Davide Giuseppe Farella.
  */
-interface ITheia: TheiaLogger {
+interface ITheia: TheiaLogger, CoroutineScope {
     /** [Resources] needed for resolve [DrawableResImageSource] */
     val resources: Resources
 }
@@ -49,6 +54,12 @@ inline fun PreTargetedTheia.load( builder: PreTargetedTheiaBuilder.() -> Unit ) 
 /** Middle implementation between [ITheia] and [Theia] for hide some member */
 abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConfig.logger  {
 
+    /** A [Job] for [CoroutineScope] */
+    private val job = Job()
+
+    /** @see CoroutineScope.coroutineContext */
+    override val coroutineContext = job + Dispatchers.IO
+
     /** A list of active [AsyncRequest] */
     private val requests = mutableListOf<TheiaRequest<*>>()
 
@@ -65,7 +76,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     @PublishedApi
     internal fun applyParams( params: TheiaParams ): Unit = with( params ) {
 
-        val load = {
+        val load = suspend {
 
             // Set placeholder if image is Async
             if ( image is Async ) load( placeholder, scalePlaceholder )
@@ -85,16 +96,18 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             }
         }
 
+        fun launchLoad() = launch { load() }
+
         // If we have Dimensions, load now, else on target's pre-draw
         when {
-            params.dimensions != null -> load()
-            params.target != null -> params.target.doOnPreDraw { load() }
+            params.dimensions != null -> launchLoad()
+            params.target != null -> params.target.doOnPreDraw { launchLoad() }
             else -> throw AssertionError()
         }
     }
 
     /** Apply [ImageSource] with its [TheiaParams] */
-    private fun applySource(
+    private suspend fun applySource(
         source: ImageSource?,
         params: TheiaParams,
         applyScale: Boolean = true,
@@ -145,7 +158,6 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     /** Stop and remove a [TheiaRequest] from [request] */
     private fun dropRequest( request: Request ) {
         ( request as? AsyncRequest )?.let {
-            it.stop()
             requests -= it
         }
     }
@@ -162,12 +174,12 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** Stop all the [TheiaRequest] and [clear] */
     private fun MutableList<Request>.purge() {
-        forEach { it.stop() }
+        job.cancel()
         this.clear()
     }
 
     /** Call [load] within [TheiaParams] */
-    private fun TheiaParams.load(
+    private suspend fun TheiaParams.load(
         source: ImageSource?,
         applyScale: Boolean = true,
         onCompletion: CompletionCallback? = {},

@@ -29,6 +29,13 @@ interface TheiaLogger {
      * the user, even if logging is disabled.
      */
     fun info( ex: TheiaException )
+
+    /**
+     * Print an info message from [CharSequence]
+     * When overriding this function, remember to handle [logEnabled] since we want to deliver some critical errors to
+     * the user, even if logging is disabled.
+     */
+    fun info( message: CharSequence )
 }
 
 /** Default implementation of [TheiaLogger] */
@@ -43,5 +50,10 @@ object DefaultTheiaLogger : TheiaLogger {
     /** Print an info message from [TheiaException] */
     override fun info( ex: TheiaException ) {
         if ( logEnabled ) Log.d( THEIA_NAME, ex.actualMessage )
+    }
+
+    /** Print an info message from [CharSequence] */
+    override fun info( message: CharSequence ) {
+        if ( logEnabled ) Log.d( THEIA_NAME, message.toString() )
     }
 }

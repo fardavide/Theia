@@ -166,7 +166,7 @@ class TheiaBuilder( resources: Resources ): AbsTheiaBuilder( resources ) {
 }
 
 /** A typealias for a lambda that receives a [Bitmap] */
-typealias CompletionCallback = (Bitmap) -> Unit
+typealias CompletionCallback = suspend (Bitmap) -> Unit
 
 /** A typealias for a lambda that receives a [TheiaException] */
-typealias ErrorCallback = (TheiaException) -> Unit
+typealias ErrorCallback = suspend (TheiaException) -> Unit

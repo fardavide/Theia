@@ -15,6 +15,7 @@
         android:allowBackup="true"
         android:fullBackupContent="true"
 
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning">
 
