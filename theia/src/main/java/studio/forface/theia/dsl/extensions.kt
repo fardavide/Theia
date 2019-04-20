@@ -4,7 +4,6 @@ package studio.forface.theia.dsl
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.View

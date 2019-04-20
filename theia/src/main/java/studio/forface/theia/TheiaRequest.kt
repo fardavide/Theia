@@ -34,20 +34,16 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
 
     /**
      * Invoke the request with the given [ImageSource]
-     *
-     * @param onComplete a lambda that receives the processed [Bitmap]
-     * @param onError a lambda that receives the generated [TheiaException]
+     * @throws TheiaException
      */
-    suspend operator fun invoke(
-        source: ImageSource,
-        overrideScaleType: ScaleType? = null,
-        onComplete: suspend (Bitmap) -> Unit = {},
-        onError: suspend (TheiaException) -> Unit = {}
-    ) {
-        runCatching { handleSource( source ) }
-            .mapCatching { prepareBitmap( it, overrideScaleType ) }
-            .onSuccess { withContext( Main ) { onComplete( it ) } }
-            .onFailure { withContext( Main ) { onError( it.toTheiaException() ) } }
+    suspend operator fun invoke( source: ImageSource, overrideScaleType: ScaleType? = null ): Bitmap {
+        return try {
+            val rawBitmap = handleSource( source )
+            prepareBitmap( rawBitmap, overrideScaleType )
+
+        } catch ( t: Throwable ) {
+            throw t.toTheiaException()
+        }
     }
 
     /**

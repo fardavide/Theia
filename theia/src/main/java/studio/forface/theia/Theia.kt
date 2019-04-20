@@ -6,10 +6,9 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import studio.forface.theia.AbsSyncImageSource.DrawableResImageSource
 import studio.forface.theia.cache.CACHE_EXT
 import studio.forface.theia.cache.Duration
@@ -28,7 +27,7 @@ import java.io.File
  *
  * @author Davide Giuseppe Farella.
  */
-interface ITheia: TheiaLogger, CoroutineScope {
+interface ITheia: TheiaLogger {
     /** [Resources] needed for resolve [DrawableResImageSource] */
     val resources: Resources
 }
@@ -54,14 +53,14 @@ inline fun PreTargetedTheia.load( builder: PreTargetedTheiaBuilder.() -> Unit ) 
 /** Middle implementation between [ITheia] and [Theia] for hide some member */
 abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConfig.logger  {
 
-    /** A [Job] for [CoroutineScope] */
-    private val job = Job()
+    /** A list of active [Job] */
+    private val jobs = mutableListOf<Job>()
 
-    /** @see CoroutineScope.coroutineContext */
-    override val coroutineContext = job + Dispatchers.IO
+    /** A [CoroutineDispatcher] for background operation */
+    private val backgroundDispatcher = IO
 
-    /** A list of active [AsyncRequest] */
-    private val requests = mutableListOf<TheiaRequest<*>>()
+    /** A [CoroutineDispatcher] for Main operations */
+    private val mainDispatcher = Main
 
     /**
      * Delete all the [File]s with extension [CACHE_EXT] with [File.lastModified] older than [olderThan] from
@@ -96,12 +95,12 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             }
         }
 
-        fun launchLoad() = launch { load() }
+        fun requestLoad() = newRequest( backgroundDispatcher ) { load() }
 
         // If we have Dimensions, load now, else on target's pre-draw
         when {
-            params.dimensions != null -> launchLoad()
-            params.target != null -> params.target.doOnPreDraw { launchLoad() }
+            params.dimensions != null -> requestLoad()
+            params.target != null -> params.target.doOnPreDraw { requestLoad() }
             else -> throw AssertionError()
         }
     }
@@ -113,7 +112,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         applyScale: Boolean = true,
         onCompletion: CompletionCallback,
         onError: ErrorCallback
-    ) {
+    ) = coroutineScope {
         val requestParams = RequestParams of params
 
         // Create the request
@@ -126,55 +125,58 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
             is Sync -> SyncRequest( requestParams )
 
-            null -> return
+            null -> throw AssertionError()
         }
-
-        // Append the request
-        appendRequest( request )
 
         // Invoke the request
-        request(
-            source,
-            overrideScaleType = if ( ! applyScale ) TheiaConfig.defaultScaleType else null,
-            onComplete = {
-                dropRequest( request )
-                onCompletion( it ) // Deliver to CompletionCallback
-                params.target?.setImageBitmap( it ) // Set into target
-            },
-            onError = {
-                dropRequest( request )
-                onError( it ) // Deliver ErrorCallback
-                if ( it.isFatal ) error( it )
-                else info( it )
-            }
-        )
-    }
+        val maybeBitmap = runCatching {
+            val overrideScaleType = if ( ! applyScale ) TheiaConfig.defaultScaleType else null
+            request( source, overrideScaleType )
+        }
 
-    /** Append a new [TheiaRequest] to [requests] */
-    private fun appendRequest( request: Request ) {
-        requests.append( request )
-    }
-
-    /** Stop and remove a [TheiaRequest] from [request] */
-    private fun dropRequest( request: Request ) {
-        ( request as? AsyncRequest )?.let {
-            requests -= it
+        // Deliver the request's result
+        newRequest( mainDispatcher ) {
+            maybeBitmap
+                .onSuccess { bitmap ->
+                    onCompletion( bitmap ) // Deliver to CompletionCallback
+                    params.target?.setImageBitmap( bitmap ) // Set into target
+                }
+                .onFailure { val e = it as TheiaException
+                    onError( e ) // Deliver ErrorCallback
+                    if ( e.isFatal ) error( e ) else info( e )
+                }
         }
     }
 
-    /** Purge all the [requests] */
-    internal open fun purgeRequests() {
-        requests.purge()
+    /** Append a new [TheiaRequest] to [jobs] */
+    private fun appendRequest( job: Job ) {
+        jobs.append( job )
     }
 
-    /** Stop all the [TheiaRequest] and [clear] */
-    private fun MutableList<Request>.append( request: Request ) {
-        this += request
+    /** Create a new [Job] with the given [CoroutineDispatcher] and append it to [jobs] */
+    private fun newRequest( dispatcher: CoroutineDispatcher, block: suspend () -> Unit ) {
+        appendRequest( CoroutineScope( Job() + dispatcher ).launch { block() } )
     }
 
-    /** Stop all the [TheiaRequest] and [clear] */
-    private fun MutableList<Request>.purge() {
+    /** Stop and remove the given [Job] from [jobs] */
+    private fun dropRequest( job: Job ) {
         job.cancel()
+        jobs -= job
+    }
+
+    /** Purge all the [jobs] */
+    internal open fun purgeRequests() {
+        jobs.purge()
+    }
+
+    /** Add the given [Job] to a [MutableList] of [Job]s */
+    private fun MutableList<Job>.append( job: Job ) {
+        this += job
+    }
+
+    /** Stop all the [TheiaRequest] and [clear] */
+    private fun MutableList<Job>.purge() {
+        jobs.forEach{ it.cancel() }
         this.clear()
     }
 
@@ -185,7 +187,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         onCompletion: CompletionCallback? = {},
         onError: ErrorCallback = {}
     ) {
-        applySource( source,this, applyScale, onCompletion ?: {}, onError )
+        applySource( source, this, applyScale, onCompletion ?: {}, onError )
     }
 }
 
