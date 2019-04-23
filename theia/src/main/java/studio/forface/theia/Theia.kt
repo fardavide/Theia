@@ -125,7 +125,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
             is Sync -> SyncRequest( requestParams )
 
-            null -> throw AssertionError()
+            null -> return@coroutineScope // Source can be null if has not been set by user.
         }
 
         // Invoke the request
