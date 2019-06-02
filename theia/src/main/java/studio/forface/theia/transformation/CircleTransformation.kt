@@ -9,14 +9,11 @@ import android.graphics.*
  */
 object CircleTransformation : TheiaTransformation {
 
-    private var x: Int = 0
-    private var y: Int = 0
-
     override fun invoke( source: Bitmap ): Bitmap {
         val size = Math.min( source.width, source.height )
 
-        x = ( source.width - size ) / 2
-        y = ( source.height - size ) / 2
+        val x = ( source.width - size ) / 2
+        val y = ( source.height - size ) / 2
 
         val squaredBitmap = Bitmap.createBitmap( source, x, y, size, size )
         if ( squaredBitmap != source ) {
