@@ -1,8 +1,11 @@
 package studio.forface.theia.imageManipulation
 
-import studio.forface.theia.Dimensions
-import studio.forface.theia.height
-import studio.forface.theia.width
+import android.graphics.Bitmap
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.spyk
+import studio.forface.theia.BitmapResponse
+import studio.forface.theia.TheiaResponse
 import kotlin.test.Test
 
 /**
@@ -11,23 +14,19 @@ import kotlin.test.Test
  */
 class ImageTransformerTest {
 
-    object TestTransformer : ImageTransformer<Int> {
-        override fun Int.softCrop( dimensions: Dimensions ): Int {
-            return this + dimensions.width + dimensions.height
-        }
+    private fun theiaTransformer( image: TheiaResponse ) = spyk( TheiaTransformer( image ) ) {
+        every { crop( any() ) }
     }
+
+    class TestTransformer( image: TheiaResponse ) : TheiaTransformer( image )
 
     @Test
     fun test() {
-        val result = TestTransformer( 4 ) {
-            softCrop( 1 to 2 )
-            softCrop( 3 to 4 )
-            softCrop( 5 to 6 )
+        val image = BitmapResponse( mockk() )
+        val result = TheiaTransformer( image ) {
+            crop( 1 to 2 )
+            crop( 1 to 2 )
         }
-
-        println( result ) // Should be 25
-        // 4 + 1 + 2 = 7
-        // 7 + 3 + 4 = 14
-        // 14 + 5 + 6 = 25
+        assert( result.image is Bitmap )
     }
 }
