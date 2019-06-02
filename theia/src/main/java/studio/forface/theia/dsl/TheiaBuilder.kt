@@ -116,10 +116,10 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
 
     /**
      * An [ErrorCallback] that will be called when something went wrong loading [image]
-     * Default is `null`
+     * Default is empty lambda
      * Set it via [onError] function
      */
-    private var errorCallback: ErrorCallback? = null
+    private var errorCallback: ErrorCallback = {}
 
     /** A [Set] of [TheiaTransformation] to apply to the images ( [image], [placeholder], [error] ) */
     private val extraTransformations = mutableListOf<TheiaTransformation>()
@@ -149,7 +149,7 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
             extraTransformations =  extraTransformations,
             useCache =              useCache,
             dimensions =            dimensions,
-            completionCallback =    completionCallback,
+            completionCallback =    completionCallback ?: {},
             errorCallback =         errorCallback
         )
     }

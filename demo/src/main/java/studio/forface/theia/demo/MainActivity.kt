@@ -1,18 +1,18 @@
 package studio.forface.theia.demo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import studio.forface.theia.Theia
 import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
 import studio.forface.theia.TheiaParams.Shape.Round
-import studio.forface.theia.cache.days
 import studio.forface.theia.cache.mins
-import studio.forface.theia.dsl.*
+import studio.forface.theia.dsl.imageUrl
+import studio.forface.theia.dsl.invoke
+import studio.forface.theia.dsl.theia
 import studio.forface.theia.invoke
 
+private const val GIF_IMAGE_URL = "https://sirv.sirv.com/website/HELLO.gif"
 private const val SMALL_IMAGE_URL = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
 private const val MEDIUM_IMAGE_URL = "https://sample-videos.com/img/Sample-png-image-1mb.png"
 private const val HUGE_IMAGE_URL = "http://www.ricoh-imaging.co.jp/english/products/q-s1/ex/img/bod_mainImg_01.jpg"
@@ -32,19 +32,19 @@ class MainActivity : AppCompatActivity() {
         // Theia by ImageView
 
         centerImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+            imageUrl = GIF_IMAGE_URL
             scaleType = Center
         }
         cropImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+            imageUrl = GIF_IMAGE_URL
             scaleType = Crop
         }
         fitImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+            imageUrl = GIF_IMAGE_URL
             scaleType = Fit
         }
         stretchImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+            imageUrl = GIF_IMAGE_URL
             scaleType = Stretch
         }
 

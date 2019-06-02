@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.*
-import kotlinx.coroutines.Dispatchers.Main
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
 import studio.forface.theia.TheiaConfig.cacheDuration
@@ -52,7 +51,6 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
      */
     private suspend fun handleSource( source: ImageSource ) = getCachedBitmap( source )
             ?: getBitmap( source ).also { storeInCache( it, source ) }
-
 
 
     /** @return a [Bitmap] get from the given [ImageSource] */

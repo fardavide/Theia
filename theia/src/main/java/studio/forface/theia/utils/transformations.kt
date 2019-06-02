@@ -40,7 +40,7 @@ internal fun Bitmap.centerTo( dimensions: Dimensions ): Bitmap {
     val dimRation = dimensions.width.toDouble() / dimensions.height
 
     // If bitmap has an higher ratio than Dimensions', that means its larger, so we use `Width`, else use `Height`
-    val use = if ( ratio > dimRation ) Use.Width else /* ratio <= dimRation */ Use.Height
+    val use = if ( ratio > dimRation ) Width else /* ratio <= dimRation */ Height
     val ( late, dimLate ) = when( use ) {
         Width -> width to dimensions.width
         Height -> height to dimensions.height
@@ -65,7 +65,7 @@ internal fun Bitmap.fitTo( dimensions: Dimensions ): Bitmap {
     val dimRation = dimensions.width.toDouble() / dimensions.height
 
     // If bitmap has an higher ratio than Dimensions', that means its larger, so we use `Height`, else use `Width`
-    val use = if ( ratio > dimRation ) Use.Height else /* ratio <= dimRation */ Use.Width
+    val use = if ( ratio > dimRation ) Height else /* ratio <= dimRation */ Width
     val ( late, dimLate ) = when( use ) {
         Width -> width to dimensions.width
         Height -> height to dimensions.height

@@ -24,8 +24,8 @@ data class TheiaParams(
     internal val extraTransformations: List<TheiaTransformation>,
     internal val useCache: Boolean,
     internal val dimensions: Dimensions?,
-    internal val completionCallback: CompletionCallback?,
-    internal val errorCallback: ErrorCallback?
+    internal val completionCallback: CompletionCallback = {},
+    internal val errorCallback: ErrorCallback = {}
 ) {
 
     /** An enum representing how to scale the image */
