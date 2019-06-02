@@ -32,7 +32,7 @@ inline operator fun PreTargetedTheia.invoke( builder: PreTargetedTheiaBuilder.()
  * Get [Theia] within a [LifecycleOwner] and [ContextWrapper]
  *
  * @return a new instance of [Theia] binded on this [FragmentActivity]
- * When [FragmentActivity] is destroyed [AbsTheia.requests] are purged.
+ * When [FragmentActivity] is destroyed [AbsTheia.jobs] are purged.
  *
  * Usually you would like to keep a strong reference to this and reuse during the [FragmentActivity]'s [Lifecycle],
  * otherwise use [TheiaActivity]
@@ -49,7 +49,7 @@ val FragmentActivity.newTheiaInstance: Theia
  * Get [Theia] within a [LifecycleOwner] and [Fragment]
  *
  * @return a new instance of [Theia] binded on this [Fragment]
- * When [Fragment] is destroyed [AbsTheia.requests] are purged.
+ * When [Fragment] is destroyed [AbsTheia.jobs] are purged.
  *
  * Usually you would like to keep a strong reference to this and reuse during the [Fragment]'s [Lifecycle], otherwise
  * use [TheiaFragment]
@@ -64,7 +64,7 @@ val Fragment.newTheiaInstance: Theia
 
 /**
  * @return a new instance of [Theia] binded on this [View]
- * When [View] is detached [AbsTheia.requests] are purged.
+ * When [View] is detached [AbsTheia.jobs] are purged.
  *
  * Usually you would like to keep a strong reference to this and reuse during the [View]'s Lifecycle
  */
@@ -87,7 +87,7 @@ val RecyclerView.ViewHolder.newTheiaInstance get() = itemView.newTheiaInstance
 
 /**
  * @return a new instance of [PreTargetedTheia] binded on this [ImageView]
- * When [View] is detached [AbsTheia.requests] are purged.
+ * When [View] is detached [AbsTheia.jobs] are purged.
  *
  * This extension on [ImageView] will create a [PreTargetedTheia] that will pass the
  * [PreTargetedTheia.target] to the [TheiaBuilder] so it doesn't need to be declared explicitly

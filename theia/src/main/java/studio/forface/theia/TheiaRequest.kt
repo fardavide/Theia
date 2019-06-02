@@ -22,8 +22,7 @@ import java.lang.System.currentTimeMillis
  *
  * @author Davide Giuseppe Farella.
  */
-internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
-    TheiaLogger by TheiaConfig.logger {
+internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaLogger by TheiaConfig.logger {
 
     /** The directory for caches */
     private val cacheDirectory get() = TheiaConfig.defaultCacheDirectory
@@ -63,6 +62,7 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> :
      */
     private fun getCachedBitmap( source: ImageSource ): Bitmap? {
         if ( ! params.useCache || source.isLocalSource || ! canUseCache() ) return null
+
         return cacheDirectory[source.cacheName, currentTimeMillis() - cacheDuration]?.readBytes()?.toBitmap()
             ?.also { info( "Loading ${source.source} from cache on ${Thread.currentThread().name}" ) }
     }
