@@ -11,10 +11,10 @@ object Project {
 
     /* Version */
     private val major:      Int =       0
-    private val minor:      Int =       3
+    private val minor:      Int =       4
     private val channel:    Channel =   Alpha
-    private val patch:      Int =       7
-    private val build:      Int =       2
+    private val patch:      Int =       0
+    private val build:      Int =       1
 
     /* Publishing */
     val bintrayGroup =      "studio.forface"
