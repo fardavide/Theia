@@ -12,7 +12,10 @@ import studio.forface.theia.cache.get
 import studio.forface.theia.cache.minus
 import studio.forface.theia.cache.set
 import studio.forface.theia.log.TheiaLogger
-import studio.forface.theia.utils.*
+import studio.forface.theia.utils.applyDimensions
+import studio.forface.theia.utils.applyTransformation
+import studio.forface.theia.utils.applyTransformations
+import studio.forface.theia.utils.toBitmap
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.lang.System.currentTimeMillis
@@ -34,10 +37,14 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaL
      * Invoke the request with the given [ImageSource]
      * @throws TheiaException
      */
-    suspend operator fun invoke( source: ImageSource, overrideScaleType: ScaleType? = null ): Bitmap {
+    suspend operator fun invoke( source: ImageSource, overrideScaleType: ScaleType? = null ): TheiaResponse {
         return try {
-            val rawBitmap = handleSource( source )
-            prepareBitmap( rawBitmap, overrideScaleType )
+            val response = with( handleSource( source ) ) {
+                // Cast response to BitmapResponse if required by user
+                if ( params.forceBitmap && this is DrawableResponse ) toBitmapResponse()
+                else this
+            }
+            prepareImage( response, overrideScaleType )
 
         } catch ( t: Throwable ) {
             throw t.toTheiaException()
@@ -45,15 +52,17 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaL
     }
 
     /**
-     * Try to get [Bitmap] from cache, if null get from [ImageSource] and then store it in cache
-     * @return [Bitmap]
+     * Try to get [TheiaResponse] from cache, if null get from [ImageSource] and then store it in cache
+     * @return [TheiaResponse]
      */
-    private suspend fun handleSource( source: ImageSource ) = getCachedBitmap( source )
-            ?: getBitmap( source ).also { storeInCache( it, source ) }
+    private suspend fun handleSource( source: ImageSource ): TheiaResponse {
+        return getCachedBitmap( source )?.let { BitmapResponse( it ) }
+            ?: getImage( source ).also { storeInCacheIfNeeded( it, source ) }
+    }
 
 
-    /** @return a [Bitmap] get from the given [ImageSource] */
-    abstract suspend fun getBitmap( source: ImageSource ): Bitmap
+    /** @return a [TheiaResponse] get from the given [ImageSource] */
+    abstract suspend fun getImage( source: ImageSource ): TheiaResponse
 
     /**
      * @return a [Bitmap] stored in cache from the given [ImageSource]
@@ -65,6 +74,14 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaL
 
         return cacheDirectory[source.cacheName, currentTimeMillis() - cacheDuration]?.readBytes()?.toBitmap()
             ?.also { info( "Loading ${source.source} from cache on ${Thread.currentThread().name}" ) }
+    }
+
+    /**
+     * Store the given [TheiaResponse] in cache if is [BitmapResponse]
+     * @see storeInCache
+     */
+    private fun storeInCacheIfNeeded( response: TheiaResponse, source: ImageSource ) {
+        if ( response is BitmapResponse ) storeInCache( response.image, source )
     }
 
     /**
@@ -89,12 +106,12 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaL
     private fun canUseCache() = cacheDirectory.canWrite()
         .also { allowed -> if ( ! allowed ) error( MissingCacheStoragePermissionsException() ) }
 
-    /** Apply the needed transformations to the given [Bitmap] */
-    private fun prepareBitmap(
-        bitmap: Bitmap,
+    /** Apply the needed transformations to the given [TheiaResponse] */
+    private fun prepareImage(
+        response: TheiaResponse,
         overrideScaleType: ScaleType? = null
-    ): Bitmap = with( params ) {
-        bitmap
+    ): TheiaResponse = with( params ) {
+        response
             .applyDimensions( dimensions,overrideScaleType ?: scaleType )
             .applyTransformation( shape.transformation )
             .applyTransformations( extraTransformations )
@@ -106,18 +123,19 @@ internal class SyncRequest( override val params: RequestParams ): TheiaRequest<S
 
     internal companion object {
         /** A single [ExecutorCoroutineDispatcher] for all the [SyncRequest]s */
-        @UseExperimental(ObsoleteCoroutinesApi::class)
+        @ObsoleteCoroutinesApi
         val singleThreadContext = newSingleThreadContext( "SyncRequest Dispatcher" )
     }
 
-    /** @return a [Bitmap] get from the given [ImageSource] */
-    override suspend fun getBitmap( source: SyncImageSource ): Bitmap = coroutineScope {
+    /** @return a [TheiaResponse] get from the given [ImageSource] */
+    @ObsoleteCoroutinesApi
+    override suspend fun getImage(source: SyncImageSource ) = coroutineScope {
         withContext( singleThreadContext ) {
             when ( source ) {
-                is BitmapImageSource -> source.source
-                is DrawableImageSource -> source.source.toHighResBitmap()
-                is DrawableResImageSource -> source.resolveDrawable().toHighResBitmap()
-                is FileImageSource -> source.source.readBytes().toBitmap()
+                is BitmapImageSource -> source.source.toResponse()
+                is DrawableImageSource -> source.source.toResponse()
+                is DrawableResImageSource -> source.resolveDrawable().toResponse()
+                is FileImageSource -> source.source.readBytes().toBitmap().toResponse()
             }
         }
     }
@@ -129,12 +147,12 @@ internal class AsyncRequest(
     override val params: RequestParams
 ): TheiaRequest<AsyncImageSource>() {
 
-    /** @return a [Bitmap] get from the given [ImageSource] */
-    override suspend fun getBitmap( source: AsyncImageSource ): Bitmap {
+    /** @return a [BitmapResponse] get from the given [ImageSource] */
+    override suspend fun getImage( source: AsyncImageSource ) : BitmapResponse {
         return when ( source ) {
             is AsyncFileImageSource -> source.source.readBytes()
             is StringImageSource -> client.get( source.source )
             is UrlImageSource -> source.source.readBytes()
-        }.toBitmap()
+        }.toBitmap().toResponse()
     }
 }

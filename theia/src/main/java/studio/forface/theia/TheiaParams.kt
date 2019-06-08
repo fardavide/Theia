@@ -23,6 +23,7 @@ data class TheiaParams(
     internal val shape: Shape,
     internal val extraTransformations: List<TheiaTransformation>,
     internal val useCache: Boolean,
+    internal val forceBitmap: Boolean,
     internal val dimensions: Dimensions?,
     internal val completionCallback: CompletionCallback = {},
     internal val errorCallback: ErrorCallback = {}

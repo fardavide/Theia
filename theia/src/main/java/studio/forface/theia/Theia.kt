@@ -134,9 +134,9 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         // Deliver the request's result
         newRequest( mainDispatcher ) {
             maybeBitmap
-                .onSuccess { bitmap ->
-                    onCompletion( bitmap ) // Deliver to CompletionCallback
-                    params.target?.setImageBitmap( bitmap ) // Set into target
+                .onSuccess { response ->
+                    onCompletion( response ) // Deliver to CompletionCallback
+                    params.target?.setImage( response ) // Set into target
                 }
                 .onFailure { val e = it as TheiaException
                     onError( e ) // Deliver ErrorCallback

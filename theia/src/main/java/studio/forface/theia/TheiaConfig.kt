@@ -48,6 +48,9 @@ object TheiaConfig {
     /** The default [AsyncImageSource] to be used as `error` if no other value is set */
     var defaultError: ImageSource? = null
 
+    /** If `true` the Images will be transformed as `Bitmap` even if they're `Drawable` */
+    var defaultForceBitmap = false
+
     /** The default [SyncImageSource] to be used as `placeholder` if no other value is set */
     var defaultPlaceholder: SyncImageSource? = null
 
