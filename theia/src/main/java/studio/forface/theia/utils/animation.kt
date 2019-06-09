@@ -42,7 +42,6 @@ private inline fun Drawable.onAnimationEnd( crossinline block: () -> Unit ) {
 internal inline fun ImageView.withDissolve( crossinline block: ImageView.() -> Unit ) {
     dissolve().setListener( object : Animator.AnimatorListener {
         /**
-         *
          * Notifies the end of the animation. This callback is not invoked
          * for animations with repeat count set to INFINITE.
          *
@@ -55,7 +54,6 @@ internal inline fun ImageView.withDissolve( crossinline block: ImageView.() -> U
         }
 
         /**
-         *
          * Notifies the repetition of the animation.
          *
          * @param animation The animation which was repeated.
@@ -63,7 +61,6 @@ internal inline fun ImageView.withDissolve( crossinline block: ImageView.() -> U
         override fun onAnimationRepeat( animation: Animator ) { /* noop */ }
 
         /**
-         *
          * Notifies the cancellation of the animation. This callback is not invoked
          * for animations with repeat count set to INFINITE.
          *
@@ -72,7 +69,6 @@ internal inline fun ImageView.withDissolve( crossinline block: ImageView.() -> U
         override fun onAnimationCancel( animation: Animator ) { /* noop */ }
 
         /**
-         *
          * Notifies the start of the animation.
          *
          * @param animation The started animation.
