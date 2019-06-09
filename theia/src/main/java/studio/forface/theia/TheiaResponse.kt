@@ -3,6 +3,7 @@ package studio.forface.theia
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import studio.forface.theia.utils.animate
 import studio.forface.theia.utils.exhaustive
 import studio.forface.theia.utils.toHighResBitmap
 
@@ -45,6 +46,6 @@ internal fun Any.toTheiaResponse() : TheiaResponse {
 internal fun ImageView.setImage( response: TheiaResponse ) {
     when ( response ) {
         is BitmapResponse -> setImageBitmap( response.image )
-        is DrawableResponse -> setImageDrawable( response.image )
+        is DrawableResponse -> setImageDrawable( response.image.also { it.animate() } )
     }.exhaustive
 }

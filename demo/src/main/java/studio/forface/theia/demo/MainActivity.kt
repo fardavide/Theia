@@ -25,11 +25,10 @@ class MainActivity : AppCompatActivity() {
 
         TheiaConfig {
             cacheDuration = 5.mins
-            defaultPlaceholderDrawableRes = R.drawable.ic_favorite
+            defaultPlaceholderDrawableRes = R.drawable.avd_loading
             loggingEnabled = true
 
             defaultUseCache = false
-            defaultForceBitmap = true
         }
 
         // Theia by ImageView

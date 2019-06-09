@@ -10,8 +10,8 @@ import org.gradle.api.JavaVersion
 object Project {
 
     /* Version */
-    private val major:      Int =       0
-    private val minor:      Int =       4
+    private val major:      Int =       1
+    private val minor:      Int =       0
     private val channel:    Channel =   Alpha
     private val patch:      Int =       0
     private val build:      Int =       1
