@@ -14,7 +14,7 @@ object Project {
     private val minor:      Int =       0
     private val channel:    Channel =   Alpha
     private val patch:      Int =       2
-    private val build:      Int =       1
+    private val build:      Int =       2
 
     /* Publishing */
     val bintrayGroup =      "studio.forface"

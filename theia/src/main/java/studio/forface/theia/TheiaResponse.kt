@@ -3,10 +3,7 @@ package studio.forface.theia
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import studio.forface.theia.utils.animate
-import studio.forface.theia.utils.animateForever
-import studio.forface.theia.utils.exhaustive
-import studio.forface.theia.utils.toHighResBitmap
+import studio.forface.theia.utils.*
 
 /** A class that holds an [Image] that is of type [Bitmap] or [Drawable] */
 sealed class ResponseWrapper<Image : Any>( val image: Image )
@@ -51,10 +48,11 @@ internal fun ImageView.setImage( response: TheiaResponse, animationLoop: Animati
             val drawable = response.image
             setImageDrawable( response.image )
             when( animationLoop ) {
-                AnimationLoop.NoLoop -> { /* noop */ }
-                AnimationLoop.Once -> drawable.animate()
-                AnimationLoop.Forever -> drawable.animateForever()
-                AnimationLoop.OnClick -> setOnClickListener { drawable.animate() }
+                is AnimationLoop.NoLoop -> { /* noop */ }
+                is AnimationLoop.Once -> drawable.animate()
+                is AnimationLoop.Forever -> drawable.animateForever()
+                is AnimationLoop.Every -> drawable.animateEvery( this, animationLoop.duration )
+                is AnimationLoop.OnClick -> setOnClickListener { drawable.animate() }
             }
         }
     }.exhaustive

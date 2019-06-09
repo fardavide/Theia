@@ -11,9 +11,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import studio.forface.theia.AbsSyncImageSource.DrawableResImageSource
 import studio.forface.theia.cache.CACHE_EXT
-import studio.forface.theia.cache.Duration
 import studio.forface.theia.cache._cleanCache
-import studio.forface.theia.cache.mins
 import studio.forface.theia.dsl.CompletionCallback
 import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.dsl.PreTargetedTheiaBuilder

@@ -2,7 +2,10 @@
 
 package studio.forface.theia.cache
 
+import studio.forface.theia.Duration
 import studio.forface.theia.TheiaConfig
+import studio.forface.theia.mins
+import studio.forface.theia.minus
 import java.io.File
 import java.lang.System.currentTimeMillis
 import studio.forface.theia.TheiaConfig.defaultCacheDirectory as cacheDir

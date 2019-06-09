@@ -1,16 +1,21 @@
+@file:Suppress("unused")
+
 package studio.forface.theia.demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.forface.theia.AnimationLoop.Every
 import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
 import studio.forface.theia.TheiaParams.Shape.Round
-import studio.forface.theia.cache.mins
+import studio.forface.theia.dsl.imageDrawableRes
 import studio.forface.theia.dsl.imageUrl
 import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.theia
 import studio.forface.theia.invoke
+import studio.forface.theia.mins
+import studio.forface.theia.secs
 
 private const val GIF_IMAGE_URL = "https://sirv.sirv.com/website/HELLO.gif"
 private const val SMALL_IMAGE_URL = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
@@ -35,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
         centerImageView.theia {
             imageUrl = GIF_IMAGE_URL
+            imageDrawableRes = R.drawable.avd_loading
+            animationLoop = Every( 5.secs )
             scaleType = Center
         }
         cropImageView.theia {
