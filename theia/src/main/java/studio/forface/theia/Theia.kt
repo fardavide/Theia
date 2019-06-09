@@ -115,7 +115,9 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         onCompletion: CompletionCallback,
         onError: ErrorCallback
     ) = coroutineScope {
-        val requestParams = RequestParams of params
+        // Avoid to `forceBitmap` if a scaling is not required
+        val newParams = params.copy( forceBitmap = params.forceBitmap && applyScale )
+        val requestParams = RequestParams of newParams
 
         // Create the request
         val request = when( source ) {

@@ -40,7 +40,8 @@ class CancelledRequestException internal constructor() : TheiaException( "Reques
 
 /** [TheiaException] describing that Transformations are not supported yet on `Drawables` */
 class DrawableTransformationNotSupportedException internal constructor() : TheiaException(
-    "Transformations are not supported on `Drawable`s yet, consider using `TheiaParams.forceBitmap`"
+    "Transformations are not supported on `Drawable`s yet, consider using `forceBitmap` - This will erase " +
+            "any animation in the `Drawable`, if any"
 )
 
 /** [TheiaException] describing that a [TransformationPipeline] has been called on an illegal receiver */

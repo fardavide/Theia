@@ -14,3 +14,8 @@ subprojects {
 tasks.register("clean", Delete::class.java ) {
     delete( rootProject.buildDir )
 }
+
+@Suppress("UnstableApiUsage")
+val test = tasks.getting( Test::class ) {
+    useJUnitPlatform { }
+}

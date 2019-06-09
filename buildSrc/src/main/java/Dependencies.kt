@@ -20,18 +20,18 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
 }
 
 @Suppress("unused")
-fun DependencyHandler.applyAndroidTests() {
+fun DependencyHandler.applyAndroidTests() = with( Lib ) { with( Lib.Android ) {
     val unit = "testImplementation"
     val android = "androidTestImplementation"
-    add( unit, Lib.test );                 add( android, Lib.test )
-    add( unit, Lib.test_junit );           add( android, Lib.test_junit )
-    add( unit, Lib.Android.lifecycle );    add( android, Lib.Android.lifecycle )
-    add( unit, Lib.mockk );                add( android, Lib.mockk )
+    add( unit, test );              add( android, test )
+    add( unit, test_junit );        add( android, test_junit )
+    add( unit, kotlintest_runner);  add( android, kotlintest_runner )
+    add( unit, lifecycle );         add( android, lifecycle )
+    add( unit, mockk );             add( android, mockk_android )
     // add( unit, Lib.Android.robolectric )
-    add( android, Lib.Android.espresso )
-    add( android, Lib.mockk_android )
-    add( android, Lib.Android.test_runner )
-}
+    add( android, espresso )
+    add( android, test_runner )
+} }
 
 object Version {
 
@@ -40,6 +40,7 @@ object Version {
     const val coroutines =                      "1.2.1"         // Updated: Apr 25, 2019
 
     /* Other */
+    const val kotlintest =                      "3.3.2"         // Updated: Apr 5, 2019
     const val ktor =                            "1.2.1"         // Updated:
     const val mockk =                           "1.9.3"         // Updated: Mar 25, 2019
 
@@ -70,6 +71,7 @@ object Lib {
     const val test_junit =                      "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
 
     /* Other */
+    const val kotlintest_runner =               "io.kotlintest:kotlintest-runner-junit5:${Version.kotlintest}"
     const val ktor =                            "io.ktor:ktor-client-core:${Version.ktor}"
     const val ktor_apache =                     "io.ktor:ktor-client-apache:${Version.ktor}"
     const val ktor_android =                    "io.ktor:ktor-client-android:${Version.ktor}"

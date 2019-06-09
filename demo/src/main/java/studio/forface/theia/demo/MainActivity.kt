@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
             cacheDuration = 5.mins
             defaultPlaceholderDrawableRes = R.drawable.ic_favorite
             loggingEnabled = true
+
+            defaultUseCache = false
+            defaultForceBitmap = true
         }
 
         // Theia by ImageView

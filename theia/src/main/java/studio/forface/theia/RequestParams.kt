@@ -11,12 +11,12 @@ import studio.forface.theia.transformation.TheiaTransformation
  * @author Davide Giuseppe Farella
  */
 internal data class RequestParams(
-    internal val dimensions: Dimensions,
-    internal val scaleType: TheiaParams.ScaleType,
-    internal val shape: TheiaParams.Shape,
-    internal val extraTransformations: List<TheiaTransformation>,
-    internal val useCache: Boolean,
-    internal val forceBitmap: Boolean
+    val dimensions: Dimensions,
+    val scaleType: TheiaParams.ScaleType,
+    val shape: TheiaParams.Shape,
+    val extraTransformations: List<TheiaTransformation>,
+    val useCache: Boolean,
+    val forceBitmap: Boolean
 ) {
     companion object {
 

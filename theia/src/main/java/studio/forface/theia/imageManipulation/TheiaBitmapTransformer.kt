@@ -69,11 +69,9 @@ open class TheiaBitmapTransformer : ImageTransformer<Bitmap> {
         val y = ( height - size ) / 2
 
         val squaredBitmap = Bitmap.createBitmap( this, x, y, size, size )
-        if ( squaredBitmap != this ) {
-            recycle()
-        }
-
         val bitmap = Bitmap.createBitmap( size, size, config )
+
+        if ( squaredBitmap != this ) recycle()
 
         val canvas = Canvas( bitmap )
         val paint = Paint()

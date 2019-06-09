@@ -1,3 +1,5 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE") // newSingleThreadContext
+
 package studio.forface.theia
 
 import android.graphics.Bitmap
@@ -41,7 +43,8 @@ internal abstract class TheiaRequest<in ImageSource: AbsImageSource<*>> : TheiaL
         return try {
             val response = with( handleSource( source ) ) {
                 // Cast response to BitmapResponse if required by user
-                if ( params.forceBitmap && this is DrawableResponse ) toBitmapResponse()
+                if ( params.forceBitmap && this is DrawableResponse )
+                    withContext( SyncRequest.singleThreadContext ) { toBitmapResponse() }
                 else this
             }
             prepareImage( response, overrideScaleType )
@@ -123,7 +126,6 @@ internal class SyncRequest( override val params: RequestParams ): TheiaRequest<S
 
     internal companion object {
         /** A single [ExecutorCoroutineDispatcher] for all the [SyncRequest]s */
-        @ObsoleteCoroutinesApi
         val singleThreadContext = newSingleThreadContext( "SyncRequest Dispatcher" )
     }
 
@@ -156,3 +158,6 @@ internal class AsyncRequest(
         }.toBitmap().toResponse()
     }
 }
+
+/** Enum for distinguish between Image, Placeholder or Error request */
+internal enum class RequestType { Image, Placeholder, Error }

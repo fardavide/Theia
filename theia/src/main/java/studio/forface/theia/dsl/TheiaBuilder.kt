@@ -81,6 +81,8 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
     /**
      * If `true` the Images will be transformed as `Bitmap` even if they're `Drawable`.
      * Default is [TheiaConfig.defaultForceBitmap]
+     *
+     * Note this won't be applied to [placeholder] and [error] if [scalePlaceholder] or [scaleError] are disabled
      */
     var forceBitmap = defaultForceBitmap
 

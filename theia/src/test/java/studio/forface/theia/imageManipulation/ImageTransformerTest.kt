@@ -1,19 +1,18 @@
 package studio.forface.theia.imageManipulation
 
 import android.graphics.Bitmap
+import io.kotlintest.specs.StringSpec
 import io.mockk.every
 import io.mockk.mockk
 import studio.forface.theia.BitmapResponse
-import kotlin.test.Test
 
 /**
  * Test class for [ImageTransformer]
  * @author Davide Giuseppe Farella
  */
-internal class ImageTransformerTest {
+internal class ImageTransformerTest : StringSpec( {
 
-    @Test
-    fun `BaseTheiaTransformer works correctly`() {
+    "BaseTheiaTransformer works correctly" {
         val transformer = object : BaseTheiaTransformer(
             bitmapTransformer = mockk {
                 every { any<Bitmap>().center(any()) } answers { firstArg() }
@@ -26,4 +25,4 @@ internal class ImageTransformerTest {
         }
         assert( result.image is Bitmap )
     }
-}
+} )

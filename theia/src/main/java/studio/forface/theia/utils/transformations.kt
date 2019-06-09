@@ -3,7 +3,6 @@
 package studio.forface.theia.utils
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import androidx.core.graphics.scale
 import studio.forface.theia.*
 import studio.forface.theia.imageManipulation.TheiaTransformer
@@ -88,42 +87,6 @@ internal fun Bitmap.stretchTo( dimensions: Dimensions ) = scale( dimensions )
 
 /** Scale a [Bitmap] with the given [Dimensions] */
 private fun Bitmap.scale( dimensions: Dimensions ) = scale( dimensions.width, dimensions.height )
-
-// endregion
-
-
-// region Drawable
-/**
- * @return a [Drawable] resized to be centered inside the given [Dimensions]
- * @see TheiaParams.ScaleType.Center
- */
-internal fun Drawable.centerTo( dimensions: Dimensions ) = this.andLogNotImplemented()
-
-/**
- * @return a [Drawable] cropped to the given [Dimensions]
- * @see forceCrop
- * @see TheiaParams.ScaleType.Crop
- */
-internal fun Drawable.cropTo( dimensions: Dimensions ) = this.andLogNotImplemented()
-
-/**
- * @return a [Drawable] resized to fit the given [Dimensions]
- * @see TheiaParams.ScaleType.Fit
- */
-internal fun Drawable.fitTo( dimensions: Dimensions ) = this.andLogNotImplemented()
-
-/**
- * @return a [Drawable] stretched to fill the given [Dimensions]
- * @see TheiaParams.ScaleType.Stretch
- */
-internal fun Drawable.stretchTo( dimensions: Dimensions ) = this.andLogNotImplemented()
-
-/** Scale a [Drawable] with the given [Dimensions] */
-private fun Drawable.scale( dimensions: Dimensions? ) = this.andLogNotImplemented()
-
-internal fun Drawable.andLogNotImplemented() = this.also {
-    TheiaConfig.logger.error( DrawableTransformationNotSupportedException() )
-}
 // endregion
 
 /** An enum used by [centerTo] and [fitTo] to readability purpose */
