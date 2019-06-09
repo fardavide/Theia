@@ -1,6 +1,5 @@
 package studio.forface.theia.utils
 
-import android.animation.Animator
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Animatable2
 import android.graphics.drawable.Drawable
@@ -40,51 +39,18 @@ private inline fun Drawable.onAnimationEnd( crossinline block: () -> Unit ) {
 
 /** Execute the lambda [block] within a dissolve animation on the [ImageView] */
 internal inline fun ImageView.withDissolve( crossinline block: ImageView.() -> Unit ) {
-    dissolve().setListener( object : Animator.AnimatorListener {
-        /**
-         *
-         * Notifies the end of the animation. This callback is not invoked
-         * for animations with repeat count set to INFINITE.
-         *
-         * @param animation The animation which reached its end.
-         */
-        override fun onAnimationEnd( animation: Animator ) {
-            block()
-            condense()
-        }
-
-        /**
-         *
-         * Notifies the repetition of the animation.
-         *
-         * @param animation The animation which was repeated.
-         */
-        override fun onAnimationRepeat( animation: Animator ) { /* noop */ }
-
-        /**
-         *
-         * Notifies the cancellation of the animation. This callback is not invoked
-         * for animations with repeat count set to INFINITE.
-         *
-         * @param animation The animation which was canceled.
-         */
-        override fun onAnimationCancel( animation: Animator ) { /* noop */ }
-
-        /**
-         *
-         * Notifies the start of the animation.
-         *
-         * @param animation The started animation.
-         */
-        override fun onAnimationStart( animation: Animator ) { /* noop */ }
-    } )
+    dissolve()
+    postDelayed( ANIMATION_DURATION ) {
+        block()
+        condense()
+    }
 }
 
 /** The duration of the dissolve animation */
-private const val ANIMATION_DURATION = 180L
+private const val ANIMATION_DURATION = 181L
 
 /** Dissolve the [ImageView] with an animation */
-@PublishedApi internal fun ImageView.dissolve() = animate().setDuration( ANIMATION_DURATION ).alpha( 0.2f )
+@PublishedApi internal fun ImageView.dissolve() = animate().setDuration( ANIMATION_DURATION ).alpha( 0.2f ).start()
 
 /** Condense the [ImageView] with an animation */
-@PublishedApi internal fun ImageView.condense() = animate().setDuration( ANIMATION_DURATION ).alpha( 1f )
+@PublishedApi internal fun ImageView.condense() = animate().setDuration( ANIMATION_DURATION ).alpha( 1f ).start()
