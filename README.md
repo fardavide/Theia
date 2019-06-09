@@ -4,9 +4,9 @@
 
 **Theia** is a *lightweight* image loader for Android.
 
-<u>With Cache System!</u>
+<u>With Cache System and animated `Drawable`s!</u>
 
-<iframe src='https://gfycat.com/ifr/HiddenOblongAlaskanmalamute' frameborder='0' scrolling='no' allowfullscreen width='640' height='1432'></iframe>
+![Theia gif](https://thumbs.gfycat.com/HiddenOblongAlaskanmalamute-size_restricted.gif)
 
 ## Wiki
 [Full wiki here!](https://github.com/4face-studi0/Theia/wiki)
