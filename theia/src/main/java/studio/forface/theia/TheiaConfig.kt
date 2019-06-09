@@ -5,7 +5,11 @@ package studio.forface.theia
 import android.Manifest.permission
 import android.content.ContextWrapper
 import io.ktor.client.HttpClient
+import studio.forface.theia.AnimationLoop.Forever
+import studio.forface.theia.AnimationLoop.Once
+import studio.forface.theia.TheiaParams.ScaleType
 import studio.forface.theia.TheiaParams.ScaleType.Center
+import studio.forface.theia.TheiaParams.Shape
 import studio.forface.theia.TheiaParams.Shape.Square
 import studio.forface.theia.cache.Duration
 import studio.forface.theia.cache._cleanCache
@@ -45,37 +49,88 @@ object TheiaConfig {
             if ( ! field.exists() ) field.mkdir()
         }
 
-    /** The default [AsyncImageSource] to be used as `error` if no other value is set */
+    /**
+     * The default [AsyncImageSource] to be used as `error` if no other value is set
+     * Default is `null`
+     */
     var defaultError: ImageSource? = null
 
-    /** If `true` the Images will be transformed as `Bitmap` even if they're `Drawable` */
+    /**
+     * How the animation should loop for `error`
+     * Default is [AnimationLoop.Once]
+     */
+    var defaultErrorAnimationLoop: AnimationLoop = Once
+
+    /**
+     * How the animation should loop for `image`
+     * Default is [AnimationLoop.Once]
+     */
+    var defaultAnimationLoop: AnimationLoop = Once
+
+    /**
+     * If `true` the Images will be transformed as `Bitmap` even if they're `Drawable`
+     * Default is `false`
+     */
     var defaultForceBitmap = false
 
-    /** The default [SyncImageSource] to be used as `placeholder` if no other value is set */
+    /**
+     * The default [SyncImageSource] to be used as `placeholder` if no other value is set
+     * Default is `null`
+     */
     var defaultPlaceholder: SyncImageSource? = null
 
-    /** If `true` `error`s will respect the [TheiaParams.scaleType], else use [defaultScaleType] */
+    /**
+     * How the animation should loop for `placeholder`
+     * Default is [AnimationLoop.Forever]
+     */
+    var defaultPlaceholderAnimationLoop: AnimationLoop = Forever
+
+    /**
+     * If `true` `error`s will respect the [TheiaParams.scaleType], else use [defaultScaleType]
+     * Default is `false`
+     */
     var defaultScaleError = false
 
-    /** If `true` `placeholder`s will respect the [TheiaParams.scaleType], else use [defaultScaleType] */
+    /**
+     * If `true` `placeholder`s will respect the [TheiaParams.scaleType], else use [defaultScaleType]
+     * Default is `false`
+     */
     var defaultScalePlaceholder = false
 
-    /** The default [TheiaParams.ScaleType] to use if none is specified explicitly. Default is [Center] */
+    /**
+     * The default [TheiaParams.ScaleType] to use if none is specified explicitly
+     * Default is [ScaleType.Center]
+     */
     var defaultScaleType = Center
 
-    /** The default [TheiaParams.Shape] to use if none is specified explicitly. Default is [Square] */
+    /**
+     * The default [TheiaParams.Shape] to use if none is specified explicitly
+     * Default is [Shape.Square]
+     */
     var defaultShape = Square
 
-    /** If `true` use cache. Default is `true` */
+    /**
+     * If `true` use cache
+     * Default is `true`
+     */
     var defaultUseCache = true
 
-    /** The [HttpClient] for execute web calls */
+    /**
+     * The [HttpClient] for execute web calls
+     * Default is `HttpClient`
+     */
     var httpClient = HttpClient()
 
-    /** Whether the logging should be enabled. Default is [BuildConfig.DEBUG] */
+    /**
+     * Whether the logging should be enabled
+     * Default is [BuildConfig.DEBUG]
+     */
     var loggingEnabled = BuildConfig.DEBUG
 
-    /** A [TheiaLogger] from print messages. Default is [DefaultTheiaLogger] */
+    /**
+     * A [TheiaLogger] from print messages
+     * Default is [DefaultTheiaLogger]
+     */
     var logger: TheiaLogger = DefaultTheiaLogger
 
 

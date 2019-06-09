@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import studio.forface.theia.utils.animate
+import studio.forface.theia.utils.animateForever
 import studio.forface.theia.utils.exhaustive
 import studio.forface.theia.utils.toHighResBitmap
 
@@ -43,9 +44,18 @@ internal fun Any.toTheiaResponse() : TheiaResponse {
 }
 
 /** Set the given [TheiaResponse] as image of the receiver [ImageView] */
-internal fun ImageView.setImage( response: TheiaResponse ) {
+internal fun ImageView.setImage( response: TheiaResponse, animationLoop: AnimationLoop ) {
     when ( response ) {
         is BitmapResponse -> setImageBitmap( response.image )
-        is DrawableResponse -> setImageDrawable( response.image.also { it.animate() } )
+        is DrawableResponse -> {
+            val drawable = response.image
+            setImageDrawable( response.image )
+            when( animationLoop ) {
+                AnimationLoop.NoLoop -> { /* noop */ }
+                AnimationLoop.Once -> drawable.animate()
+                AnimationLoop.Forever -> drawable.animateForever()
+                AnimationLoop.OnClick -> setOnClickListener { drawable.animate() }
+            }
+        }
     }.exhaustive
 }

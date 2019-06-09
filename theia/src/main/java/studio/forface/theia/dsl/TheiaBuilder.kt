@@ -5,9 +5,12 @@ package studio.forface.theia.dsl
 import android.content.res.Resources
 import android.widget.ImageView
 import studio.forface.theia.*
+import studio.forface.theia.TheiaConfig.defaultAnimationLoop
 import studio.forface.theia.TheiaConfig.defaultError
+import studio.forface.theia.TheiaConfig.defaultErrorAnimationLoop
 import studio.forface.theia.TheiaConfig.defaultForceBitmap
 import studio.forface.theia.TheiaConfig.defaultPlaceholder
+import studio.forface.theia.TheiaConfig.defaultPlaceholderAnimationLoop
 import studio.forface.theia.TheiaConfig.defaultScaleError
 import studio.forface.theia.TheiaConfig.defaultScalePlaceholder
 import studio.forface.theia.TheiaConfig.defaultScaleType
@@ -74,6 +77,24 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
      * Default is [TheiaConfig.defaultShape]
      */
     var shape: TheiaParams.Shape = defaultShape
+
+    /**
+     * How the animation should loop for `image`
+     * Default is [TheiaConfig.defaultAnimationLoop]
+     */
+    var animationLoop: AnimationLoop = defaultAnimationLoop
+
+    /**
+     * How the animation should loop for `placeholder`
+     * Default is [TheiaConfig.defaultPlaceholderAnimationLoop]
+     */
+    var placeholderAnimationLoop: AnimationLoop = defaultPlaceholderAnimationLoop
+
+    /**
+     * How the animation should loop for `error`
+     * Default is [TheiaConfig.defaultErrorAnimationLoop]
+     */
+    var errorAnimationLoop: AnimationLoop = defaultErrorAnimationLoop
 
     /** If `true` cache will be used for this request. Default is [TheiaConfig.defaultUseCache] */
     var useCache = defaultUseCache
@@ -146,20 +167,23 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
         }
 
         return TheiaParams(
-            image =                 actualImage,
-            target =                target,
-            placeholder =           placeholder,
-            error =                 error ?: placeholder,
-            scaleError =            scaleError,
-            scalePlaceholder =      scalePlaceholder,
-            scaleType =             scaleType,
-            shape =                 shape,
-            extraTransformations =  extraTransformations,
-            useCache =              useCache,
-            forceBitmap =           forceBitmap,
-            dimensions =            dimensions,
-            completionCallback =    completionCallback ?: {},
-            errorCallback =         errorCallback
+            image =                     actualImage,
+            target =                    target,
+            placeholder =               placeholder,
+            error =                     error ?: placeholder,
+            scaleError =                scaleError,
+            scalePlaceholder =          scalePlaceholder,
+            scaleType =                 scaleType,
+            shape =                     shape,
+            extraTransformations =      extraTransformations,
+            animationLoop =             animationLoop,
+            placeholderAnimationLoop =  placeholderAnimationLoop,
+            errorAnimationLoop =        errorAnimationLoop,
+            useCache =                  useCache,
+            forceBitmap =               forceBitmap,
+            dimensions =                dimensions,
+            completionCallback =        completionCallback ?: {},
+            errorCallback =             errorCallback
         )
     }
 }

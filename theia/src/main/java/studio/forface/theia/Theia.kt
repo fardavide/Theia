@@ -80,20 +80,20 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         val load = suspend {
 
             // Set placeholder if image is Async
-            if ( image is Async ) load( placeholder, scalePlaceholder )
+            if ( image is Async ) loadPlaceholder()
 
             // Set image and handle error
             // On completion call params.completionCallback
-            load( image, onCompletion = params.completionCallback ) {
+            loadImage {
 
                 // Call errorCallback if not null.
                 params.errorCallback( it )
 
                 // Set placeholder if error is NOT Sync ( Async or null )
-                if ( error !is Sync ) load( placeholder, scalePlaceholder )
+                if ( error !is Sync ) loadPlaceholder()
 
                 // Set error image. On error, fallback on placeholder again
-                load( error, scaleError ) { load( placeholder, scalePlaceholder ) }
+                loadError { loadPlaceholder() }
             }
         }
 
@@ -112,6 +112,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         source: ImageSource?,
         params: TheiaParams,
         applyScale: Boolean = true,
+        animationLoop: AnimationLoop,
         onCompletion: CompletionCallback,
         onError: ErrorCallback
     ) = coroutineScope {
@@ -138,7 +139,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             maybeBitmap
                 .onSuccess { response ->
                     onCompletion( response ) // Deliver to CompletionCallback
-                    params.target?.setImage( response ) // Set into target
+                    params.target?.setImage( response, animationLoop ) // Set into target
                 }
                 .onFailure { val e = it as TheiaException
                     onError( e ) // Deliver ErrorCallback
@@ -183,10 +184,30 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     private suspend fun TheiaParams.load(
         source: ImageSource?,
         applyScale: Boolean = true,
+        animationLoop: AnimationLoop,
         onCompletion: CompletionCallback = {},
         onError: ErrorCallback = {}
     ) {
-        applySource( source, this, applyScale, onCompletion, onError )
+        applySource( source, this, applyScale, animationLoop, onCompletion, onError )
+    }
+
+    /** Call [load] `image` within [TheiaParams] */
+    private suspend fun TheiaParams.loadImage(
+        onError: ErrorCallback = {}
+    ) {
+        load( image, animationLoop = animationLoop, onCompletion = completionCallback, onError = onError )
+    }
+
+    /** Call [load] `placeholder` within [TheiaParams] */
+    private suspend fun TheiaParams.loadPlaceholder() {
+        load( placeholder, scalePlaceholder, placeholderAnimationLoop )
+    }
+
+    /** Call [load] `error` within [TheiaParams] */
+    private suspend fun TheiaParams.loadError(
+        onError: ErrorCallback = {}
+    ) {
+        load( error, scaleError, errorAnimationLoop, onError = onError )
     }
 }
 

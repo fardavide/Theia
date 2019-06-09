@@ -158,6 +158,3 @@ internal class AsyncRequest(
         }.toBitmap().toResponse()
     }
 }
-
-/** Enum for distinguish between Image, Placeholder or Error request */
-internal enum class RequestType { Image, Placeholder, Error }
