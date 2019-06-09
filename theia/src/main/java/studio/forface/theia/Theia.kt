@@ -190,9 +190,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     }
 
     /** Call [load] `image` within [TheiaParams] */
-    private suspend fun TheiaParams.loadImage(
-        onError: ErrorCallback = {}
-    ) {
+    private suspend fun TheiaParams.loadImage( onError: ErrorCallback = {} ) {
         load( image, animationLoop = animationLoop, onCompletion = completionCallback, onError = onError )
     }
 
@@ -202,9 +200,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     }
 
     /** Call [load] `error` within [TheiaParams] */
-    private suspend fun TheiaParams.loadError(
-        onError: ErrorCallback = {}
-    ) {
+    private suspend fun TheiaParams.loadError( onError: ErrorCallback = {} ) {
         load( error, scaleError, errorAnimationLoop, onError = onError )
     }
 }
