@@ -174,7 +174,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** Stop all the [TheiaRequest] and [clear] */
     private fun MutableList<Job>.purge() {
-        jobs.forEach{ it.cancel() }
+        try { jobs.forEach { it.cancel() } } catch ( e: ConcurrentModificationException ) { purge() }
         this.clear()
     }
 

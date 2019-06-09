@@ -1,72 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity"
+    tools:ignore="ContentDescription">
+
+    <!-- region First block -->
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/centerImageView"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/cropImageView"
-            app:layout_constraintDimensionRatio="w,1:3" tools:srcCompat="@drawable/ic_favorite"/>
+        android:id="@+id/centerImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fitImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cropImageView"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/hugeCenterImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintEnd_toStartOf="@+id/cropImageView"
-            app:layout_constraintDimensionRatio="w,1:3" tools:srcCompat="@drawable/ic_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/fitImageView" android:layout_marginTop="8dp"/>
+        android:id="@+id/cropImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/stretchImageView"
+        app:layout_constraintStart_toEndOf="@+id/centerImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/hugeFitImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/cropImageView"
-            app:layout_constraintDimensionRatio="w,1:3" tools:srcCompat="@drawable/ic_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/hugeCenterImageView"/>
+        android:id="@+id/fitImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@+id/centerImageView"
+        app:layout_constraintBottom_toTopOf="@+id/firstGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/stretchImageView"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/fitImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toStartOf="@+id/cropImageView"
-            app:layout_constraintDimensionRatio="w,1:3" tools:srcCompat="@drawable/ic_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/centerImageView"/>
+        android:id="@+id/stretchImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@+id/cropImageView"
+        app:layout_constraintBottom_toTopOf="@+id/firstGuideline"
+        app:layout_constraintStart_toEndOf="@+id/fitImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+    <!-- endregion -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33333" />
+
+    <!-- region Second block - Round -->
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/cropImageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/centerImageView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintDimensionRatio="w,1:3"
-            tools:srcCompat="@drawable/ic_favorite"/>
+        android:id="@+id/hugeCenterImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/firstGuideline"
+        app:layout_constraintBottom_toTopOf="@id/hugeFitImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/hugeCropImageView"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/hugeCropImageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/centerImageView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintDimensionRatio="w,1:3"
-            tools:srcCompat="@drawable/ic_favorite" app:layout_constraintTop_toBottomOf="@+id/stretchImageView"
-            android:layout_marginTop="8dp"/>
+        android:id="@+id/hugeCropImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/firstGuideline"
+        app:layout_constraintBottom_toTopOf="@id/hugeStretchImageView"
+        app:layout_constraintStart_toEndOf="@id/hugeCenterImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/stretchImageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/centerImageView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintDimensionRatio="w,1:3"
-            tools:srcCompat="@drawable/ic_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/cropImageView"/>
+        android:id="@+id/hugeFitImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/hugeCenterImageView"
+        app:layout_constraintBottom_toTopOf="@id/secondGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/hugeStretchImageView"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/hugeStretchImageView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/centerImageView"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintDimensionRatio="w,1:3"
-            tools:srcCompat="@drawable/ic_favorite"
-            app:layout_constraintTop_toBottomOf="@+id/hugeCropImageView"/>
+        android:id="@+id/hugeStretchImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/hugeCropImageView"
+        app:layout_constraintBottom_toTopOf="@id/secondGuideline"
+        app:layout_constraintStart_toEndOf="@id/hugeFitImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
+    <!-- endregion -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66666" />
+
+    <!-- region Third block - Animation -->
+    <!-- region Guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/animHorizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.833333" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/animVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+    <!-- endregion -->
+
+    <!-- Once -->
+    <TextView
+        android:id="@+id/animOnceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/secondGuideline"
+        app:layout_constraintBottom_toTopOf="@id/animOnceImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/animVerticalGuideline"
+
+        android:text="@string/text_once"
+        android:textAlignment="center"
+        android:lines="1"
+        />
+    <ImageView
+        android:id="@+id/animOnceImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/animOnceTextView"
+        app:layout_constraintBottom_toTopOf="@id/animHorizontalGuideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/animVerticalGuideline"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
+    <!-- Forever -->
+    <TextView
+        android:id="@+id/animForeverTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/secondGuideline"
+        app:layout_constraintBottom_toTopOf="@id/animForeverImageView"
+        app:layout_constraintStart_toEndOf="@id/animVerticalGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:text="@string/text_forever"
+        android:textAlignment="center"
+        android:lines="1"
+        />
+    <ImageView
+        android:id="@+id/animForeverImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/animForeverTextView"
+        app:layout_constraintBottom_toTopOf="@id/animHorizontalGuideline"
+        app:layout_constraintStart_toEndOf="@id/animVerticalGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
+    <!-- Timed -->
+    <TextView
+        android:id="@+id/animTimedTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/animHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@id/animTimedImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/animVerticalGuideline"
+
+        android:text="@string/text_timed"
+        android:textAlignment="center"
+        android:lines="1"
+        />
+    <ImageView
+        android:id="@+id/animTimedImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/animTimedTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/animVerticalGuideline"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+
+    <!-- Click -->
+    <TextView
+        android:id="@+id/animClickTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/animHorizontalGuideline"
+        app:layout_constraintBottom_toTopOf="@id/animClickImageView"
+        app:layout_constraintStart_toEndOf="@id/animVerticalGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:text="@string/text_click"
+        android:textAlignment="center"
+        android:lines="1"
+        android:typeface="monospace"
+        />
+    <ImageView
+        android:id="@+id/animClickImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/imageMargin"
+
+        app:layout_constraintTop_toBottomOf="@id/animClickTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/animVerticalGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        tools:srcCompat="@drawable/ic_favorite" />
+    <!-- endregion -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
