@@ -5,17 +5,14 @@ package studio.forface.theia.demo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.forface.theia.*
 import studio.forface.theia.AnimationLoop.*
-import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
-import studio.forface.theia.TheiaParams.Shape.Round
+import studio.forface.theia.TheiaParams.Shape.Rounded
 import studio.forface.theia.dsl.imageDrawableRes
 import studio.forface.theia.dsl.imageUrl
 import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.theia
-import studio.forface.theia.invoke
-import studio.forface.theia.mins
-import studio.forface.theia.secs
 
 private const val GIF_IMAGE_URL = "https://sirv.sirv.com/website/HELLO.gif"
 private const val SMALL_IMAGE_URL = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
@@ -29,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView( R.layout.activity_main )
 
         TheiaConfig {
-            cacheDuration = 5.mins
+            cacheDuration = 5.days
             defaultPlaceholderDrawableRes = R.drawable.avd_loading
             loggingEnabled = true
         }
@@ -55,25 +52,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Huge round
+        val roundedShape = Rounded( Corners ofDp 32 )
         hugeCenterImageView.theia {
             imageUrl = HUGE_IMAGE_URL
             scaleType = Center
-            shape = Round
+            shape = roundedShape
         }
         hugeCropImageView.theia {
             imageUrl = HUGE_IMAGE_URL
             scaleType = Crop
-            shape = Round
+            shape = roundedShape
         }
         hugeFitImageView.theia {
             imageUrl = HUGE_IMAGE_URL
             scaleType = Fit
-            shape = Round
+            shape = roundedShape
         }
         hugeStretchImageView.theia {
             imageUrl = HUGE_IMAGE_URL
             scaleType = Stretch
-            shape = Round
+            shape = roundedShape
         }
 
         // Animated

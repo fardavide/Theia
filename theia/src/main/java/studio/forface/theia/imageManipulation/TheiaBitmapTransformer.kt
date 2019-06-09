@@ -1,11 +1,10 @@
 package studio.forface.theia.imageManipulation
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import studio.forface.theia.Corners
 import studio.forface.theia.Dimensions
-import studio.forface.theia.utils.centerTo
-import studio.forface.theia.utils.cropTo
-import studio.forface.theia.utils.fitTo
-import studio.forface.theia.utils.stretchTo
+import studio.forface.theia.utils.*
 
 /**
  * A base [ImageTransformer] for [Bitmap]
@@ -58,31 +57,15 @@ open class TheiaBitmapTransformer : ImageTransformer<Bitmap> {
     // endregion
 
     /**
-     * Apply a Round shape to the Image
+     * Apply a Circle shape to the Image
      *
      * @return [Bitmap]
      */
-    override fun Bitmap.round() : Bitmap {
-        val size = Math.min( width, height )
+    override fun Bitmap.circle() = toCircle()
 
-        val x = ( width - size ) / 2
-        val y = ( height - size ) / 2
-
-        val squaredBitmap = Bitmap.createBitmap( this, x, y, size, size )
-        val bitmap = Bitmap.createBitmap( size, size, config )
-
-        if ( squaredBitmap != this ) recycle()
-
-        val canvas = Canvas( bitmap )
-        val paint = Paint()
-        val shader = BitmapShader( squaredBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP )
-        paint.shader = shader
-        paint.isAntiAlias = true
-
-        val r = size / 2f
-        canvas.drawCircle( r, r, r, paint )
-
-        squaredBitmap.recycle()
-        return bitmap
-    }
+    /**
+     * Apply a Rounded shape to the Image
+     * @return [Drawable]
+     */
+    override fun Bitmap.round( corners: Corners ) = roundTo( corners )
 }
