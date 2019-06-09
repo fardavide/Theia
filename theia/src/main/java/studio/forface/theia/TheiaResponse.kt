@@ -42,18 +42,20 @@ internal fun Any.toTheiaResponse() : TheiaResponse {
 
 /** Set the given [TheiaResponse] as image of the receiver [ImageView] */
 internal fun ImageView.setImage( response: TheiaResponse, animationLoop: AnimationLoop ) {
-    when ( response ) {
-        is BitmapResponse -> setImageBitmap( response.image )
-        is DrawableResponse -> {
-            val drawable = response.image
-            setImageDrawable( response.image )
-            when( animationLoop ) {
-                is AnimationLoop.NoLoop -> { /* noop */ }
-                is AnimationLoop.Once -> drawable.animate()
-                is AnimationLoop.Forever -> drawable.animateForever()
-                is AnimationLoop.Every -> drawable.animateEvery( this, animationLoop.duration )
-                is AnimationLoop.OnClick -> setOnClickListener { drawable.animate() }
+    withDissolve {
+        when (response) {
+            is BitmapResponse -> setImageBitmap( response.image )
+            is DrawableResponse -> {
+                val drawable = response.image
+                setImageDrawable( response.image )
+                when (animationLoop) {
+                    is AnimationLoop.NoLoop -> { /* noop */ }
+                    is AnimationLoop.Once -> drawable.animate()
+                    is AnimationLoop.Forever -> drawable.animateForever()
+                    is AnimationLoop.Every -> drawable.animateEvery( this, animationLoop.duration )
+                    is AnimationLoop.OnClick -> setOnClickListener { drawable.animate() }
+                }
             }
-        }
-    }.exhaustive
+        }.exhaustive
+    }
 }
