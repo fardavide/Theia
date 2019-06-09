@@ -3,10 +3,10 @@
 package studio.forface.theia.dsl
 
 import android.content.res.Resources
-import android.graphics.Bitmap
 import android.widget.ImageView
 import studio.forface.theia.*
 import studio.forface.theia.TheiaConfig.defaultError
+import studio.forface.theia.TheiaConfig.defaultForceBitmap
 import studio.forface.theia.TheiaConfig.defaultPlaceholder
 import studio.forface.theia.TheiaConfig.defaultScaleError
 import studio.forface.theia.TheiaConfig.defaultScalePlaceholder
@@ -78,6 +78,14 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
     /** If `true` cache will be used for this request. Default is [TheiaConfig.defaultUseCache] */
     var useCache = defaultUseCache
 
+    /**
+     * If `true` the Images will be transformed as `Bitmap` even if they're `Drawable`.
+     * Default is [TheiaConfig.defaultForceBitmap]
+     *
+     * Note this won't be applied to [placeholder] and [error] if [scalePlaceholder] or [scaleError] are disabled
+     */
+    var forceBitmap = defaultForceBitmap
+
     /** Set a [CompletionCallback] that will be called when [image] is ready */
     fun onCompletion( callback: CompletionCallback ) {
         this.completionCallback = callback
@@ -116,10 +124,10 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
 
     /**
      * An [ErrorCallback] that will be called when something went wrong loading [image]
-     * Default is `null`
+     * Default is empty lambda
      * Set it via [onError] function
      */
-    private var errorCallback: ErrorCallback? = null
+    private var errorCallback: ErrorCallback = {}
 
     /** A [Set] of [TheiaTransformation] to apply to the images ( [image], [placeholder], [error] ) */
     private val extraTransformations = mutableListOf<TheiaTransformation>()
@@ -148,8 +156,9 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
             shape =                 shape,
             extraTransformations =  extraTransformations,
             useCache =              useCache,
+            forceBitmap =           forceBitmap,
             dimensions =            dimensions,
-            completionCallback =    completionCallback,
+            completionCallback =    completionCallback ?: {},
             errorCallback =         errorCallback
         )
     }
@@ -165,8 +174,8 @@ class TheiaBuilder( resources: Resources ): AbsTheiaBuilder( resources ) {
     public override var target: ImageView? = null
 }
 
-/** A typealias for a lambda that receives a [Bitmap] */
-typealias CompletionCallback = suspend (Bitmap) -> Unit
+/** A typealias for a lambda that receives a [TheiaResponse] */
+typealias CompletionCallback = suspend (TheiaResponse) -> Unit
 
 /** A typealias for a lambda that receives a [TheiaException] */
 typealias ErrorCallback = suspend (TheiaException) -> Unit

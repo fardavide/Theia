@@ -1,5 +1,3 @@
-@file:Suppress("MayBeConstant")
-
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
 import org.gradle.kotlin.dsl.DependencyHandlerScope
@@ -14,80 +12,91 @@ val repos: RepositoryHandler.() -> Unit get() = {
 }
 
 val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit get() = {
-    classpath( kotlin("gradle-plugin", Versions.kotlin ) )
-    classpath( Libs.Android.gradle_plugin )
-    classpath( Libs.Publishing.bintray_plugin )
-    classpath( Libs.Publishing.maven_plugin )
+    classpath( kotlin("gradle-plugin", Version.kotlin ) )
+    classpath( Lib.Android.gradle_plugin )
+    classpath( Lib.Publishing.dokka_plugin )
+    classpath( Lib.Publishing.bintray_plugin )
+    classpath( Lib.Publishing.maven_plugin )
 }
 
 @Suppress("unused")
-fun DependencyHandler.applyAndroidTests() {
+fun DependencyHandler.applyAndroidTests() = with( Lib ) { with( Lib.Android ) {
     val unit = "testImplementation"
     val android = "androidTestImplementation"
-    add( unit, Libs.test );                 add( android, Libs.test )
-    add( unit, Libs.test_junit );           add( android, Libs.test_junit )
-    add( unit, Libs.Android.lifecycle );    add( android, Libs.Android.lifecycle )
-    add( unit, Libs.mockk );                add( android, Libs.mockk )
-    // add( unit, Libs.Android.robolectric )
-    add( android, Libs.Android.espresso )
-    add( android, Libs.mockk_android )
-    add( android, Libs.Android.test_runner )
-}
+    add( unit, test );              add( android, test )
+    add( unit, test_junit );        add( android, test_junit )
+    add( unit, kotlintest_runner);  add( android, kotlintest_runner )
+    add( unit, lifecycle );         add( android, lifecycle )
+    add( unit, mockk );             add( android, mockk_android )
+    // add( unit, Lib.Android.robolectric )
+    add( android, espresso )
+    add( android, test_runner )
+} }
 
-object Versions {
-    val kotlin =                        "1.3.30"
-    val coroutines =                    "1.2.0"
-    val mockk =                         "1.9"
-    val ktor =                          "1.1.3"
-
-    val android_constraint_layout =     "2.0.0-alpha1"
-    val android_espresso =              "3.1.1"
-    val android_gradle_plugin =         "3.3.1"
-    val android_ktx =                   "1.1.0-alpha03"
-    val android_lifecycle =             "2.0.0"
-    val android_recycler_view =         "1.0.0"
-    val android_robolectric =           "4.2"
-    val android_support =               "1.1.0-alpha02"
-    val android_test_runner =           "1.1.1"
-
-    val publishing_bintray_plugin =     "1.8.4"
-    val publishing_maven_plugin =       "2.1"
-}
-
-@Suppress("unused")
-object Libs {
+object Version {
 
     /* Kotlin */
-    val kotlin =                                "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val coroutines_android =                    "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-    val kotlin_reflect =                        "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-    val test =                                  "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
-    val test_junit =                            "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
+    const val kotlin =                          "1.3.31"        // Updated: Apr 25, 2019
+    const val coroutines =                      "1.2.1"         // Updated: Apr 25, 2019
 
-    val ktor =                                  "io.ktor:ktor-client-core:${Versions.ktor}"
-    val ktor_apache =                           "io.ktor:ktor-client-apache:${Versions.ktor}"
-    val ktor_android =                          "io.ktor:ktor-client-android:${Versions.ktor}"
-    val mockk =                                 "io.mockk:mockk:${Versions.mockk}"
-    val mockk_android =                         "io.mockk:mockk-android:${Versions.mockk}"
+    /* Other */
+    const val kotlintest =                      "3.3.2"         // Updated: Apr 5, 2019
+    const val ktor =                            "1.2.1"         // Updated:
+    const val mockk =                           "1.9.3"         // Updated: Mar 25, 2019
+
+    /* Android */
+    const val android_constraintLayout =        "2.0.0-beta1"   // Updated: May 8, 2019
+    const val android_espresso =                "3.2.0"         // Updated: May 30, 2019
+    const val android_gradle_plugin =           "3.5.0-beta03"  // Updated: May 28, 2019
+    const val android_ktx =                     "1.1.0-beta01"  // Updated: May 8, 2019
+    const val android_lifecycle =               "2.1.0-beta01"  // Updated: May 8, 2019
+    const val android_recyclerView =            "1.1.0-alpha05" // Updated: May 8, 2019
+    const val android_robolectric =             "4.3"           // Updated: May 30, 2019
+    const val android_support =                 "1.1.0-alpha05" // Updated: May 08, 2019
+    const val androidx_test =                   "1.2.0"         // Updated: May 31, 2019
+
+    /* Publishing */
+    const val publishing_bintray_plugin =       "1.8.4"         // Updated:
+    const val publishing_dokka_plugin =         "0.9.18"        // Updated: Mar 19, 2019
+    const val publishing_maven_plugin =         "2.1"           // Updated:
+}
+
+object Lib {
+
+    /* Kotlin */
+    const val kotlin =                          "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
+    const val coroutines_android =              "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
+    const val kotlin_reflect =                  "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
+    const val test =                            "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
+    const val test_junit =                      "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
+
+    /* Other */
+    const val kotlintest_runner =               "io.kotlintest:kotlintest-runner-junit5:${Version.kotlintest}"
+    const val ktor =                            "io.ktor:ktor-client-core:${Version.ktor}"
+    const val ktor_apache =                     "io.ktor:ktor-client-apache:${Version.ktor}"
+    const val ktor_android =                    "io.ktor:ktor-client-android:${Version.ktor}"
+    const val mockk =                           "io.mockk:mockk:${Version.mockk}"
+    const val mockk_android =                   "io.mockk:mockk-android:${Version.mockk}"
 
     /* Android */
     object Android {
-        val appcompat =                         "androidx.appcompat:appcompat:${Versions.android_support}"
-        val constraint_layout =                 "androidx.constraintlayout:constraintlayout:${Versions.android_constraint_layout}"
-        val espresso =                          "androidx.test.espresso:espresso-core:${Versions.android_espresso}"
-        val gradle_plugin =                     "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
-        val ktx =                               "androidx.core:core-ktx:${Versions.android_ktx}"
-        val lifecycle =                         "androidx.lifecycle:lifecycle-runtime:${Versions.android_lifecycle}"
-        val lifecycle_jdk8 =                    "androidx.lifecycle:lifecycle-common-java8:${Versions.android_lifecycle}"
-        val recycler_view =                     "androidx.recyclerview:recyclerview:${Versions.android_recycler_view}"
-        val robolectric =                       "org.robolectric:robolectric:${Versions.android_robolectric}"
-        val support_annotations =               "com.android.support:support-annotations:28.0.0"
-        val test_runner =                       "com.android.support.test:runner:${Versions.android_test_runner}"
+        const val appcompat =                   "androidx.appcompat:appcompat:${Version.android_support}"
+        const val constraintLayout =           "androidx.constraintlayout:constraintlayout:${Version.android_constraintLayout}"
+        const val espresso =                    "androidx.test.espresso:espresso-core:${Version.android_espresso}"
+        const val gradle_plugin =               "com.android.tools.build:gradle:${Version.android_gradle_plugin}"
+        const val ktx =                         "androidx.core:core-ktx:${Version.android_ktx}"
+        const val lifecycle =                   "androidx.lifecycle:lifecycle-runtime:${Version.android_lifecycle}"
+        const val lifecycle_jdk8 =              "androidx.lifecycle:lifecycle-common-java8:${Version.android_lifecycle}"
+        const val recyclerView =                "androidx.recyclerview:recyclerview:${Version.android_recyclerView}"
+        const val robolectric =                 "org.robolectric:robolectric:${Version.android_robolectric}"
+        const val support_annotations =         "com.android.support:support-annotations:28.0.0"
+        const val test_runner =                 "com.android.support.test:runner:${Version.androidx_test}"
     }
 
     /* Publishing */
     object Publishing {
-        val bintray_plugin =                    "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.publishing_bintray_plugin}"
-        val maven_plugin =                      "com.github.dcendents:android-maven-gradle-plugin:${Versions.publishing_maven_plugin}"
+        const val bintray_plugin =                  "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Version.publishing_bintray_plugin}"
+        const val dokka_plugin =                    "org.jetbrains.dokka:dokka-android-gradle-plugin:${Version.publishing_dokka_plugin}"
+        const val maven_plugin =                    "com.github.dcendents:android-maven-gradle-plugin:${Version.publishing_maven_plugin}"
     }
 }

@@ -1,19 +1,19 @@
 package studio.forface.theia.transformation
 
-import android.graphics.Bitmap
+import studio.forface.theia.TheiaResponse
 
 /**
- * An interface for apply a transformation to a [Bitmap]
+ * An interface for apply a transformation to a [TheiaResponse]
  *
  * @author Davide Giuseppe Farella
  */
 interface TheiaTransformation {
 
-    /** @return the transformed [Bitmap] */
-    operator fun invoke( source: Bitmap ): Bitmap
+    /** @return the transformed [TheiaResponse] */
+    operator fun invoke( source: TheiaResponse ): TheiaResponse
 }
 
-/** An empty [TheiaTransformation] that return the unchanged source [Bitmap] */
+/** An empty [TheiaTransformation] that return the unchanged source [TheiaResponse] */
 internal object NoTransformation : TheiaTransformation {
-    override fun invoke( source: Bitmap ) = source
+    override fun invoke( source: TheiaResponse ) = source
 }

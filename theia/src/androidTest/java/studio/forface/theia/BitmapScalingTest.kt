@@ -2,8 +2,6 @@ package studio.forface.theia
 
 import android.graphics.Bitmap
 import androidx.core.graphics.createBitmap
-import androidx.test.runner.AndroidJUnit4
-import org.junit.runner.RunWith
 import studio.forface.theia.utils.centerTo
 import studio.forface.theia.utils.cropTo
 import studio.forface.theia.utils.fitTo
@@ -16,7 +14,6 @@ import kotlin.test.assertEquals
  *
  * @author Davide Giuseppe Farella
  */
-@RunWith( AndroidJUnit4::class )
 class BitmapScalingTest {
 
     @Test

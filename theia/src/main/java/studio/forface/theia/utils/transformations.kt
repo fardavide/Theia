@@ -1,36 +1,41 @@
+@file:Suppress("UNUSED_PARAMETER") // TODO not implemented methods
+
 package studio.forface.theia.utils
 
 import android.graphics.Bitmap
 import androidx.core.graphics.scale
-import studio.forface.theia.Dimensions
-import studio.forface.theia.TheiaParams
-import studio.forface.theia.height
+import studio.forface.theia.*
+import studio.forface.theia.imageManipulation.TheiaTransformer
 import studio.forface.theia.transformation.TheiaTransformation
 import studio.forface.theia.utils.Use.Height
 import studio.forface.theia.utils.Use.Width
-import studio.forface.theia.width
 
-/** Apply a [Dimensions] to a [Bitmap] */
-internal fun Bitmap.applyDimensions( dimensions: Dimensions, scaleType: TheiaParams.ScaleType ): Bitmap {
-    return when( scaleType ) {
-        TheiaParams.ScaleType.Center ->   centerTo( dimensions )
-        TheiaParams.ScaleType.Crop ->     cropTo( dimensions )
-        TheiaParams.ScaleType.Fit ->      fitTo( dimensions )
-        TheiaParams.ScaleType.Stretch ->  stretchTo( dimensions )
+/** Apply a [Dimensions] to a [TheiaResponse] */
+internal fun TheiaResponse.applyDimensions( dimensions: Dimensions, scaleType: TheiaParams.ScaleType ): TheiaResponse {
+    return with( TheiaTransformer ) {
+        when (scaleType) {
+            TheiaParams.ScaleType.Center ->     center( dimensions )
+            TheiaParams.ScaleType.Crop ->       crop( dimensions )
+            TheiaParams.ScaleType.Fit ->        fit( dimensions )
+            TheiaParams.ScaleType.Stretch ->    stretch( dimensions )
+        }
     }
 }
 
-/** Apply a [TheiaTransformation] to a [Bitmap] */
-internal fun Bitmap.applyTransformation( transformation: TheiaTransformation ) =
+/** Apply a [TheiaTransformation] to a [TheiaResponse] */
+internal fun TheiaResponse.applyTransformation( transformation: TheiaTransformation ) =
     transformation.invoke(this )
 
-/** Apply a [Collection] of [TheiaTransformation] to a [Bitmap] */
-internal fun Bitmap.applyTransformations( transformations: Collection<TheiaTransformation> ): Bitmap {
-    var bitmap = this
-    transformations.forEach { transformation -> bitmap = transformation( bitmap ) }
-    return bitmap
+/** Apply a [Collection] of [TheiaTransformation] to a [TheiaResponse] */
+internal fun TheiaResponse.applyTransformations(
+    transformations: Collection<TheiaTransformation>
+): TheiaResponse {
+    var response = this
+    transformations.forEach { transformation -> response = transformation( response ) }
+    return response
 }
 
+// region Bitmap
 /**
  * @return a [Bitmap] resized to be centered inside the given [Dimensions]
  * @see TheiaParams.ScaleType.Center
@@ -40,13 +45,13 @@ internal fun Bitmap.centerTo( dimensions: Dimensions ): Bitmap {
     val dimRation = dimensions.width.toDouble() / dimensions.height
 
     // If bitmap has an higher ratio than Dimensions', that means its larger, so we use `Width`, else use `Height`
-    val use = if ( ratio > dimRation ) Use.Width else /* ratio <= dimRation */ Use.Height
+    val use = if ( ratio > dimRation ) Width else /* ratio <= dimRation */ Height
     val ( late, dimLate ) = when( use ) {
         Width -> width to dimensions.width
         Height -> height to dimensions.height
     }
     val scaleRatio = dimLate.toDouble() / late
-    return scale( ( width * scaleRatio ).toInt(), ( height * scaleRatio  ).toInt())
+    return scale( this.dimensions * scaleRatio )
 }
 
 /**
@@ -65,21 +70,24 @@ internal fun Bitmap.fitTo( dimensions: Dimensions ): Bitmap {
     val dimRation = dimensions.width.toDouble() / dimensions.height
 
     // If bitmap has an higher ratio than Dimensions', that means its larger, so we use `Height`, else use `Width`
-    val use = if ( ratio > dimRation ) Use.Height else /* ratio <= dimRation */ Use.Width
+    val use = if ( ratio > dimRation ) Height else /* ratio <= dimRation */ Width
     val ( late, dimLate ) = when( use ) {
         Width -> width to dimensions.width
         Height -> height to dimensions.height
     }
     val scaleRatio = dimLate.toDouble() / late
-    return scale( ( width * scaleRatio ).toInt(), ( height * scaleRatio ).toInt() ).cropTo( dimensions )
+    return scale( this.dimensions * scaleRatio ).cropTo( dimensions )
 }
 
 /**
  * @return a [Bitmap] stretched to fill the given [Dimensions]
  * @see TheiaParams.ScaleType.Stretch
  */
-internal fun Bitmap.stretchTo( dimensions: Dimensions ) = scale( dimensions.width, dimensions.height )
+internal fun Bitmap.stretchTo( dimensions: Dimensions ) = scale( dimensions )
 
+/** Scale a [Bitmap] with the given [Dimensions] */
+private fun Bitmap.scale( dimensions: Dimensions ) = scale( dimensions.width, dimensions.height )
+// endregion
 
 /** An enum used by [centerTo] and [fitTo] to readability purpose */
 private enum class Use { Width, Height }

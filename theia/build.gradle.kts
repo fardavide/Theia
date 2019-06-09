@@ -9,19 +9,19 @@ android { applyAndroidConfig() }
 dependencies {
     applyAndroidTests()
 
-    implementation( Libs.kotlin )
-    implementation( Libs.coroutines_android )
-    implementation( Libs.kotlin_reflect )
+    implementation( Lib.kotlin )
+    implementation( Lib.coroutines_android )
+    implementation( Lib.kotlin_reflect )
 
-    implementation( Libs.ktor )
-    implementation( Libs.ktor_android )
+    implementation( Lib.ktor )
+    implementation( Lib.ktor_android )
 
-    implementation( Libs.Android.appcompat )
-    implementation( Libs.Android.ktx )
-    implementation( Libs.Android.lifecycle )
-    implementation( Libs.Android.lifecycle_jdk8 )
-    implementation( Libs.Android.recycler_view )
-    implementation( Libs.Android.support_annotations )
+    implementation( Lib.Android.appcompat )
+    implementation( Lib.Android.ktx )
+    implementation( Lib.Android.lifecycle )
+    implementation( Lib.Android.lifecycle_jdk8 )
+    implementation( Lib.Android.recyclerView )
+    implementation( Lib.Android.support_annotations )
 }
 
 publish("theia" )

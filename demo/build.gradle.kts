@@ -10,12 +10,12 @@ dependencies {
     implementation( project(":theia" ) )
     applyAndroidTests()
 
-    implementation( Libs.kotlin )
-    implementation( Libs.coroutines_android )
+    implementation( Lib.kotlin )
+    implementation( Lib.coroutines_android )
 
-    implementation( Libs.Android.appcompat )
-    implementation( Libs.Android.constraint_layout )
-    implementation( Libs.Android.ktx )
-    implementation( Libs.Android.lifecycle )
-    implementation( Libs.Android.recycler_view )
+    implementation( Lib.Android.appcompat )
+    implementation( Lib.Android.constraintLayout )
+    implementation( Lib.Android.ktx )
+    implementation( Lib.Android.lifecycle )
+    implementation( Lib.Android.recyclerView )
 }

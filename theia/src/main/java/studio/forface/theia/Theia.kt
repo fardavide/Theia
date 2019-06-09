@@ -32,6 +32,7 @@ interface ITheia: TheiaLogger {
     val resources: Resources
 }
 
+
 /** Create a Request to apply an image into an `ImageView` */
 inline fun Theia.load( builder: TheiaBuilder.() -> Unit ) {
     val params = with( TheiaBuilder( resources ) ) {
@@ -49,6 +50,7 @@ inline fun PreTargetedTheia.load( builder: PreTargetedTheiaBuilder.() -> Unit ) 
     }
     applyParams( params )
 }
+
 
 /** Middle implementation between [ITheia] and [Theia] for hide some member */
 abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConfig.logger  {
@@ -85,7 +87,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
             load( image, onCompletion = params.completionCallback ) {
 
                 // Call errorCallback if not null.
-                params.errorCallback?.invoke( it )
+                params.errorCallback( it )
 
                 // Set placeholder if error is NOT Sync ( Async or null )
                 if ( error !is Sync ) load( placeholder, scalePlaceholder )
@@ -113,16 +115,13 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         onCompletion: CompletionCallback,
         onError: ErrorCallback
     ) = coroutineScope {
-        val requestParams = RequestParams of params
+        // Avoid to `forceBitmap` if a scaling is not required
+        val newParams = params.copy( forceBitmap = params.forceBitmap && applyScale )
+        val requestParams = RequestParams of newParams
 
         // Create the request
         val request = when( source ) {
-            is Async ->
-                AsyncRequest(
-                    TheiaConfig.httpClient,
-                    requestParams
-                )
-
+            is Async -> AsyncRequest( TheiaConfig.httpClient, requestParams )
             is Sync -> SyncRequest( requestParams )
 
             null -> return@coroutineScope // Source can be null if has not been set by user.
@@ -137,9 +136,9 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
         // Deliver the request's result
         newRequest( mainDispatcher ) {
             maybeBitmap
-                .onSuccess { bitmap ->
-                    onCompletion( bitmap ) // Deliver to CompletionCallback
-                    params.target?.setImageBitmap( bitmap ) // Set into target
+                .onSuccess { response ->
+                    onCompletion( response ) // Deliver to CompletionCallback
+                    params.target?.setImage( response ) // Set into target
                 }
                 .onFailure { val e = it as TheiaException
                     onError( e ) // Deliver ErrorCallback
@@ -184,10 +183,10 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     private suspend fun TheiaParams.load(
         source: ImageSource?,
         applyScale: Boolean = true,
-        onCompletion: CompletionCallback? = {},
+        onCompletion: CompletionCallback = {},
         onError: ErrorCallback = {}
     ) {
-        applySource( source, this, applyScale, onCompletion ?: {}, onError )
+        applySource( source, this, applyScale, onCompletion, onError )
     }
 }
 
@@ -195,11 +194,13 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 /** Default implementation of [ITheia] */
 open class Theia internal constructor( override val resources: Resources ) : AbsTheia()
 
+
 /** Implementation of [ITheia] with a pre-targeted [ImageView] */
 class PreTargetedTheia internal constructor (
     override val resources: Resources,
     val target: ImageView
 ) : AbsTheia()
+
 
 /** Implementation of [Theia] that exposes [purgeRequests] publicly */
 class UnhandledTheia internal constructor( resources: Resources ) : Theia( resources ) {
