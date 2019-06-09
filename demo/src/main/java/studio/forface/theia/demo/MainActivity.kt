@@ -35,19 +35,19 @@ class MainActivity : AppCompatActivity() {
 
         // Small square
         centerImageView.theia {
-            imageUrl = MEDIUM_IMAGE_URL
+            imageUrl = SMALL_IMAGE_URL
             scaleType = Center
         }
         cropImageView.theia {
-            imageUrl = MEDIUM_IMAGE_URL
+            imageUrl = SMALL_IMAGE_URL
             scaleType = Crop
         }
         fitImageView.theia {
-            imageUrl = MEDIUM_IMAGE_URL
+            imageUrl = SMALL_IMAGE_URL
             scaleType = Fit
         }
         stretchImageView.theia {
-            imageUrl = MEDIUM_IMAGE_URL
+            imageUrl = SMALL_IMAGE_URL
             scaleType = Stretch
         }
 
