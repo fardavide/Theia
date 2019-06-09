@@ -6,7 +6,7 @@
 
 <u>With Cache System!</u>
 
-![Theia gif](https://media.giphy.com/media/1Bh5mrJo1uLifyXcj4/giphy.gif)
+<iframe src='https://gfycat.com/ifr/HiddenOblongAlaskanmalamute' frameborder='0' scrolling='no' allowfullscreen width='640' height='1432'></iframe>
 
 ## Wiki
 [Full wiki here!](https://github.com/4face-studi0/Theia/wiki)

@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package studio.forface.theia.cache
+package studio.forface.theia
 
 /**
  * An inline class representing the time with math operators
@@ -8,18 +8,21 @@ package studio.forface.theia.cache
  * @author Davide Giuseppe Farella
  */
 @Suppress("EXPERIMENTAL_FEATURE_WARNING")
-inline class Duration(internal val timeMs: Long ) {
+inline class Duration( internal val timeMs: Long ) {
 
-    internal operator fun plus( other: Duration ) = Duration(timeMs + other.timeMs )
-    internal operator fun minus( other: Duration ) = Duration(timeMs - other.timeMs )
+    internal operator fun plus( other: Duration) = Duration(timeMs + other.timeMs )
+    internal operator fun minus( other: Duration) = Duration(timeMs - other.timeMs )
     internal operator fun times( multiplier: Int ) = Duration(timeMs * multiplier )
     internal operator fun div( divider: Int ) = Duration(timeMs / divider )
 }
 
-internal operator fun Long.minus( duration: Duration ) = this - duration.timeMs
+internal operator fun Long.minus( duration: Duration) = this - duration.timeMs
+
+/** @return a [Duration] of the given value in seconds */
+val Int.secs get() = Duration(this.toLong() * 1000 /* ms */ )
 
 /** @return a [Duration] of the given value in minutes */
-val Int.mins get() = Duration(this.toLong() * 1000 /* ms */ * 60 /* seconds */ )
+val Int.mins get() = 60.secs * this
 
 /** @return a [Duration] of the given value in hours */
 val Int.hours get() = 60.mins * this

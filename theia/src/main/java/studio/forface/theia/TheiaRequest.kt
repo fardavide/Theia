@@ -11,9 +11,9 @@ import studio.forface.theia.AbsSyncImageSource.*
 import studio.forface.theia.TheiaConfig.cacheDuration
 import studio.forface.theia.TheiaParams.ScaleType
 import studio.forface.theia.cache.get
-import studio.forface.theia.cache.minus
 import studio.forface.theia.cache.set
 import studio.forface.theia.log.TheiaLogger
+import studio.forface.theia.minus
 import studio.forface.theia.utils.applyDimensions
 import studio.forface.theia.utils.applyTransformation
 import studio.forface.theia.utils.applyTransformations

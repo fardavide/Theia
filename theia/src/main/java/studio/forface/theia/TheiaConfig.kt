@@ -11,9 +11,7 @@ import studio.forface.theia.TheiaParams.ScaleType
 import studio.forface.theia.TheiaParams.ScaleType.Center
 import studio.forface.theia.TheiaParams.Shape
 import studio.forface.theia.TheiaParams.Shape.Square
-import studio.forface.theia.cache.Duration
 import studio.forface.theia.cache._cleanCache
-import studio.forface.theia.cache.months
 import studio.forface.theia.dsl.dsl
 import studio.forface.theia.log.DefaultTheiaLogger
 import studio.forface.theia.log.TheiaLogger

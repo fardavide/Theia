@@ -11,9 +11,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import studio.forface.theia.AbsSyncImageSource.DrawableResImageSource
 import studio.forface.theia.cache.CACHE_EXT
-import studio.forface.theia.cache.Duration
 import studio.forface.theia.cache._cleanCache
-import studio.forface.theia.cache.mins
 import studio.forface.theia.dsl.CompletionCallback
 import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.dsl.PreTargetedTheiaBuilder
@@ -176,7 +174,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** Stop all the [TheiaRequest] and [clear] */
     private fun MutableList<Job>.purge() {
-        jobs.forEach{ it.cancel() }
+        try { jobs.forEach { it.cancel() } } catch ( e: ConcurrentModificationException ) { purge() }
         this.clear()
     }
 
@@ -192,9 +190,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     }
 
     /** Call [load] `image` within [TheiaParams] */
-    private suspend fun TheiaParams.loadImage(
-        onError: ErrorCallback = {}
-    ) {
+    private suspend fun TheiaParams.loadImage( onError: ErrorCallback = {} ) {
         load( image, animationLoop = animationLoop, onCompletion = completionCallback, onError = onError )
     }
 
@@ -204,9 +200,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
     }
 
     /** Call [load] `error` within [TheiaParams] */
-    private suspend fun TheiaParams.loadError(
-        onError: ErrorCallback = {}
-    ) {
+    private suspend fun TheiaParams.loadError( onError: ErrorCallback = {} ) {
         load( error, scaleError, errorAnimationLoop, onError = onError )
     }
 }

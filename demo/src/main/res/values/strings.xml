@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Theia demo</string>
+    <string name="text_once">Repeat once</string>
+    <string name="text_forever">Repeat forever</string>
+    <string name="text_timed">Repeat every 5 seconds</string>
+    <string name="text_click"><b>CLICK ME!</b></string>
 </resources>
