@@ -56,7 +56,7 @@ object Version {
     const val androidx_test =                   "1.2.0"         // Updated: May 31, 2019
 
     /* Publishing */
-    const val publishing_bintray_plugin =       "1.8.4"         // Updated:
+    const val publishing_bintray_plugin =       "1.8.4"         // Updated: Jul 08, 2018
     const val publishing_dokka_plugin =         "0.9.18"        // Updated: Mar 19, 2019
     const val publishing_maven_plugin =         "2.1"           // Updated:
 }
