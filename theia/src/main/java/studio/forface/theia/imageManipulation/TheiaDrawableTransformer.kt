@@ -1,6 +1,7 @@
 package studio.forface.theia.imageManipulation
 
 import android.graphics.drawable.Drawable
+import studio.forface.theia.Corners
 import studio.forface.theia.Dimensions
 import studio.forface.theia.DrawableTransformationNotSupportedException
 import studio.forface.theia.TheiaConfig
@@ -23,7 +24,7 @@ open class TheiaDrawableTransformer : ImageTransformer<Drawable> {
      *
      * @return [Drawable]
      */
-    override fun Drawable.center( dimensions: Dimensions ) = this.andLogNotImplemented()
+    override fun Drawable.center( dimensions: Dimensions ) = this.andLogNotSupported()
 
     /**
      * @see DrawableTransformationNotSupportedException
@@ -35,7 +36,7 @@ open class TheiaDrawableTransformer : ImageTransformer<Drawable> {
      *
      * @return [Drawable]
      */
-    override fun Drawable.crop( dimensions: Dimensions ) = this.andLogNotImplemented()
+    override fun Drawable.crop( dimensions: Dimensions ) = this.andLogNotSupported()
 
     /**
      * @see DrawableTransformationNotSupportedException
@@ -47,7 +48,7 @@ open class TheiaDrawableTransformer : ImageTransformer<Drawable> {
      *
      * @return [Drawable]
      */
-    override fun Drawable.fit( dimensions: Dimensions ) = this.andLogNotImplemented()
+    override fun Drawable.fit( dimensions: Dimensions ) = this.andLogNotSupported()
 
     /**
      * @see DrawableTransformationNotSupportedException
@@ -59,19 +60,27 @@ open class TheiaDrawableTransformer : ImageTransformer<Drawable> {
      *
      * @return [Drawable]
      */
-    override fun Drawable.stretch( dimensions: Dimensions ) = this.andLogNotImplemented()
+    override fun Drawable.stretch( dimensions: Dimensions ) = this.andLogNotSupported()
     // endregion
 
     /**
      * @see DrawableTransformationNotSupportedException
      *
-     * Apply a Round shape to the Image
+     * Apply a Circle shape to the Image
      * @return [Drawable]
      */
-    override fun Drawable.round() = this.andLogNotImplemented()
+    override fun Drawable.circle() = this.andLogNotSupported()
+
+    /**
+     * @see DrawableTransformationNotSupportedException
+     *
+     * Apply a Rounded shape to the Image
+     * @return [Drawable]
+     */
+    override fun Drawable.round( corners: Corners ) = this.andLogNotSupported()
 
     /** @return same [Drawable] and log [DrawableTransformationNotSupportedException] */
-    private fun Drawable.andLogNotImplemented() = this.also {
+    private fun Drawable.andLogNotSupported() = this.also {
         TheiaConfig.logger.info( DrawableTransformationNotSupportedException() )
     }
 }

@@ -18,14 +18,38 @@ import studio.forface.theia.utils.doOnDestroy
 import studio.forface.theia.utils.doOnDetach
 import java.io.File
 
-/** @see Theia.load */
-inline operator fun Theia.invoke( builder: TheiaBuilder.() -> Unit ) {
-    load( builder )
+/**
+ * Create a Request to apply an image into an `ImageView`
+ *
+ * @param block a REQUIRED lambda that takes [TheiaBuilder] as receiver for create the request
+ *
+ * @param extra an optional [ExtraParams]
+ * @see theiaParams for more details
+ *
+ *
+ * @see Theia.load */
+inline operator fun Theia.invoke(
+    extra: ExtraParams = {},
+    block: TheiaBuilder.() -> Unit
+) {
+    load( extra, block )
 }
 
-/** @see PreTargetedTheia.load */
-inline operator fun PreTargetedTheia.invoke( builder: PreTargetedTheiaBuilder.() -> Unit ) {
-    load( builder )
+/**
+ * Create a Request to apply an image into an `ImageView` from a [PreTargetedTheia]
+ *
+ * @param block a REQUIRED lambda that takes [PreTargetedTheiaBuilder] as receiver for create the request
+ *
+ * @param extra an optional [ExtraParams]
+ * @see theiaParams for more details
+ *
+ *
+ * @see PreTargetedTheia.load */
+inline operator fun PreTargetedTheia.invoke(
+    extra: ExtraParams = {},
+    block: PreTargetedTheiaBuilder.() -> Unit
+) {
+    load( extra, block )
 }
 
 /**

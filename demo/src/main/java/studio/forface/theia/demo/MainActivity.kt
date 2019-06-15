@@ -5,17 +5,14 @@ package studio.forface.theia.demo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.forface.theia.*
 import studio.forface.theia.AnimationLoop.*
-import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
-import studio.forface.theia.TheiaParams.Shape.Round
+import studio.forface.theia.TheiaParams.Shape.Rounded
 import studio.forface.theia.dsl.imageDrawableRes
 import studio.forface.theia.dsl.imageUrl
 import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.theia
-import studio.forface.theia.invoke
-import studio.forface.theia.mins
-import studio.forface.theia.secs
 
 private const val GIF_IMAGE_URL = "https://sirv.sirv.com/website/HELLO.gif"
 private const val SMALL_IMAGE_URL = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
@@ -29,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView( R.layout.activity_main )
 
         TheiaConfig {
-            cacheDuration = 5.mins
+            cacheDuration = 5.days
             defaultPlaceholderDrawableRes = R.drawable.avd_loading
             loggingEnabled = true
         }
@@ -37,60 +34,53 @@ class MainActivity : AppCompatActivity() {
         // Theia by ImageView
 
         // Small square
-        centerImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        val smallParams = theiaParams { imageUrl = SMALL_IMAGE_URL }
+
+        centerImageView.theia( smallParams ) {
             scaleType = Center
         }
-        cropImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        cropImageView.theia( smallParams ) {
             scaleType = Crop
         }
-        fitImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        fitImageView.theia( smallParams ) {
             scaleType = Fit
         }
-        stretchImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        stretchImageView.theia( smallParams ) {
             scaleType = Stretch
         }
 
         // Huge round
-        hugeCenterImageView.theia {
+        val hugeParams = theiaParams {
             imageUrl = HUGE_IMAGE_URL
+            shape = Rounded( Corners ofDp 32 )
+        }
+
+        hugeCenterImageView.theia( hugeParams ) {
             scaleType = Center
-            shape = Round
         }
-        hugeCropImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeCropImageView.theia( hugeParams ) {
             scaleType = Crop
-            shape = Round
         }
-        hugeFitImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeFitImageView.theia( hugeParams ) {
             scaleType = Fit
-            shape = Round
         }
-        hugeStretchImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeStretchImageView.theia( hugeParams ) {
             scaleType = Stretch
-            shape = Round
         }
 
         // Animated
-        animOnceImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        val animatedParams = theiaParams { imageDrawableRes = R.drawable.avd_loading }
+
+        animOnceImageView.theia( animatedParams ) {
             animationLoop = Once
         }
-        animForeverImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animForeverImageView.theia( animatedParams ) {
             animationLoop = Forever
         }
-        animTimedImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animTimedImageView.theia( animatedParams ) {
             animationLoop = Every( 5.secs )
         }
-        animClickImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animClickImageView.theia( animatedParams ) {
             animationLoop = OnClick
         }
     }
