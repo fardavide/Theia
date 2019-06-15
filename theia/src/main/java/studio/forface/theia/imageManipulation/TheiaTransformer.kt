@@ -109,10 +109,16 @@ abstract class BaseTheiaTransformer (
     // endregion
 
     /**
-     * Apply a Round shape to the Image
+     * Apply a Circle shape to the Image
      * @return [TheiaResponse]
      */
-    override fun TheiaResponse.round() = transformImage { it.round() }
+    override fun TheiaResponse.circle() = transformImage { it.circle() }
+
+    /**
+     * Apply a Rounded shape to the Image
+     * @return [TheiaResponse]
+     */
+    override fun TheiaResponse.round( corners: Corners ) = transformImage { it.round( corners ) }
 }
 
 

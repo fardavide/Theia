@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import studio.forface.theia.*
 import studio.forface.theia.AnimationLoop.*
 import studio.forface.theia.TheiaParams.ScaleType.*
-import studio.forface.theia.TheiaParams.Shape.Round
+import studio.forface.theia.TheiaParams.Shape.Rounded
 import studio.forface.theia.dsl.imageDrawableRes
 import studio.forface.theia.dsl.imageUrl
 import studio.forface.theia.dsl.invoke
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView( R.layout.activity_main )
 
         TheiaConfig {
-            cacheDuration = 5.mins
+            cacheDuration = 5.days
             defaultPlaceholderDrawableRes = R.drawable.avd_loading
             loggingEnabled = true
         }
@@ -34,27 +34,25 @@ class MainActivity : AppCompatActivity() {
         // Theia by ImageView
 
         // Small square
-        centerImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        val smallParams = theiaParams { imageUrl = SMALL_IMAGE_URL }
+
+        centerImageView.theia( smallParams ) {
             scaleType = Center
         }
-        cropImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        cropImageView.theia( smallParams ) {
             scaleType = Crop
         }
-        fitImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        fitImageView.theia( smallParams ) {
             scaleType = Fit
         }
-        stretchImageView.theia {
-            imageUrl = SMALL_IMAGE_URL
+        stretchImageView.theia( smallParams ) {
             scaleType = Stretch
         }
 
         // Huge round
         val hugeParams = theiaParams {
             imageUrl = HUGE_IMAGE_URL
-            shape = Round
+            shape = Rounded( Corners ofDp 32 )
         }
 
         hugeCenterImageView.theia( hugeParams ) {
@@ -71,20 +69,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Animated
-        animOnceImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        val animatedParams = theiaParams { imageDrawableRes = R.drawable.avd_loading }
+
+        animOnceImageView.theia( animatedParams ) {
             animationLoop = Once
         }
-        animForeverImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animForeverImageView.theia( animatedParams ) {
             animationLoop = Forever
         }
-        animTimedImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animTimedImageView.theia( animatedParams ) {
             animationLoop = Every( 5.secs )
         }
-        animClickImageView.theia {
-            imageDrawableRes = R.drawable.avd_loading
+        animClickImageView.theia( animatedParams ) {
             animationLoop = OnClick
         }
     }

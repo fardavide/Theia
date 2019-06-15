@@ -1,5 +1,6 @@
 package studio.forface.theia.imageManipulation
 
+import studio.forface.theia.Corners
 import studio.forface.theia.Dimensions
 import studio.forface.theia.TheiaParams.Shape
 
@@ -17,7 +18,7 @@ interface ImageTransformer<Image> {
      * Original dimensions will change
      * Original proportions will be maintained
      *
-     * @returnImage
+     * @return [Image]
      */
     fun Image.center( dimensions: Dimensions ) : Image
 
@@ -27,7 +28,7 @@ interface ImageTransformer<Image> {
      * Original dimensions will be maintained
      * Original proportions will be maintained
      *
-     * @returnImage
+     * @return [Image]
      */
     fun Image.crop( dimensions: Dimensions ) : Image
 
@@ -37,7 +38,7 @@ interface ImageTransformer<Image> {
      * Original dimensions will change
      * Original proportions will be maintained
      *
-     * @returnImage
+     * @return [Image]
      */
     fun Image.fit( dimensions: Dimensions ) : Image
 
@@ -47,16 +48,22 @@ interface ImageTransformer<Image> {
      * Original dimensions will change
      * Original proportions will be ignored
      *
-     * @returnImage
+     * @return [Image]
      */
     fun Image.stretch( dimensions: Dimensions ) : Image
     // endregion
 
     /**
-     * Apply a [Shape.Round] to the [Image]
-     * @returnImage
+     * Apply a [Shape.Circle] to the [Image]
+     * @return [Image]
      */
-    fun Image.round() : Image
+    fun Image.circle() : Image
+
+    /**
+     * Apply a [Shape.Rounded] to the [Image]
+     * @return [Image]
+     */
+    fun Image.round( corners: Corners ) : Image
 }
 
 /**

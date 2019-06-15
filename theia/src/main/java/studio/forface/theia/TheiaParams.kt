@@ -6,6 +6,7 @@ import studio.forface.theia.dsl.CompletionCallback
 import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.transformation.CircleTransformation
 import studio.forface.theia.transformation.NoTransformation
+import studio.forface.theia.transformation.RoundedTransformation
 import studio.forface.theia.transformation.TheiaTransformation
 
 /**
@@ -65,10 +66,35 @@ data class TheiaParams(
 
     /** A custom shape for the image to load */
     sealed class Shape( val transformation: TheiaTransformation ) {
-        object Round : Shape( CircleTransformation )
+        object Circle : Shape( CircleTransformation )
+        class Rounded( corner: Corners ) : Shape( RoundedTransformation( corner ) )
         object Square : Shape( NoTransformation )
     }
 }
+
+/** A class that represents the size of the corners */
+sealed class ImageCorners<N : Number>( internal val number: N ) {
+
+    class Percentage internal constructor ( percentage: Float ) : ImageCorners<Float>( percentage )
+    class Dp internal constructor ( dp: Int ) : ImageCorners<Int>( dp )
+    class Pixel internal constructor ( pixels: Int ) : ImageCorners<Int>( pixels )
+
+    @Suppress("unused") // Public APIs
+    companion object {
+
+        /** @return [ImageCorners.Percentage] */
+        infix fun ofPercentage( percentage: Float ) = Percentage( percentage )
+
+        /** @return [ImageCorners.Dp] */
+        infix fun ofDp( dp: Int ) = Dp( dp )
+
+        /** @return [ImageCorners.Pixel] */
+        infix fun ofPixels( pixels: Int ) = Pixel( pixels )
+    }
+}
+
+/** Typealias for [ImageCorners] of any type */
+typealias Corners = ImageCorners<*>
 
 /**
  * A function that takes an [ExtraParams] block and return the same block.
