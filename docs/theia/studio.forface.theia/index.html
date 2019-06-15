@@ -1,0 +1,424 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>studio.forface.theia - theia</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">theia</a>&nbsp;/&nbsp;<a href="./index.html">studio.forface.theia</a><br/>
+<br/>
+<h2>Package studio.forface.theia</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-abs-async-image-source/index.html">AbsAsyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsAsyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="-abs-async-image-source/index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="-image-source.html">ImageSource</a> that will be loaded asynchronously</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-abs-image-source.html">AbsImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span></code>
+<p>A sealed class that wraps the source of the image to load.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-abs-sync-image-source/index.html">AbsSyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsSyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="-abs-sync-image-source/index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="-image-source.html">ImageSource</a> that will be loaded synchronously</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-abs-theia/index.html">AbsTheia</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbsTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-i-theia/index.html"><span class="identifier">ITheia</span></a><span class="symbol">, </span><a href="../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>Middle implementation between <a href="-i-theia/index.html">ITheia</a> and <a href="-theia/index.html">Theia</a> for hide some member</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-animation-loop/index.html">AnimationLoop</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AnimationLoop</span></code>
+<p>An enum representing how the animation should loop</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-bitmap-response/index.html">BitmapResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BitmapResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-response-wrapper/index.html"><span class="identifier">ResponseWrapper</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a><span class="symbol">&gt;</span></code>
+<p><a href="-response-wrapper/index.html">ResponseWrapper</a> of type <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-response/index.html">DrawableResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableResponse</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-response-wrapper/index.html"><span class="identifier">ResponseWrapper</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a><span class="symbol">&gt;</span></code>
+<p><a href="-response-wrapper/index.html">ResponseWrapper</a> of type <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html">Drawable</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-duration/index.html">Duration</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Duration</span></code>
+<p>An inline class representing the time with math operators</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-image-corners/index.html">ImageCorners</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">ImageCorners</span><span class="symbol">&lt;</span><span class="identifier">N</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span></code>
+<p>A class that represents the size of the corners</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-i-theia/index.html">ITheia</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ITheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>An interface for load images into an <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a>
+Implements <a href="#">CoroutineScope</a> for async calls.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-pre-targeted-theia/index.html">PreTargetedTheia</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PreTargetedTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abs-theia/index.html"><span class="identifier">AbsTheia</span></a></code>
+<p>Implementation of <a href="-i-theia/index.html">ITheia</a> with a pre-targeted <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-response-wrapper/index.html">ResponseWrapper</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">ResponseWrapper</span><span class="symbol">&lt;</span><span class="identifier">Image</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
+<p>A class that holds an <a href="-response-wrapper/index.html#Image">Image</a> that is of type <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a> or <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html">Drawable</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia/index.html">Theia</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Theia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-abs-theia/index.html"><span class="identifier">AbsTheia</span></a></code>
+<p>Default implementation of <a href="-i-theia/index.html">ITheia</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-config/index.html">TheiaConfig</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">TheiaConfig</span></code>
+<p>An object containing configuration for the library</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-params/index.html">TheiaParams</a></p>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">TheiaParams</span></code>
+<p>Required params for apply the image into <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-unhandled-theia/index.html">UnhandledTheia</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UnhandledTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia/index.html"><span class="identifier">Theia</span></a></code>
+<p>Implementation of <a href="-theia/index.html">Theia</a> that exposes <a href="-unhandled-theia/purge-requests.html">purgeRequests</a> publicly</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-cancelled-request-exception.html">CancelledRequestException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CancelledRequestException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that a Request has been cancelled</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-transformation-not-supported-exception.html">DrawableTransformationNotSupportedException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableTransformationNotSupportedException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that Transformations are not supported yet on <code>Drawables</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-illegal-pipeline-receiver-exception.html">IllegalPipelineReceiverException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">IllegalPipelineReceiverException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that a <a href="../studio.forface.theia.image-manipulation/-transformation-pipeline.html">TransformationPipeline</a> has been called on an illegal receiver</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-image-source-not-set-exception.html">ImageSourceNotSetException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ImageSourceNotSetException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that no <a href="../studio.forface.theia.dsl/-abs-theia-builder/image.html">TheiaBuilder.image</a> or <a href="../studio.forface.theia.dsl/-abs-theia-builder/placeholder.html">TheiaBuilder.placeholder</a> has been set</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-missing-cache-storage-permissions-exception.html">MissingCacheStoragePermissionsException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MissingCacheStoragePermissionsException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that no permissions have been provided for use cache</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-pointless-request-exception.html">PointlessRequestException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PointlessRequestException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that the Request is useless since none of <a href="../studio.forface.theia.dsl/-theia-builder/target.html">TheiaBuilder.target</a> and
+<a href="#">TheiaBuilder.completionCallback</a> is supplied</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-exception/index.html">TheiaException</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">TheiaException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
+<p>A base <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a> for the library</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-undefined-dimensions-exception.html">UndefinedDimensionsException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UndefinedDimensionsException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="-theia-exception/index.html">TheiaException</a> describing that both <a href="../studio.forface.theia.dsl/-theia-builder/target.html">TheiaBuilder.target</a> and <a href="../studio.forface.theia.dsl/-abs-theia-builder/dimensions.html">TheiaBuilder.dimensions</a> are null</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-async-image-source.html">AsyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">AsyncImageSource</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-abs-async-image-source/index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Typealias for <a href="-abs-async-image-source/index.html">AbsAsyncImageSource</a> of any type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-corners.html">Corners</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Corners</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-image-corners/index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Typealias for <a href="-image-corners/index.html">ImageCorners</a> of any type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-dimensions.html">Dimensions</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Dimensions</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html"><span class="identifier">Pair</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">,</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code>
+<p>A typealias for a <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/index.html">Pair</a> of <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html">Int</a>s</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-extra-params.html">ExtraParams</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ExtraParams</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="../studio.forface.theia.dsl/-abs-theia-builder/index.html"><span class="identifier">AbsTheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>A typealias for a lambda that takes <a href="../studio.forface.theia.dsl/-abs-theia-builder/index.html">AbsTheiaBuilder</a> as receiver and return <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a>
+This represents an block that will create optional <a href="-theia-params/index.html">TheiaParams</a> for the request.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-image-source.html">ImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">ImageSource</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Typealias for <a href="-abs-image-source.html">AbsImageSource</a> of any type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-sync-image-source.html">SyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">SyncImageSource</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-abs-sync-image-source/index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Typealias for <a href="-abs-sync-image-source/index.html">AbsSyncImageSource</a> of any type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-response.html">TheiaResponse</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">TheiaResponse</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-response-wrapper/index.html"><span class="identifier">ResponseWrapper</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span></code>
+<p>Typealias of <a href="-response-wrapper/index.html">ResponseWrapper</a> of any type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="android.graphics.-bitmap/index.html">android.graphics.Bitmap</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="android.graphics.drawable.-drawable/index.html">android.graphics.drawable.Drawable</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="java.io.-file/index.html">java.io.File</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="java.net.-u-r-l/index.html">java.net.URL</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kotlin.-int/index.html">kotlin.Int</a></p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="kotlin.-string/index.html">kotlin.String</a></p>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="actual-message.html">actualMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><a href="-theia-exception/index.html"><span class="identifier">TheiaException</span></a><span class="symbol">.</span><span class="identifier">actualMessage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-t-h-e-i-a_-n-a-m-e.html">THEIA_NAME</a></p>
+</td>
+<td>
+<code><span class="keyword">const</span> <span class="keyword">val </span><span class="identifier">THEIA_NAME</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code>
+<p>The name of the library</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><a href="-theia-config/index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$invoke(studio.forface.theia.TheiaConfig, kotlin.Function1((studio.forface.theia.TheiaConfig, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-theia-config/index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Invoke function for setup <a href="-theia-config/index.html">TheiaConfig</a> within DSL style
+E.g. &gt;
+TheiaConfig {
+loggingEnabled = true
+}</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="load.html">load</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-theia/index.html"><span class="identifier">Theia</span></a><span class="symbol">.</span><span class="identifier">load</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../studio.forface.theia.dsl/-theia-builder/index.html"><span class="identifier">TheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code></p>
+<code><span class="keyword">fun </span><a href="-pre-targeted-theia/index.html"><span class="identifier">PreTargetedTheia</span></a><span class="symbol">.</span><span class="identifier">load</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../studio.forface.theia.dsl/-pre-targeted-theia-builder/index.html"><span class="identifier">PreTargetedTheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code> from a <a href="-pre-targeted-theia/index.html">PreTargetedTheia</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="note.html">note</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">note</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="theia-params.html">theiaParams</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">theiaParams</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$theiaParams(kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-extra-params.html"><span class="identifier">ExtraParams</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-extra-params.html"><span class="identifier">ExtraParams</span></a></code>
+<p>A function that takes an <a href="-extra-params.html">ExtraParams</a> block and return the same block.
+It's purpose is to create a block that will create <a href="-theia-params/index.html">TheiaParams</a> that can be applied on another instance of
+<a href="../studio.forface.theia.dsl/-abs-theia-builder/index.html">AbsTheiaBuilder</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

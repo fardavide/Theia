@@ -1,0 +1,69 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TheiaActivity - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia.dsl</a>&nbsp;/&nbsp;<a href="./index.html">TheiaActivity</a><br/>
+<br/>
+<h1>TheiaActivity</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TheiaActivity</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">AppCompatActivity</span><span class="symbol">, </span><a href="../-theia-component/index.html"><span class="identifier">TheiaComponent</span></a></code>
+<p>An abstract <code>Activity</code> that holds a single strong instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, since calling <code>getTheia</code> will create
+every time a new instance</p>
+<p>NOTE: Use this is NOT required for benefit of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, if you prefer, you cant simply implement
+<code>val theia by lazy { newTheiaInstance() }</code> by in your <code>Activity</code></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">TheiaActivity</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>An abstract <code>Activity</code> that holds a single strong instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, since calling <code>getTheia</code> will create
+every time a new instance</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="theia.html">theia</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">theia</span><span class="symbol">: </span><a href="../../studio.forface.theia/-theia/index.html"><span class="identifier">Theia</span></a></code>
+<p>A strong reference to a single instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a> for this component</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../androidx.fragment.app.-fragment-activity/new-theia-instance.html">newTheiaInstance</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">FragmentActivity</span><span class="symbol">.</span><span class="identifier">newTheiaInstance</span><span class="symbol">: </span><a href="../../studio.forface.theia/-theia/index.html"><span class="identifier">Theia</span></a></code>
+<p>Get <a href="../../studio.forface.theia/-theia/index.html">Theia</a> within a <a href="#">LifecycleOwner</a> and <a href="https://developer.android.com/reference/android/content/ContextWrapper.html">ContextWrapper</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

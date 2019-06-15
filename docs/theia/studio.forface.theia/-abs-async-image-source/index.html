@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbsAsyncImageSource - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">AbsAsyncImageSource</a><br/>
+<br/>
+<h1>AbsAsyncImageSource</h1>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsAsyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="../-image-source.html">ImageSource</a> that will be loaded asynchronously</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-async-file-image-source/index.html">AsyncFileImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AsyncFileImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://developer.android.com/reference/java/io/File.html">File</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-string-image-source/index.html">StringImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-url-image-source/index.html">UrlImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UrlImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://developer.android.com/reference/java/net/URL.html">URL</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-async-file-image-source/index.html">AsyncFileImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AsyncFileImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://developer.android.com/reference/java/io/File.html">File</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-string-image-source/index.html">StringImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">StringImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-url-image-source/index.html">UrlImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UrlImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsAsyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/net/URL.html"><span class="identifier">URL</span></a><span class="symbol">&gt;</span></code>
+<p>An <a href="../-async-image-source.html">AsyncImageSource</a> of type <a href="https://developer.android.com/reference/java/net/URL.html">URL</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

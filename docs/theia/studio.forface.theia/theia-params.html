@@ -1,0 +1,25 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>theiaParams - theia</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">theia</a>&nbsp;/&nbsp;<a href="index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./theia-params.html">theiaParams</a><br/>
+<br/>
+<h1>theiaParams</h1>
+<a name="studio.forface.theia$theiaParams(kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)))"></a>
+<code><span class="keyword">fun </span><span class="identifier">theiaParams</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$theiaParams(kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-extra-params.html"><span class="identifier">ExtraParams</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-extra-params.html"><span class="identifier">ExtraParams</span></a></code>
+<p>A function that takes an <a href="-extra-params.html">ExtraParams</a> block and return the same block.
+It's purpose is to create a block that will create <a href="-theia-params/index.html">TheiaParams</a> that can be applied on another instance of
+<a href="../studio.forface.theia.dsl/-abs-theia-builder/index.html">AbsTheiaBuilder</a>.</p>
+<p>Example:</p>
+<p>val extraParams = theiaParams {
+imageUrl = someImageUrl
+shape = Round
+}
+someImageView.theia( extraParams ) {
+scaleType = Center
+}</p>
+</BODY>
+</HTML>

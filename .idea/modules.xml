@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Theia.iml" filepath="$PROJECT_DIR$/Theia.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/theia/theia.iml" filepath="$PROJECT_DIR$/theia/theia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Theia.iml" filepath="$PROJECT_DIR$/Theia.iml" group="Theia" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" group="Theia/buildSrc" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" group="Theia/demo" />
+      <module fileurl="file://$PROJECT_DIR$/theia/theia.iml" filepath="$PROJECT_DIR$/theia/theia.iml" group="Theia/theia" />
     </modules>
   </component>
 </project>

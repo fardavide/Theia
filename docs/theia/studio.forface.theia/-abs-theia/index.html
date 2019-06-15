@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbsTheia - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">AbsTheia</a><br/>
+<br/>
+<h1>AbsTheia</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbsTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-i-theia/index.html"><span class="identifier">ITheia</span></a><span class="symbol">, </span><a href="../../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>Middle implementation between <a href="../-i-theia/index.html">ITheia</a> and <a href="../-theia/index.html">Theia</a> for hide some member</p>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-i-theia/resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/res/Resources.html"><span class="identifier">Resources</span></a></code>
+<p><a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> needed for resolve <a href="../-abs-sync-image-source/-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="clean-cache.html">cleanCache</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cleanCache</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</span><span class="symbol">:</span>&nbsp;<a href="../-duration/index.html"><span class="identifier">Duration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0.mins<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Delete all the <a href="https://developer.android.com/reference/java/io/File.html">File</a>s with extension <a href="#">CACHE_EXT</a> with <a href="https://developer.android.com/reference/java/io/File.html#lastModified()">File.lastModified</a> older than <a href="clean-cache.html#studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</a> from
+<a href="../-theia-config/default-cache-directory.html">TheiaConfig.defaultCacheDirectory</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-pre-targeted-theia/index.html">PreTargetedTheia</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PreTargetedTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsTheia</span></a></code>
+<p>Implementation of <a href="../-i-theia/index.html">ITheia</a> with a pre-targeted <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-theia/index.html">Theia</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Theia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsTheia</span></a></code>
+<p>Default implementation of <a href="../-i-theia/index.html">ITheia</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

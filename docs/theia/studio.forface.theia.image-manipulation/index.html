@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>studio.forface.theia.imageManipulation - theia</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">theia</a>&nbsp;/&nbsp;<a href="./index.html">studio.forface.theia.imageManipulation</a><br/>
+<br/>
+<h2>Package studio.forface.theia.imageManipulation</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-base-theia-transformer/index.html">BaseTheiaTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">BaseTheiaTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-image-transformer/index.html"><span class="identifier">ImageTransformer</span></a><span class="symbol">&lt;</span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><a href="../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>A base <a href="-image-transformer/index.html">ImageTransformer</a> for <a href="../studio.forface.theia/-theia-response.html">TheiaResponse</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-image-transformer/index.html">ImageTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">ImageTransformer</span><span class="symbol">&lt;</span><span class="identifier">Image</span><span class="symbol">&gt;</span></code>
+<p>Interface containing available transformations for <a href="-image-transformer/index.html#Image">Image</a>s</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-bitmap-transformer/index.html">TheiaBitmapTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">TheiaBitmapTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-image-transformer/index.html"><span class="identifier">ImageTransformer</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a><span class="symbol">&gt;</span></code>
+<p>A base <a href="-image-transformer/index.html">ImageTransformer</a> for <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-drawable-transformer/index.html">TheiaDrawableTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">TheiaDrawableTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-image-transformer/index.html"><span class="identifier">ImageTransformer</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a><span class="symbol">&gt;</span></code>
+<p>A base <a href="-image-transformer/index.html">ImageTransformer</a> for <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html">Drawable</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-theia-transformer.html">TheiaTransformer</a></p>
+</td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">TheiaTransformer</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-theia-transformer/index.html"><span class="identifier">BaseTheiaTransformer</span></a></code>
+<p>Default <a href="-image-transformer/index.html">ImageTransformer</a> for <a href="../studio.forface.theia/-theia-response.html">TheiaResponse</a>
+Inherit from <a href="-base-theia-transformer/index.html">BaseTheiaTransformer</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-transformation-pipeline.html">TransformationPipeline</a></p>
+</td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">TransformationPipeline</span><span class="symbol">&lt;</span><span class="identifier">Image</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">=</span>&nbsp;<a href="-image-transformer/index.html"><span class="identifier">ImageTransformer</span></a><span class="symbol">&lt;</span><a href="-transformation-pipeline.html#Image"><span class="identifier">Image</span></a><span class="symbol">&gt;</span><span class="symbol">.</span><span class="symbol">(</span><a href="-transformation-pipeline.html#Image"><span class="identifier">Image</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="-transformation-pipeline.html#Image"><span class="identifier">Image</span></a></code>
+<p>Typealias of a lambda that takes <a href="-image-transformer/index.html">ImageTransformer</a> as receiver and Image as parameter and return an Image</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-image-transformer/index.html"><span class="identifier">ImageTransformer</span></a><span class="symbol">&lt;</span><a href="invoke.html#I"><span class="identifier">I</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier">I</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="invoke.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.imageManipulation$invoke(studio.forface.theia.imageManipulation.invoke.T, studio.forface.theia.imageManipulation.invoke.I, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.imageManipulation.invoke.I)), , )))/image">image</span><span class="symbol">:</span>&nbsp;<a href="invoke.html#I"><span class="identifier">I</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.theia.imageManipulation$invoke(studio.forface.theia.imageManipulation.invoke.T, studio.forface.theia.imageManipulation.invoke.I, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.imageManipulation.invoke.I)), , )))/block">block</span><span class="symbol">:</span>&nbsp;<a href="-transformation-pipeline.html"><span class="identifier">TransformationPipeline</span></a><span class="symbol">&lt;</span><a href="invoke.html#I"><span class="identifier">I</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="invoke.html#I"><span class="identifier">I</span></a></code>
+<p><a href="invoke.html">invoke</a> operator for use the receiver <a href="-image-transformer/index.html">T</a> of the given lambda <a href="invoke.html#studio.forface.theia.imageManipulation$invoke(studio.forface.theia.imageManipulation.invoke.T, studio.forface.theia.imageManipulation.invoke.I, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.imageManipulation.invoke.I)), , )))/block">block</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="transform.html">transform</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-base-theia-transformer/index.html"><span class="identifier">BaseTheiaTransformer</span></a><span class="symbol">&gt;</span> <a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a><span class="symbol">.</span><span class="identifier">transform</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.imageManipulation$transform(studio.forface.theia.ResponseWrapper((kotlin.Any)), studio.forface.theia.imageManipulation.transform.T, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.ResponseWrapper((kotlin.Any)))), , )))/transformer">transformer</span><span class="symbol">:</span>&nbsp;<a href="transform.html#T"><span class="identifier">T</span></a><span class="symbol">, </span><span class="identifier" id="studio.forface.theia.imageManipulation$transform(studio.forface.theia.ResponseWrapper((kotlin.Any)), studio.forface.theia.imageManipulation.transform.T, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.ResponseWrapper((kotlin.Any)))), , )))/pipeline">pipeline</span><span class="symbol">:</span>&nbsp;<a href="-transformation-pipeline.html"><span class="identifier">TransformationPipeline</span></a><span class="symbol">&lt;</span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a></code>
+<p>Transform the receiver <a href="../studio.forface.theia/-theia-response.html">TheiaResponse</a> with the given <a href="transform.html#studio.forface.theia.imageManipulation$transform(studio.forface.theia.ResponseWrapper((kotlin.Any)), studio.forface.theia.imageManipulation.transform.T, kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.ResponseWrapper((kotlin.Any)))), , )))/transformer">transformer</a></p>
+<code><span class="keyword">fun </span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a><span class="symbol">.</span><span class="identifier">transform</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.imageManipulation$transform(studio.forface.theia.ResponseWrapper((kotlin.Any)), kotlin.Function2((studio.forface.theia.imageManipulation.ImageTransformer((studio.forface.theia.ResponseWrapper((kotlin.Any)))), , )))/pipeline">pipeline</span><span class="symbol">:</span>&nbsp;<a href="-transformation-pipeline.html"><span class="identifier">TransformationPipeline</span></a><span class="symbol">&lt;</span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><a href="../studio.forface.theia/-theia-response.html"><span class="identifier">TheiaResponse</span></a></code>
+<p>Transform the receiver <a href="../studio.forface.theia/-theia-response.html">TheiaResponse</a> with <a href="-theia-transformer.html">TheiaTransformer</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

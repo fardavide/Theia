@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TheiaViewHolder - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia.dsl</a>&nbsp;/&nbsp;<a href="./index.html">TheiaViewHolder</a><br/>
+<br/>
+<h1>TheiaViewHolder</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TheiaViewHolder</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ViewHolder</span><span class="symbol">, </span><a href="../-theia-component/index.html"><span class="identifier">TheiaComponent</span></a></code>
+<p>An abstract <a href="#">RecyclerView.ViewHolder</a> that holds a single strong instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, since calling <code>getTheia</code>
+will create every time a new instance</p>
+<p>NOTE: Use this is NOT required for benefit of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, if you prefer, you cant simply implement
+<code>val theia by lazy { newTheiaInstance() }</code> by in your <a href="#">RecyclerView.ViewHolder</a></p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
+<td>
+<code><span class="identifier">TheiaViewHolder</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.dsl.TheiaViewHolder$<init>(android.view.View)/itemView">itemView</span><span class="symbol">:</span>&nbsp;<a href="https://developer.android.com/reference/android/view/View.html"><span class="identifier">View</span></a><span class="symbol">)</span></code>
+<p>An abstract <a href="#">RecyclerView.ViewHolder</a> that holds a single strong instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a>, since calling <code>getTheia</code>
+will create every time a new instance</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="theia.html">theia</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">theia</span><span class="symbol">: </span><a href="../../studio.forface.theia/-theia/index.html"><span class="identifier">Theia</span></a></code>
+<p>A strong reference to a single instance of <a href="../../studio.forface.theia/-theia/index.html">Theia</a> for this component</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../androidx.recyclerview.widget.-recycler-view.-view-holder/new-theia-instance.html">newTheiaInstance</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">ViewHolder</span><span class="symbol">.</span><span class="identifier">newTheiaInstance</span><span class="symbol">: </span><a href="../../studio.forface.theia/-theia/index.html"><span class="identifier">Theia</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

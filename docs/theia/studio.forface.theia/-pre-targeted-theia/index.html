@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PreTargetedTheia - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">PreTargetedTheia</a><br/>
+<br/>
+<h1>PreTargetedTheia</h1>
+<code><span class="keyword">class </span><span class="identifier">PreTargetedTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abs-theia/index.html"><span class="identifier">AbsTheia</span></a></code>
+<p>Implementation of <a href="../-i-theia/index.html">ITheia</a> with a pre-targeted <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a></p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/res/Resources.html"><span class="identifier">Resources</span></a></code>
+<p><a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> needed for resolve <a href="../-abs-sync-image-source/-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="target.html">target</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">target</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/widget/ImageView.html"><span class="identifier">ImageView</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-abs-theia/clean-cache.html">cleanCache</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cleanCache</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</span><span class="symbol">:</span>&nbsp;<a href="../-duration/index.html"><span class="identifier">Duration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0.mins<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Delete all the <a href="https://developer.android.com/reference/java/io/File.html">File</a>s with extension <a href="#">CACHE_EXT</a> with <a href="https://developer.android.com/reference/java/io/File.html#lastModified()">File.lastModified</a> older than <a href="../-abs-theia/clean-cache.html#studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</a> from
+<a href="../-theia-config/default-cache-directory.html">TheiaConfig.defaultCacheDirectory</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><a href="./index.html"><span class="identifier">PreTargetedTheia</span></a><span class="symbol">.</span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.dsl$invoke(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="../-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia.dsl$invoke(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../../studio.forface.theia.dsl/-pre-targeted-theia-builder/index.html"><span class="identifier">PreTargetedTheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code> from a <a href="./index.html">PreTargetedTheia</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../load.html">load</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="./index.html"><span class="identifier">PreTargetedTheia</span></a><span class="symbol">.</span><span class="identifier">load</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="../-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.PreTargetedTheia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.PreTargetedTheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../../studio.forface.theia.dsl/-pre-targeted-theia-builder/index.html"><span class="identifier">PreTargetedTheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code> from a <a href="./index.html">PreTargetedTheia</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

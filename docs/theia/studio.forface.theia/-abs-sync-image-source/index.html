@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbsSyncImageSource - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">AbsSyncImageSource</a><br/>
+<br/>
+<h1>AbsSyncImageSource</h1>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsSyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="../-image-source.html">ImageSource</a> that will be loaded synchronously</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-bitmap-image-source/index.html">BitmapImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BitmapImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-image-source/index.html">DrawableImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html">Drawable</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableResImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="#">Int</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-file-image-source/index.html">FileImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FileImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/java/io/File.html">File</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-bitmap-image-source/index.html">BitmapImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BitmapImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/android/graphics/Bitmap.html">Bitmap</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-image-source/index.html">DrawableImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html">Drawable</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableResImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="#">Int</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-file-image-source/index.html">FileImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FileImageSource</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">AbsSyncImageSource</span></a><span class="symbol">&lt;</span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a><span class="symbol">&gt;</span></code>
+<p>A <a href="../-sync-image-source.html">SyncImageSource</a> of type <a href="https://developer.android.com/reference/java/io/File.html">File</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

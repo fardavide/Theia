@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ImageCorners - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">ImageCorners</a><br/>
+<br/>
+<h1>ImageCorners</h1>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">ImageCorners</span><span class="symbol">&lt;</span><span class="identifier">N</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-number/index.html"><span class="identifier">Number</span></a><span class="symbol">&gt;</span></code>
+<p>A class that represents the size of the corners</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-dp.html">Dp</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Dp</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-percentage.html">Percentage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Percentage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-pixel.html">Pixel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Pixel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="of-dp.html">ofDp</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><span class="identifier">ofDp</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.ImageCorners.Companion$ofDp(kotlin.Int)/dp">dp</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-dp.html"><span class="identifier">ImageCorners.Dp</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="of-percentage.html">ofPercentage</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><span class="identifier">ofPercentage</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.ImageCorners.Companion$ofPercentage(kotlin.Float)/percentage">percentage</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-percentage.html"><span class="identifier">ImageCorners.Percentage</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="of-pixels.html">ofPixels</a></p>
+</td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><span class="identifier">ofPixels</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.ImageCorners.Companion$ofPixels(kotlin.Int)/pixels">pixels</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="-pixel.html"><span class="identifier">ImageCorners.Pixel</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-dp.html">Dp</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Dp</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-percentage.html">Percentage</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Percentage</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><span class="identifier">Float</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="-pixel.html">Pixel</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Pixel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ImageCorners</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

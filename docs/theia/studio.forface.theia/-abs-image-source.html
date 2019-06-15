@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbsImageSource - theia</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">theia</a>&nbsp;/&nbsp;<a href="index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./-abs-image-source.html">AbsImageSource</a><br/>
+<br/>
+<h1>AbsImageSource</h1>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span></code>
+<p>A sealed class that wraps the source of the image to load.</p>
+<h3>Parameters</h3>
+<p><a name="Type"></a>
+<code>Type</code> - the type of <a href="#">source</a></p>
+<p><strong>Author</strong><br/>
+Davide Giuseppe Farella</p>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="-abs-async-image-source/index.html">AbsAsyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsAsyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="-abs-async-image-source/index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="-image-source.html">ImageSource</a> that will be loaded asynchronously</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="-abs-sync-image-source/index.html">AbsSyncImageSource</a></p>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">AbsSyncImageSource</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">Type</span><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./-abs-image-source.html"><span class="identifier">AbsImageSource</span></a><span class="symbol">&lt;</span><a href="-abs-sync-image-source/index.html#Type"><span class="identifier">Type</span></a><span class="symbol">&gt;</span></code>
+<p>A sealed class for <a href="-image-source.html">ImageSource</a> that will be loaded synchronously</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

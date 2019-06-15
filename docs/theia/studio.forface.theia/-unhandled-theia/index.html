@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>UnhandledTheia - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">UnhandledTheia</a><br/>
+<br/>
+<h1>UnhandledTheia</h1>
+<code><span class="keyword">class </span><span class="identifier">UnhandledTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-theia/index.html"><span class="identifier">Theia</span></a></code>
+<p>Implementation of <a href="../-theia/index.html">Theia</a> that exposes <a href="purge-requests.html">purgeRequests</a> publicly</p>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-theia/resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/res/Resources.html"><span class="identifier">Resources</span></a></code>
+<p><a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> needed for resolve <a href="../-abs-sync-image-source/-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="purge-requests.html">purgeRequests</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">purgeRequests</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Purge all the <a href="#">jobs</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><a href="../-theia/index.html"><span class="identifier">Theia</span></a><span class="symbol">.</span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.dsl$invoke(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="../-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia.dsl$invoke(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../../studio.forface.theia.dsl/-theia-builder/index.html"><span class="identifier">TheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../load.html">load</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-theia/index.html"><span class="identifier">Theia</span></a><span class="symbol">.</span><span class="identifier">load</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/extra">extra</span><span class="symbol">:</span>&nbsp;<a href="../-extra-params.html"><span class="identifier">ExtraParams</span></a>&nbsp;<span class="symbol">=</span>&nbsp;{}<span class="symbol">, </span><span class="identifier" id="studio.forface.theia$load(studio.forface.theia.Theia, kotlin.Function1((studio.forface.theia.dsl.AbsTheiaBuilder, kotlin.Unit)), kotlin.Function1((studio.forface.theia.dsl.TheiaBuilder, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="../../studio.forface.theia.dsl/-theia-builder/index.html"><span class="identifier">TheiaBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Create a Request to apply an image into an <code>ImageView</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

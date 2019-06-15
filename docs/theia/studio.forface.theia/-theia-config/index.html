@@ -1,0 +1,284 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TheiaConfig - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">TheiaConfig</a><br/>
+<br/>
+<h1>TheiaConfig</h1>
+<code><span class="keyword">object </span><span class="identifier">TheiaConfig</span></code>
+<p>An object containing configuration for the library</p>
+<p><strong>Author</strong><br/>
+Davide Giuseppe Farella</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="cache-duration.html">cacheDuration</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cacheDuration</span><span class="symbol">: </span><a href="../-duration/index.html"><span class="identifier">Duration</span></a></code>
+<p>A <a href="../-duration/index.html">Duration</a> representing how long the cached images should be used before use fresh data
+Default is 1 month ( 1.months )</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-animation-loop.html">defaultAnimationLoop</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultAnimationLoop</span><span class="symbol">: </span><a href="../-animation-loop/index.html"><span class="identifier">AnimationLoop</span></a></code>
+<p>How the animation should loop for <code>image</code>
+Default is <a href="../-animation-loop/-once.html">AnimationLoop.Once</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-cache-directory.html">defaultCacheDirectory</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultCacheDirectory</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a></code>
+<p>The default <a href="https://developer.android.com/reference/java/io/File.html">File</a> directory where to store cache.
+Note: changing default directory may require <a href="https://developer.android.com/reference/android/Manifest/permission.html#READ_EXTERNAL_STORAGE">permission.READ_EXTERNAL_STORAGE</a> and
+<a href="https://developer.android.com/reference/android/Manifest/permission.html#WRITE_EXTERNAL_STORAGE">permission.WRITE_EXTERNAL_STORAGE</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-error.html">defaultError</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultError</span><span class="symbol">: </span><a href="../-image-source.html"><span class="identifier">ImageSource</span></a><span class="symbol">?</span></code>
+<p>The default <a href="../-async-image-source.html">AsyncImageSource</a> to be used as <code>error</code> if no other value is set
+Default is <code>null</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-error-animation-loop.html">defaultErrorAnimationLoop</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultErrorAnimationLoop</span><span class="symbol">: </span><a href="../-animation-loop/index.html"><span class="identifier">AnimationLoop</span></a></code>
+<p>How the animation should loop for <code>error</code>
+Default is <a href="../-animation-loop/-once.html">AnimationLoop.Once</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-error-drawable-res.html">defaultErrorDrawableRes</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="https://developer.android.com/reference/android/content/ContextWrapper.html"><span class="identifier">ContextWrapper</span></a><span class="symbol">.</span><span class="identifier">defaultErrorDrawableRes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="default-force-bitmap.html">defaultForceBitmap</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultForceBitmap</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If <code>true</code> the Images will be transformed as <code>Bitmap</code> even if they're <code>Drawable</code>
+Default is <code>false</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-placeholder.html">defaultPlaceholder</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultPlaceholder</span><span class="symbol">: </span><a href="../-sync-image-source.html"><span class="identifier">SyncImageSource</span></a><span class="symbol">?</span></code>
+<p>The default <a href="../-sync-image-source.html">SyncImageSource</a> to be used as <code>placeholder</code> if no other value is set
+Default is <code>null</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-placeholder-animation-loop.html">defaultPlaceholderAnimationLoop</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultPlaceholderAnimationLoop</span><span class="symbol">: </span><a href="../-animation-loop/index.html"><span class="identifier">AnimationLoop</span></a></code>
+<p>How the animation should loop for <code>placeholder</code>
+Default is <a href="../-animation-loop/-forever.html">AnimationLoop.Forever</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-placeholder-drawable-res.html">defaultPlaceholderDrawableRes</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="https://developer.android.com/reference/android/content/ContextWrapper.html"><span class="identifier">ContextWrapper</span></a><span class="symbol">.</span><span class="identifier">defaultPlaceholderDrawableRes</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="default-scale-error.html">defaultScaleError</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultScaleError</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If <code>true</code> <code>error</code>s will respect the <a href="#">TheiaParams.scaleType</a>, else use <a href="default-scale-type.html">defaultScaleType</a>
+Default is <code>false</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-scale-placeholder.html">defaultScalePlaceholder</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultScalePlaceholder</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If <code>true</code> <code>placeholder</code>s will respect the <a href="#">TheiaParams.scaleType</a>, else use <a href="default-scale-type.html">defaultScaleType</a>
+Default is <code>false</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-scale-type.html">defaultScaleType</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultScaleType</span><span class="symbol">: </span><a href="../-theia-params/-scale-type/index.html"><span class="identifier">TheiaParams.ScaleType</span></a></code>
+<p>The default <a href="../-theia-params/-scale-type/index.html">TheiaParams.ScaleType</a> to use if none is specified explicitly
+Default is <a href="../-theia-params/-scale-type/-center.html">ScaleType.Center</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-shape.html">defaultShape</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultShape</span><span class="symbol">: </span><a href="../-theia-params/-shape/-square.html"><span class="identifier">TheiaParams.Shape.Square</span></a></code>
+<p>The default <a href="../-theia-params/-shape/index.html">TheiaParams.Shape</a> to use if none is specified explicitly
+Default is <a href="../-theia-params/-shape/-square.html">Shape.Square</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="default-use-cache.html">defaultUseCache</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">defaultUseCache</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>If <code>true</code> use cache
+Default is <code>true</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="http-client.html">httpClient</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">httpClient</span><span class="symbol">: </span><span class="identifier">HttpClient</span></code>
+<p>The <a href="#">HttpClient</a> for execute web calls
+Default is <code>HttpClient</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="logger.html">logger</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">logger</span><span class="symbol">: </span><a href="../../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>A <a href="../../studio.forface.theia.log/-theia-logger/index.html">TheiaLogger</a> from print messages
+Default is <a href="../../studio.forface.theia.log/-default-theia-logger/index.html">DefaultTheiaLogger</a></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="logging-enabled.html">loggingEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">loggingEnabled</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>Whether the logging should be enabled
+Default is <a href="#">BuildConfig.DEBUG</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-async-error-file.html">defaultAsyncErrorFile</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultAsyncErrorFile</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-error-bitmap.html">defaultErrorBitmap</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultErrorBitmap</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-error-drawable.html">defaultErrorDrawable</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultErrorDrawable</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-error-file.html">defaultErrorFile</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultErrorFile</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-error-url.html">defaultErrorUrl</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultErrorUrl</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-placeholder-bitmap.html">defaultPlaceholderBitmap</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultPlaceholderBitmap</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/graphics/Bitmap.html"><span class="identifier">Bitmap</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-placeholder-drawable.html">defaultPlaceholderDrawable</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultPlaceholderDrawable</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html"><span class="identifier">Drawable</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.dsl/default-placeholder-file.html">defaultPlaceholderFile</a></p>
+</td>
+<td>
+<code><span class="keyword">var </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">defaultPlaceholderFile</span><span class="symbol">: </span><a href="https://developer.android.com/reference/java/io/File.html"><span class="identifier">File</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../invoke.html">invoke</a></p>
+</td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="identifier">invoke</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia$invoke(studio.forface.theia.TheiaConfig, kotlin.Function1((studio.forface.theia.TheiaConfig, kotlin.Unit)))/block">block</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaConfig</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Invoke function for setup <a href="./index.html">TheiaConfig</a> within DSL style
+E.g. &gt;
+TheiaConfig {
+loggingEnabled = true
+}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

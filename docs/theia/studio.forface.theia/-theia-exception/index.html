@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TheiaException - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">TheiaException</a><br/>
+<br/>
+<h1>TheiaException</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">TheiaException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html"><span class="identifier">Exception</span></a></code>
+<p>A base <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-exception/index.html">Exception</a> for the library</p>
+<p><strong>Author</strong><br/>
+Davide Giuseppe Farella</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="is-fatal.html">isFatal</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">isFatal</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code>
+<p>A <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a> representing whether an error is fatal</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="message.html">message</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">message</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../actual-message.html">actualMessage</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><a href="./index.html"><span class="identifier">TheiaException</span></a><span class="symbol">.</span><span class="identifier">actualMessage</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-cancelled-request-exception.html">CancelledRequestException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CancelledRequestException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that a Request has been cancelled</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-drawable-transformation-not-supported-exception.html">DrawableTransformationNotSupportedException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">DrawableTransformationNotSupportedException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that Transformations are not supported yet on <code>Drawables</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-illegal-pipeline-receiver-exception.html">IllegalPipelineReceiverException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">IllegalPipelineReceiverException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that a <a href="../../studio.forface.theia.image-manipulation/-transformation-pipeline.html">TransformationPipeline</a> has been called on an illegal receiver</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-image-source-not-set-exception.html">ImageSourceNotSetException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ImageSourceNotSetException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that no <a href="../../studio.forface.theia.dsl/-abs-theia-builder/image.html">TheiaBuilder.image</a> or <a href="../../studio.forface.theia.dsl/-abs-theia-builder/placeholder.html">TheiaBuilder.placeholder</a> has been set</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-missing-cache-storage-permissions-exception.html">MissingCacheStoragePermissionsException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">MissingCacheStoragePermissionsException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that no permissions have been provided for use cache</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-pointless-request-exception.html">PointlessRequestException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PointlessRequestException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that the Request is useless since none of <a href="../../studio.forface.theia.dsl/-theia-builder/target.html">TheiaBuilder.target</a> and
+<a href="#">TheiaBuilder.completionCallback</a> is supplied</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../-undefined-dimensions-exception.html">UndefinedDimensionsException</a></p>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">UndefinedDimensionsException</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">TheiaException</span></a></code>
+<p><a href="./index.html">TheiaException</a> describing that both <a href="../../studio.forface.theia.dsl/-theia-builder/target.html">TheiaBuilder.target</a> and <a href="../../studio.forface.theia.dsl/-abs-theia-builder/dimensions.html">TheiaBuilder.dimensions</a> are null</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

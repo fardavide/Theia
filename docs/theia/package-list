@@ -1,0 +1,26 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:studio.forface.theia$days#kotlin.Intstudio.forface.theia/kotlin.-int/days.html
+$dokka.location:studio.forface.theia$hours#kotlin.Intstudio.forface.theia/kotlin.-int/hours.html
+$dokka.location:studio.forface.theia$mins#kotlin.Intstudio.forface.theia/kotlin.-int/mins.html
+$dokka.location:studio.forface.theia$months#kotlin.Intstudio.forface.theia/kotlin.-int/months.html
+$dokka.location:studio.forface.theia$secs#kotlin.Intstudio.forface.theia/kotlin.-int/secs.html
+$dokka.location:studio.forface.theia$toAsyncImageSource(java.io.File)studio.forface.theia/java.io.-file/to-async-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(android.graphics.Bitmap)studio.forface.theia/android.graphics.-bitmap/to-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(android.graphics.drawable.Drawable)studio.forface.theia/android.graphics.drawable.-drawable/to-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(java.io.File)studio.forface.theia/java.io.-file/to-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(java.net.URL)studio.forface.theia/java.net.-u-r-l/to-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(kotlin.Int, android.content.res.Resources)studio.forface.theia/kotlin.-int/to-image-source.html
+$dokka.location:studio.forface.theia$toImageSource(kotlin.String)studio.forface.theia/kotlin.-string/to-image-source.html
+$dokka.location:studio.forface.theia$weeks#kotlin.Intstudio.forface.theia/kotlin.-int/weeks.html
+$dokka.location:studio.forface.theia.dsl$newTheiaInstance#android.view.Viewstudio.forface.theia.dsl/android.view.-view/new-theia-instance.html
+$dokka.location:studio.forface.theia.dsl$newTheiaInstance#androidx.fragment.app.Fragmentstudio.forface.theia.dsl/androidx.fragment.app.-fragment/new-theia-instance.html
+$dokka.location:studio.forface.theia.dsl$newTheiaInstance#androidx.fragment.app.FragmentActivitystudio.forface.theia.dsl/androidx.fragment.app.-fragment-activity/new-theia-instance.html
+$dokka.location:studio.forface.theia.dsl$newTheiaInstance#androidx.recyclerview.widget.RecyclerView.ViewHolderstudio.forface.theia.dsl/androidx.recyclerview.widget.-recycler-view.-view-holder/new-theia-instance.html
+$dokka.location:studio.forface.theia.dsl$theia#android.widget.ImageViewstudio.forface.theia.dsl/android.widget.-image-view/theia.html
+studio.forface.theia
+studio.forface.theia.dsl
+studio.forface.theia.imageManipulation
+studio.forface.theia.log
+studio.forface.theia.transformation
+studio.forface.theia.utils

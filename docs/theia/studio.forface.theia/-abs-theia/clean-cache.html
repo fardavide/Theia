@@ -1,0 +1,20 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>AbsTheia.cleanCache - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="index.html">AbsTheia</a>&nbsp;/&nbsp;<a href="./clean-cache.html">cleanCache</a><br/>
+<br/>
+<h1>cleanCache</h1>
+<a name="studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)"></a>
+<code><span class="keyword">fun </span><span class="identifier">cleanCache</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</span><span class="symbol">:</span>&nbsp;<a href="../-duration/index.html"><span class="identifier">Duration</span></a>&nbsp;<span class="symbol">=</span>&nbsp;0.mins<span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Delete all the <a href="https://developer.android.com/reference/java/io/File.html">File</a>s with extension <a href="#">CACHE_EXT</a> with <a href="https://developer.android.com/reference/java/io/File.html#lastModified()">File.lastModified</a> older than <a href="clean-cache.html#studio.forface.theia.AbsTheia$cleanCache(studio.forface.theia.Duration)/olderThan">olderThan</a> from
+<a href="../-theia-config/default-cache-directory.html">TheiaConfig.defaultCacheDirectory</a></p>
+<h3>Parameters</h3>
+<p><a name="olderThan"></a>
+<code>olderThan</code> - A duration for query files to delete.
+Default is 0 minutes ( <code>0.mins</code> ), soo all the caches will be removed</p>
+</BODY>
+</HTML>

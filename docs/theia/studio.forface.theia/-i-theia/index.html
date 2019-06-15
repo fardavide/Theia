@@ -1,0 +1,102 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ITheia - theia</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">theia</a>&nbsp;/&nbsp;<a href="../index.html">studio.forface.theia</a>&nbsp;/&nbsp;<a href="./index.html">ITheia</a><br/>
+<br/>
+<h1>ITheia</h1>
+<code><span class="keyword">interface </span><span class="identifier">ITheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>An interface for load images into an <a href="https://developer.android.com/reference/android/widget/ImageView.html">ImageView</a>
+Implements <a href="#">CoroutineScope</a> for async calls.</p>
+<p><strong>Author</strong><br/>
+Davide Giuseppe Farella.</p>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="resources.html">resources</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">resources</span><span class="symbol">: </span><a href="https://developer.android.com/reference/android/content/res/Resources.html"><span class="identifier">Resources</span></a></code>
+<p><a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> needed for resolve <a href="../-abs-sync-image-source/-drawable-res-image-source/index.html">DrawableResImageSource</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.log/-theia-logger/log-enabled.html">logEnabled</a></p>
+</td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">logEnabled</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.log/-theia-logger/error.html">error</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">error</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.log.TheiaLogger$error(studio.forface.theia.TheiaException)/ex">ex</span><span class="symbol">:</span>&nbsp;<a href="../-theia-exception/index.html"><span class="identifier">TheiaException</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Print an error message from <a href="../-theia-exception/index.html">TheiaException</a>
+When overriding this function, remember to handle <a href="../../studio.forface.theia.log/-theia-logger/log-enabled.html">logEnabled</a> since we want to deliver some critical errors to
+the user, even if logging is disabled.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.log/-theia-logger/info.html">info</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">info</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.log.TheiaLogger$info(studio.forface.theia.TheiaException)/ex">ex</span><span class="symbol">:</span>&nbsp;<a href="../-theia-exception/index.html"><span class="identifier">TheiaException</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Print an info message from <a href="../-theia-exception/index.html">TheiaException</a>
+When overriding this function, remember to handle <a href="../../studio.forface.theia.log/-theia-logger/log-enabled.html">logEnabled</a> since we want to deliver some critical errors to
+the user, even if logging is disabled.</p>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">info</span><span class="symbol">(</span><span class="identifier" id="studio.forface.theia.log.TheiaLogger$info(kotlin.CharSequence)/message">message</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html"><span class="identifier">CharSequence</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code>
+<p>Print an info message from <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-char-sequence/index.html">CharSequence</a>
+When overriding this function, remember to handle <a href="../../studio.forface.theia.log/-theia-logger/log-enabled.html">logEnabled</a> since we want to deliver some critical errors to
+the user, even if logging is disabled.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../../studio.forface.theia.utils/exhaustive.html">exhaustive</a></p>
+</td>
+<td>
+<code><span class="keyword">val </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a><span class="symbol">.</span><span class="identifier">exhaustive</span><span class="symbol">: </span><a href="../../studio.forface.theia.utils/exhaustive.html#T"><span class="identifier">T</span></a></code>
+<p>With this we are sure all the branch are required for <code>when</code> without assignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<p><a href="../-abs-theia/index.html">AbsTheia</a></p>
+</td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">AbsTheia</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">ITheia</span></a><span class="symbol">, </span><a href="../../studio.forface.theia.log/-theia-logger/index.html"><span class="identifier">TheiaLogger</span></a></code>
+<p>Middle implementation between <a href="./index.html">ITheia</a> and <a href="../-theia/index.html">Theia</a> for hide some member</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
