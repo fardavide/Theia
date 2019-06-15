@@ -5,17 +5,14 @@ package studio.forface.theia.demo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import studio.forface.theia.*
 import studio.forface.theia.AnimationLoop.*
-import studio.forface.theia.TheiaConfig
 import studio.forface.theia.TheiaParams.ScaleType.*
 import studio.forface.theia.TheiaParams.Shape.Round
 import studio.forface.theia.dsl.imageDrawableRes
 import studio.forface.theia.dsl.imageUrl
 import studio.forface.theia.dsl.invoke
 import studio.forface.theia.dsl.theia
-import studio.forface.theia.invoke
-import studio.forface.theia.mins
-import studio.forface.theia.secs
 
 private const val GIF_IMAGE_URL = "https://sirv.sirv.com/website/HELLO.gif"
 private const val SMALL_IMAGE_URL = "https://googlechrome.github.io/samples/picture-element/images/butterfly.jpg"
@@ -55,25 +52,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Huge round
-        hugeCenterImageView.theia {
+        val hugeParams = theiaParams {
             imageUrl = HUGE_IMAGE_URL
+            shape = Round
+        }
+
+        hugeCenterImageView.theia( hugeParams ) {
             scaleType = Center
-            shape = Round
         }
-        hugeCropImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeCropImageView.theia( hugeParams ) {
             scaleType = Crop
-            shape = Round
         }
-        hugeFitImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeFitImageView.theia( hugeParams ) {
             scaleType = Fit
-            shape = Round
         }
-        hugeStretchImageView.theia {
-            imageUrl = HUGE_IMAGE_URL
+        hugeStretchImageView.theia( hugeParams ) {
             scaleType = Stretch
-            shape = Round
         }
 
         // Animated
