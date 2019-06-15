@@ -21,6 +21,8 @@ import studio.forface.theia.transformation.TheiaTransformation
 /**
  * A builder for [ITheia]
  *
+ * @constructor is internal, use [Theia.invoke], [Theia.load], [PreTargetedTheia.load] or [PreTargetedTheia.invoke]
+ *
  * @author Davide Giuseppe Farella
  */
 @TheiaDsl
@@ -190,11 +192,15 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
 
 /** Implementation of [AbsTheiaBuilder] that receives [AbsTheiaBuilder.target] as constructor params */
 @TheiaDsl
-class PreTargetedTheiaBuilder( resources: Resources, override var target: ImageView? ): AbsTheiaBuilder( resources )
+open class PreTargetedTheiaBuilder @PublishedApi internal constructor(
+    resources: Resources, override var target: ImageView?
+): AbsTheiaBuilder( resources )
 
 /** Default implementation of [AbsTheiaBuilder] that exposes [AbsTheiaBuilder.target] */
 @TheiaDsl
-class TheiaBuilder( resources: Resources ): AbsTheiaBuilder( resources ) {
+class TheiaBuilder @PublishedApi internal constructor(
+    resources: Resources
+): AbsTheiaBuilder( resources ) {
     public override var target: ImageView? = null
 }
 

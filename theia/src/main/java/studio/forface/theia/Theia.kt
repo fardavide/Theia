@@ -31,19 +31,41 @@ interface ITheia: TheiaLogger {
 }
 
 
-/** Create a Request to apply an image into an `ImageView` */
-inline fun Theia.load( builder: TheiaBuilder.() -> Unit ) {
+/**
+ * Create a Request to apply an image into an `ImageView`
+ *
+ * @param block a REQUIRED lambda that takes [TheiaBuilder] as receiver for create the request
+ *
+ * @param extra an optional [ExtraParams]
+ * @see theiaParams for more details
+ */
+inline fun Theia.load(
+    extra: ExtraParams = {},
+    block: TheiaBuilder.() -> Unit
+) {
     val params = with( TheiaBuilder( resources ) ) {
-        builder()
+        extra()
+        block()
         build()
     }
     applyParams( params )
 }
 
-/** Create a Request to apply an image into an `ImageView` from a [PreTargetedTheia] */
-inline fun PreTargetedTheia.load( builder: PreTargetedTheiaBuilder.() -> Unit ) {
+/**
+ * Create a Request to apply an image into an `ImageView` from a [PreTargetedTheia]
+ *
+ * @param block a REQUIRED lambda that takes [PreTargetedTheiaBuilder] as receiver for create the request
+ *
+ * @param extra an optional [ExtraParams]
+ * @see theiaParams for more details
+ */
+inline fun PreTargetedTheia.load(
+    extra: ExtraParams = {},
+    block: PreTargetedTheiaBuilder.() -> Unit
+) {
     val params = with( PreTargetedTheiaBuilder( resources, target ) ) {
-        builder()
+        extra()
+        block()
         build()
     }
     applyParams( params )
