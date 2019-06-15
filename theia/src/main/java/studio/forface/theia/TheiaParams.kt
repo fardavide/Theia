@@ -1,6 +1,7 @@
 package studio.forface.theia
 
 import android.widget.ImageView
+import studio.forface.theia.dsl.AbsTheiaBuilder
 import studio.forface.theia.dsl.CompletionCallback
 import studio.forface.theia.dsl.ErrorCallback
 import studio.forface.theia.transformation.CircleTransformation
@@ -68,3 +69,27 @@ data class TheiaParams(
         object Square : Shape( NoTransformation )
     }
 }
+
+/**
+ * A function that takes an [ExtraParams] block and return the same block.
+ * It's purpose is to create a block that will create [TheiaParams] that can be applied on another instance of
+ * [AbsTheiaBuilder].
+ *
+ * Example:
+> val extraParams = theiaParams {
+    imageUrl = someImageUrl
+    shape = Round
+ }
+ someImageView.theia( extraParams ) {
+    scaleType = Center
+ }
+ */
+fun theiaParams( block: ExtraParams ) = block
+
+/**
+ * A typealias for a lambda that takes [AbsTheiaBuilder] as receiver and return [Unit]
+ * This represents an block that will create optional [TheiaParams] for the request.
+ *
+ * @see theiaParams
+ */
+typealias ExtraParams = AbsTheiaBuilder.() -> Unit
