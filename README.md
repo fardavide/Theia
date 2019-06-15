@@ -6,6 +6,8 @@
 
 <u>With Cache System and animated `Drawable`s!</u>
 
+### [Full Doc here](https://4face-studi0.github.io/Theia/theia/)
+
 ![Theia gif](https://thumbs.gfycat.com/HiddenOblongAlaskanmalamute-size_restricted.gif)
 
 ## Wiki
