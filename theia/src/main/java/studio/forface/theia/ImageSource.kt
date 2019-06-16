@@ -2,13 +2,14 @@
 
 package studio.forface.theia
 
-import android.content.res.Resources
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import studio.forface.theia.AbsAsyncImageSource.*
 import studio.forface.theia.AbsSyncImageSource.*
 import studio.forface.theia.cache.CACHE_EXT
+import studio.forface.theia.utils.getDrawableCompat
 import java.io.File
 import java.net.URL
 
@@ -38,12 +39,11 @@ sealed class AbsSyncImageSource<out Type> : AbsImageSource<Type>() {
     /** A [SyncImageSource] of type [Int] [DrawableRes] */
     class DrawableResImageSource(
         @DrawableRes override val source: Int,
-        private val resources: Resources
+        private val context: Context
     ) : AbsSyncImageSource<Int>() {
 
         /** @return a [Drawable] from [source] */
-        @Suppress("DEPRECATION")
-        fun resolveDrawable(): Drawable = resources.getDrawable( source )
+        fun resolveDrawable(): Drawable = context.getDrawableCompat( source )
     }
 
     /** A [SyncImageSource] of type [File] */
@@ -91,22 +91,22 @@ internal typealias Async = AsyncImageSource
 
 
 /** @return a [BitmapImageSource] from [Bitmap] */
-fun Bitmap.toImageSource() = BitmapImageSource(this )
+fun Bitmap.toImageSource() = BitmapImageSource( this )
 
 /** @return a [DrawableImageSource] from [Drawable] */
-fun Drawable.toImageSource() = DrawableImageSource(this )
+fun Drawable.toImageSource() = DrawableImageSource( this )
 
 /** @return a [DrawableResImageSource] from [Int] [DrawableRes] */
-fun @receiver: DrawableRes Int.toImageSource( resources: Resources ) = DrawableResImageSource(this, resources )
+fun @receiver: DrawableRes Int.toImageSource( context: Context ) = DrawableResImageSource( this, context )
 
 /** @return a [FileImageSource] from [File] */
-fun File.toImageSource() = FileImageSource(this )
+fun File.toImageSource() = FileImageSource( this )
 
 /** @return a [AsyncFileImageSource] from [File] */
-fun File.toAsyncImageSource() = AsyncFileImageSource(this )
+fun File.toAsyncImageSource() = AsyncFileImageSource( this )
 
 /** @return a [StringImageSource] from [String] */
-fun String.toImageSource() = StringImageSource(this )
+fun String.toImageSource() = StringImageSource( this )
 
 /** @return a [UrlImageSource] from [URL] */
-fun URL.toImageSource() = UrlImageSource(this )
+fun URL.toImageSource() = UrlImageSource( this )

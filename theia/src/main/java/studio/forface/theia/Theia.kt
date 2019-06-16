@@ -3,7 +3,6 @@
 package studio.forface.theia
 
 import android.content.Context
-import android.content.res.Resources
 import android.widget.ImageView
 import androidx.core.view.doOnPreDraw
 import kotlinx.coroutines.*
@@ -18,6 +17,7 @@ import studio.forface.theia.dsl.PreTargetedTheiaBuilder
 import studio.forface.theia.dsl.TheiaBuilder
 import studio.forface.theia.log.TheiaLogger
 import java.io.File
+import kotlin.coroutines.CoroutineContext
 
 /**
  * An interface for load images into an [ImageView]
@@ -25,9 +25,9 @@ import java.io.File
  *
  * @author Davide Giuseppe Farella.
  */
-interface ITheia: TheiaLogger {
-    /** [Resources] needed for resolve [DrawableResImageSource] */
-    val resources: Resources
+interface ITheia: TheiaLogger, CoroutineScope {
+    /** [Context] needed for resolve [DrawableResImageSource] */
+    val context : Context
 }
 
 
@@ -43,7 +43,7 @@ inline fun Theia.load(
     extra: ExtraParams = {},
     block: TheiaBuilder.() -> Unit
 ) {
-    val params = with( TheiaBuilder( resources ) ) {
+    val params = with( TheiaBuilder( context ) ) {
         extra()
         block()
         build()
@@ -63,7 +63,7 @@ inline fun PreTargetedTheia.load(
     extra: ExtraParams = {},
     block: PreTargetedTheiaBuilder.() -> Unit
 ) {
-    val params = with( PreTargetedTheiaBuilder( resources, target ) ) {
+    val params = with( PreTargetedTheiaBuilder( context, target ) ) {
         extra()
         block()
         build()
@@ -72,8 +72,11 @@ inline fun PreTargetedTheia.load(
 }
 
 
-/** Middle implementation between [ITheia] and [Theia] for hide some member */
+/**
+ * Middle implementation between [ITheia] and [Theia] for hide some member */
 abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConfig.logger  {
+
+    override val coroutineContext: CoroutineContext = Job()
 
     /** A list of active [Job] */
     private val jobs = mutableListOf<Job>()
@@ -175,7 +178,7 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** Create a new [Job] with the given [CoroutineDispatcher] and append it to [jobs] */
     private fun newRequest( dispatcher: CoroutineDispatcher, block: suspend () -> Unit ) {
-        appendRequest( CoroutineScope( Job() + dispatcher ).launch { block() } )
+        appendRequest( launch( dispatcher ) { block() } )
     }
 
     /** Stop and remove the given [Job] from [jobs] */
@@ -196,7 +199,12 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
     /** Stop all the [TheiaRequest] and [clear] */
     private fun MutableList<Job>.purge() {
-        try { jobs.forEach { it.cancel() } } catch ( e: ConcurrentModificationException ) { purge() }
+        try {
+            jobs.forEach { it.cancel( CancelledRequestException().toCancellationException() ) }
+
+        // Run again if ConcurrentModificationException
+        } catch ( e: ConcurrentModificationException ) { purge() }
+
         this.clear()
     }
 
@@ -229,22 +237,18 @@ abstract class AbsTheia internal constructor(): ITheia, TheiaLogger by TheiaConf
 
 
 /** Default implementation of [ITheia] */
-open class Theia internal constructor( override val resources: Resources ) : AbsTheia()
+open class Theia internal constructor( override val context: Context ) : AbsTheia()
 
 
 /** Implementation of [ITheia] with a pre-targeted [ImageView] */
 class PreTargetedTheia internal constructor (
-    override val resources: Resources,
+    override val context: Context,
     val target: ImageView
 ) : AbsTheia()
 
 
 /** Implementation of [Theia] that exposes [purgeRequests] publicly */
-class UnhandledTheia internal constructor( resources: Resources ) : Theia( resources ) {
-    public override fun purgeRequests() {
-        super.purgeRequests()
-    }
-}
+class UnhandledTheia internal constructor( context: Context ) : Theia( context )
 
 
 /** A typealias for [TheiaRequest] without generic */

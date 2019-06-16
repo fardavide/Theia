@@ -133,8 +133,8 @@ object TheiaConfig {
 
 
     /* Extensions */
-    var ContextWrapper.defaultPlaceholderDrawableRes:   Int  by dsl { defaultPlaceholder = it.toImageSource( resources ) }
-    var ContextWrapper.defaultErrorDrawableRes:         Int  by dsl { defaultError = it.toImageSource( resources ) }
+    var ContextWrapper.defaultPlaceholderDrawableRes:   Int  by dsl { defaultPlaceholder = it.toImageSource( this ) }
+    var ContextWrapper.defaultErrorDrawableRes:         Int  by dsl { defaultError = it.toImageSource( this ) }
 }
 
 /**
