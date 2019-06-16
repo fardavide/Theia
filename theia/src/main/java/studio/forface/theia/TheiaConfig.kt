@@ -121,7 +121,7 @@ object TheiaConfig {
 
     /**
      * Whether the logging should be enabled
-     * Default is [BuildConfig.DEBUG]
+     * Default is [isDebugConfig] ( [BuildConfig.DEBUG] )
      */
     var loggingEnabled = BuildConfig.DEBUG
 
@@ -149,4 +149,11 @@ inline operator fun TheiaConfig.invoke( block: TheiaConfig.() -> Unit ) {
 }
 
 /** An empty [File] */
-internal val noDirectory = File("" )
+internal val noDirectory = File( "" )
+
+/**
+ * @see [BuildConfig.DEBUG]
+ * This is useful for testing, where we don't have [BuildConfig]
+ */
+internal val isDebugConfig =
+        try { BuildConfig.DEBUG } catch ( e: NoClassDefFoundError ) { true }

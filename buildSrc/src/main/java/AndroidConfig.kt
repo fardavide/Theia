@@ -15,6 +15,7 @@ fun TestedExtension.applyAndroidConfig(
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         getByName( "release" ) {
             isMinifyEnabled = false
@@ -22,10 +23,18 @@ fun TestedExtension.applyAndroidConfig(
         }
         getByName("debug" ) {}
     }
+
+    sourceSets {
+        getByName( "main" ).java.srcDirs( "src/main/kotlin" )
+        getByName( "test" ).java.srcDirs( "src/test/kotlin" )
+        getByName( "androidTest" ).java.srcDirs( "src/androidTest/kotlin" )
+    }
+
     compileOptions {
         sourceCompatibility = Project.jdkVersion
         targetCompatibility = Project.jdkVersion
     }
+
     packagingOptions {
         exclude("META-INF/DEPENDENCIES" )
         exclude("META-INF/LICENSE" )
@@ -46,5 +55,6 @@ fun TestedExtension.applyAndroidConfig(
         exclude("META-INF/ktor-http-cio.kotlin_module" )
         exclude("META-INF/ktor-utils.kotlin_module" )
     }
+
     testOptions.unitTests.isIncludeAndroidResources = true
 }
