@@ -1,14 +1,12 @@
 plugins {
-    id("com.android.library" )
-    id("kotlin-android" )
-    id("kotlin-android-extensions" )
+    id( "com.android.library" )
+    id( "kotlin-android" )
+    id( "kotlin-android-extensions" )
 }
 
 android { applyAndroidConfig() }
 
 dependencies {
-    applyAndroidTests()
-
     implementation( Lib.kotlin )
     implementation( Lib.coroutines_android )
     implementation( Lib.kotlin_reflect )
@@ -22,7 +20,10 @@ dependencies {
     implementation( Lib.Android.lifecycle_jdk8 )
     implementation( Lib.Android.recyclerView )
     implementation( Lib.Android.support_annotations )
+
+    testImplementation( Module.testAndroid )
+    androidTestImplementation( Module.testAndroidInstrumented )
 }
 
-publish("theia" )
+publish( "theia" )
 applyDokka()

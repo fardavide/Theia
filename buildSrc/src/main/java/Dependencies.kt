@@ -1,9 +1,6 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.artifacts.dsl.RepositoryHandler
-import org.gradle.kotlin.dsl.DependencyHandlerScope
-import org.gradle.kotlin.dsl.ScriptHandlerScope
-import org.gradle.kotlin.dsl.kotlin
-import org.gradle.kotlin.dsl.maven
+import org.gradle.kotlin.dsl.*
 
 val repos: RepositoryHandler.() -> Unit get() = {
     google()
@@ -19,25 +16,11 @@ val ScriptHandlerScope.classpathDependencies: DependencyHandlerScope.() -> Unit 
     classpath( Lib.Publishing.maven_plugin )
 }
 
-@Suppress("unused")
-fun DependencyHandler.applyAndroidTests() = with( Lib ) { with( Lib.Android ) {
-    val unit = "testImplementation"
-    val android = "androidTestImplementation"
-    add( unit, test );              add( android, test )
-    add( unit, test_junit );        add( android, test_junit )
-    add( unit, kotlintest_runner);  add( android, kotlintest_runner )
-    add( unit, lifecycle );         add( android, lifecycle )
-    add( unit, mockk );             add( android, mockk_android )
-    // add( unit, Lib.Android.robolectric )
-    add( android, espresso )
-    add( android, test_runner )
-} }
-
 object Version {
 
     /* Kotlin */
     const val kotlin =                          "1.3.31"        // Updated: Apr 25, 2019
-    const val coroutines =                      "1.2.1"         // Updated: Apr 25, 2019
+    const val coroutines =                      "1.3.0-M1"      // Updated: Jun 07, 2019
 
     /* Other */
     const val kotlintest =                      "3.3.2"         // Updated: Apr 5, 2019
@@ -65,7 +48,9 @@ object Lib {
 
     /* Kotlin */
     const val kotlin =                          "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Version.kotlin}"
+    const val coroutines =                      "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutines}"
     const val coroutines_android =              "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutines}"
+    const val coroutines_test =                 "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutines}"
     const val kotlin_reflect =                  "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
     const val test =                            "org.jetbrains.kotlin:kotlin-test:${Version.kotlin}"
     const val test_junit =                      "org.jetbrains.kotlin:kotlin-test-junit:${Version.kotlin}"
@@ -81,7 +66,7 @@ object Lib {
     /* Android */
     object Android {
         const val appcompat =                   "androidx.appcompat:appcompat:${Version.android_support}"
-        const val constraintLayout =           "androidx.constraintlayout:constraintlayout:${Version.android_constraintLayout}"
+        const val constraintLayout =            "androidx.constraintlayout:constraintlayout:${Version.android_constraintLayout}"
         const val espresso =                    "androidx.test.espresso:espresso-core:${Version.android_espresso}"
         const val gradle_plugin =               "com.android.tools.build:gradle:${Version.android_gradle_plugin}"
         const val ktx =                         "androidx.core:core-ktx:${Version.android_ktx}"
@@ -95,8 +80,17 @@ object Lib {
 
     /* Publishing */
     object Publishing {
-        const val bintray_plugin =                  "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Version.publishing_bintray_plugin}"
-        const val dokka_plugin =                    "org.jetbrains.dokka:dokka-android-gradle-plugin:${Version.publishing_dokka_plugin}"
-        const val maven_plugin =                    "com.github.dcendents:android-maven-gradle-plugin:${Version.publishing_maven_plugin}"
+        const val bintray_plugin =              "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Version.publishing_bintray_plugin}"
+        const val dokka_plugin =                "org.jetbrains.dokka:dokka-android-gradle-plugin:${Version.publishing_dokka_plugin}"
+        const val maven_plugin =                "com.github.dcendents:android-maven-gradle-plugin:${Version.publishing_maven_plugin}"
     }
 }
+
+class ModuleHolder( scope: DependencyHandlerScope ) : DependencyHandler by scope {
+    val theia get() =                    project( ":theia" )
+    val testKotlin get() =               project( ":sharedTest:testKotlin" )
+    val testAndroid get() =              project( ":sharedTest:testAndroid" )
+    val testAndroidInstrumented get() =  project( ":sharedTest:testAndroidInstrumented" )
+}
+
+val DependencyHandlerScope.Module get() = ModuleHolder( this )

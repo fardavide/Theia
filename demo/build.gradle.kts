@@ -7,8 +7,7 @@ plugins {
 android { applyAndroidConfig( "studio.forface.theia.demo", 18 ) }
 
 dependencies {
-    implementation( project(":theia" ) )
-    applyAndroidTests()
+    implementation( Module.theia )
 
     implementation( Lib.kotlin )
     implementation( Lib.coroutines_android )
