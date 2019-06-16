@@ -2,7 +2,7 @@
 
 package studio.forface.theia.dsl
 
-import android.content.res.Resources
+import android.content.Context
 import android.widget.ImageView
 import studio.forface.theia.*
 import studio.forface.theia.TheiaConfig.defaultAnimationLoop
@@ -26,7 +26,7 @@ import studio.forface.theia.transformation.TheiaTransformation
  * @author Davide Giuseppe Farella
  */
 @TheiaDsl
-abstract class AbsTheiaBuilder internal constructor ( internal val resources: Resources ) {
+abstract class AbsTheiaBuilder internal constructor ( internal val context: Context ) {
 
     /** The [AsyncImageSource] for the image to load into [target] */
     var image: ImageSource? = null
@@ -193,14 +193,14 @@ abstract class AbsTheiaBuilder internal constructor ( internal val resources: Re
 /** Implementation of [AbsTheiaBuilder] that receives [AbsTheiaBuilder.target] as constructor params */
 @TheiaDsl
 open class PreTargetedTheiaBuilder @PublishedApi internal constructor(
-    resources: Resources, override var target: ImageView?
-): AbsTheiaBuilder( resources )
+    context: Context, override var target: ImageView?
+): AbsTheiaBuilder( context )
 
 /** Default implementation of [AbsTheiaBuilder] that exposes [AbsTheiaBuilder.target] */
 @TheiaDsl
 class TheiaBuilder @PublishedApi internal constructor(
-    resources: Resources
-): AbsTheiaBuilder( resources ) {
+    context: Context
+): AbsTheiaBuilder( context ) {
     public override var target: ImageView? = null
 }
 

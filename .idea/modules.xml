@@ -5,6 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/Theia.iml" filepath="$PROJECT_DIR$/Theia.iml" group="Theia" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/buildSrc/buildSrc.iml" group="Theia/buildSrc" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" group="Theia/demo" />
+      <module fileurl="file://$PROJECT_DIR$/sharedTest/sharedTest.iml" filepath="$PROJECT_DIR$/sharedTest/sharedTest.iml" group="Theia/sharedTest" />
+      <module fileurl="file://$PROJECT_DIR$/sharedTest/testAndroid/testAndroid.iml" filepath="$PROJECT_DIR$/sharedTest/testAndroid/testAndroid.iml" group="Theia/sharedTest/testAndroid" />
+      <module fileurl="file://$PROJECT_DIR$/sharedTest/testAndroidInstrumented/testAndroidInstrumented.iml" filepath="$PROJECT_DIR$/sharedTest/testAndroidInstrumented/testAndroidInstrumented.iml" group="Theia/sharedTest/testAndroidInstrumented" />
+      <module fileurl="file://$PROJECT_DIR$/sharedTest/testKotlin/testKotlin.iml" filepath="$PROJECT_DIR$/sharedTest/testKotlin/testKotlin.iml" group="Theia/sharedTest/testKotlin" />
       <module fileurl="file://$PROJECT_DIR$/theia/theia.iml" filepath="$PROJECT_DIR$/theia/theia.iml" group="Theia/theia" />
     </modules>
   </component>
